@@ -1,0 +1,19 @@
+.layout {
+    width: auto;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    align-items: center;
+}
+
+.main {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1044px;
+    margin-inline: auto;
+}
