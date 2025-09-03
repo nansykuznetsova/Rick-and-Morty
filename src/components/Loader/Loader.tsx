@@ -1,25 +1,24 @@
 import cn from "classnames";
-import "./Loader.css"
 
-type SizeVariant = "small" | "large";
+import "./Loader.css";
 
-interface RotatingImageProps {
-    text?: string;
-    size?: SizeVariant;
+interface LoaderProps {
+  text?: string;
+  size?: "small" | "large"; // union прямо в интерфейсе
 }
 
-export const Loader: React.FC<RotatingImageProps> = ({ text , size }: RotatingImageProps) => {
-    return (
-        <div className="loader">
-            <img
-                src="/src/assets/images/loader.png"
-                alt="загружаем информацию"
-                className={cn("loader-rotating", {
-                    small: size === "small",
-                    large: size === "large",
-                })}
-            />
-            <p>{text}</p>
-        </div>
-    )
-}
+export const Loader = ({ text, size }: LoaderProps) => {
+  return (
+    <div className="loader">
+      <img
+        src="/src/assets/images/loader.png"
+        alt="загружаем информацию"
+        className={cn("loader-rotating", {
+          small: size === "small",
+          large: size === "large",
+        })}
+      />
+      <p>{text}</p>
+    </div>
+  );
+};
