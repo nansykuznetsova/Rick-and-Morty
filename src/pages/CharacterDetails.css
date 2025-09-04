@@ -1,0 +1,24 @@
+.character-details {
+  display: flex;
+  flex-direction: column;
+  padding-block: 42px;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.go-back-character-details {
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  margin-left: 96px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.arrow-back {
+  width: 24px;
+  height: 24px;
+}

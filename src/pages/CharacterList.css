@@ -1,0 +1,8 @@
+.character-list {
+  display: flex;
+  flex-direction: column;
+  padding-block: 42px;
+  width: 100%;
+  align-items: center;
+  min-height: 100vh;
+}
