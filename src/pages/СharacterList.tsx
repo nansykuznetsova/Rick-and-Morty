@@ -1,4 +1,4 @@
-import { Layout } from "../layout/Layout.tsx";
+import { Layout } from "../components/Layout/Layout.tsx";
 import { Logo } from "../components/Logo/Logo.tsx";
 import { Loader } from "../components/Loader/Loader.tsx";
 
