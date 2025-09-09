@@ -1,15 +1,36 @@
 import { useState, useEffect, useRef } from "react";
+import cn from "classnames";
+
+import { StatusCircle } from "../Status/Status.tsx";
+import { STATUS_COLORS } from "../../constants/options.ts";
 
 import ArrowCloseIcon from "../../assets/icons/arrow-close.svg?react";
 import ArrowOpenIcon from "../../assets/icons/arrow-open.svg?react";
 
 import "./Select.css";
 
-const options: string[] = ["Human", "Alien", "Humanoid", "Animal", "Robot"];
+export interface Option {
+  label: string;
+  value: string;
+}
 
-export const Select: React.FC = () => {
+export interface SelectProps {
+  options: Option[];
+  variant?: "default" | "small";
+  value?: string;
+  placeholder: string;
+  onChange?: (value: string) => void;
+}
+
+export const Select: React.FC<SelectProps> = ({
+  options,
+  variant,
+  value = "Alive",
+  placeholder,
+  onChange,
+}) => {
   const [display, setDisplay] = useState<boolean>(false);
-  const [selected, setSelected] = useState<string>("");
+  const [selected, setSelected] = useState<Option | null>(null);
   const selectRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,26 +51,59 @@ export const Select: React.FC = () => {
 
   const handleClick = () => setDisplay(!display);
 
-  const handleClickOption = (item) => {
+  const handleClickOption = (item: Option) => {
     setSelected(item);
     setDisplay(false);
+    onChange?.(item.value);
   };
+
   return (
-    <div className="select" ref={selectRef}>
-      <button type="button" className="select-button" onClick={handleClick}>
-        {selected || "Species"}
+    <div
+      className={cn("select", {
+        "select-small": variant === "small",
+      })}
+      ref={selectRef}
+    >
+      <button
+        type="button"
+        className={cn("select-button", {
+          "select-button-small": variant === "small",
+        })}
+        onClick={handleClick}
+      >
+        {variant === "small" ? (
+          <div className="button-inner">
+            {selected?.label || value}
+            <StatusCircle
+              color={STATUS_COLORS[selected?.value || value.toLowerCase()]}
+            />
+          </div>
+        ) : (
+          selected?.label || placeholder
+        )}
         {display ? <ArrowOpenIcon /> : <ArrowCloseIcon />}
       </button>
       {display && options.length && (
-        <ul className="select-options" role="listbox">
+        <ul
+          className={cn("select-options", {
+            "select-options-small": variant === "small",
+          })}
+          role="listbox"
+        >
           {options.map((item) => (
             <li
-              key={item}
-              className={`select-option ${item === selected ? "selected" : ""}`}
+              key={item.value}
+              className={cn("select-option", {
+                selected: item.value === selected?.value,
+                "select-option-small": variant === "small",
+              })}
               role="option"
               onClick={() => handleClickOption(item)}
             >
-              {item}
+              {item.label}
+              {variant === "small" && (
+                <StatusCircle color={STATUS_COLORS[item.value]} />
+              )}
             </li>
           ))}
         </ul>
