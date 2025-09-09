@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { Layout } from "../layout/Layout.tsx";
+import { Layout } from "../components/Layout/Layout.tsx";
 import { Loader } from "../components/Loader/Loader.tsx";
 import ArrowBack from "../assets/icons/arrow-back.svg?react";
 

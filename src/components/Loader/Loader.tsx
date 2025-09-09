@@ -4,7 +4,7 @@ import "./Loader.css";
 
 interface LoaderProps {
   text?: string;
-  size?: "small" | "large"; // union прямо в интерфейсе
+  size?: "small" | "large";
 }
 
 export const Loader = ({ text, size }: LoaderProps) => {
