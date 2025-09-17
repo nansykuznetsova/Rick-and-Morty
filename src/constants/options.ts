@@ -5,6 +5,7 @@ export const SPECIES_OPTIONS = [
   { label: "Animal", value: "animal" },
   { label: "Robot", value: "robot" },
 ];
+
 export const GENDER_OPTIONS = [
   { label: "Female", value: "female" },
   { label: "Male", value: "male" },
@@ -17,9 +18,3 @@ export const STATUS_OPTIONS = [
   { label: "Dead", value: "dead" },
   { label: "Unknown", value: "unknown" },
 ];
-
-export const STATUS_COLORS: Record<string, string> = {
-  alive: "green",
-  dead: "red",
-  unknown: "orange",
-};

@@ -1,9 +1,5 @@
 import { Select } from "../../components/Select/Select.tsx";
-import {
-  SPECIES_OPTIONS,
-  GENDER_OPTIONS,
-  STATUS_OPTIONS,
-} from "../../constants/options.ts";
+import { SPECIES_OPTIONS, GENDER_OPTIONS, STATUS_OPTIONS } from "@/constants";
 
 import "./SelectorPanel.css";
 

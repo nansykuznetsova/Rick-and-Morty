@@ -1,11 +1,17 @@
+import { STATUS_OPTIONS } from "@/constants";
+
 import { Layout } from "../components/Layout/Layout.tsx";
 import { Logo } from "../components/Logo/Logo.tsx";
-// import { Loader } from "../components/Loader/Loader.tsx";
+import { Loader } from "../components/Loader/Loader.tsx";
+import { Select } from "../components/Select/Select.tsx";
+import {
+  StatusCircle,
+  type StatusesType,
+} from "@/components/Status/Status.tsx";
+
 import { SelectorPanel } from "../widgets/SelectorPanel/SelectorPanel.tsx";
 
 import "./CharacterList.css";
-import { STATUS_OPTIONS } from "../constants/options.ts";
-import { Select } from "../components/Select/Select.tsx";
 
 export const CharacterList: React.FunctionComponent = () => {
   return (
@@ -13,8 +19,18 @@ export const CharacterList: React.FunctionComponent = () => {
       <div className="character-list">
         <Logo />
         <SelectorPanel />
-        <Select variant="small" placeholder="Status" options={STATUS_OPTIONS} />
-        {/*<Loader text="Loading characters..." size="large" />*/}
+        <Select
+          variant="small"
+          options={STATUS_OPTIONS}
+          SelectOptionComponent={(props) => (
+            <>
+              {props.value}
+
+              <StatusCircle status={props.value as StatusesType} />
+            </>
+          )}
+        />
+        <Loader text="Loading characters..." size="large" />
       </div>
     </Layout>
   );
