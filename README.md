@@ -13,9 +13,9 @@ If you are developing a production application, we recommend updating the config
 
 ```js
 export default tseslint.config([
-  globalIgnores(["dist"]),
+  globalIgnores(['dist']),
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ['**/*.{ts,tsx}'],
     extends: [
       // Other configs...
 
@@ -24,18 +24,18 @@ export default tseslint.config([
       // Alternatively, use this for stricter rules
       ...tseslint.configs.strictTypeChecked,
       // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+      ...tseslint.configs.stylisticTypeChecked
 
       // Other configs...
     ],
     languageOptions: {
       parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname
+      }
       // other options...
-    },
-  },
+    }
+  }
 ]);
 ```
 
@@ -43,27 +43,27 @@ You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-re
 
 ```js
 // eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
+import reactX from 'eslint-plugin-react-x';
+import reactDom from 'eslint-plugin-react-dom';
 
 export default tseslint.config([
-  globalIgnores(["dist"]),
+  globalIgnores(['dist']),
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ['**/*.{ts,tsx}'],
     extends: [
       // Other configs...
       // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
+      reactX.configs['recommended-typescript'],
       // Enable lint rules for React DOM
-      reactDom.configs.recommended,
+      reactDom.configs.recommended
     ],
     languageOptions: {
       parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname
+      }
       // other options...
-    },
-  },
+    }
+  }
 ]);
 ```

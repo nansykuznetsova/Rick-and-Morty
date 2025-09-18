@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import cn from "classnames";
+import { useState, useEffect, useRef } from 'react';
+import cn from 'classnames';
 
-import ArrowCloseIcon from "@/assets/icons/arrow-close.svg?react";
-import ArrowOpenIcon from "@/assets/icons/arrow-open.svg?react";
+import ArrowCloseIcon from '@/assets/icons/arrow-close.svg?react';
+import ArrowOpenIcon from '@/assets/icons/arrow-open.svg?react';
 
-import "./Select.css";
+import './Select.css';
 
 export interface Option {
   label: string;
@@ -21,7 +21,7 @@ export const DefaultSelectOptionContent = (props: SelectOptionContentProps) => {
 
 export interface SelectProps {
   options: Option[];
-  variant?: "default" | "small";
+  variant?: 'default' | 'small';
   value?: string;
   placeholder?: string;
   onChange?: (value: string) => void;
@@ -31,11 +31,11 @@ export interface SelectProps {
 export const Select = (props: SelectProps) => {
   const {
     options,
-    variant = "default",
-    value = "Alive",
+    variant = 'default',
+    value = 'Alive',
     placeholder,
     onChange,
-    SelectOptionComponent = DefaultSelectOptionContent,
+    SelectOptionComponent = DefaultSelectOptionContent
   } = props;
 
   const [display, setDisplay] = useState<boolean>(false);
@@ -52,9 +52,9 @@ export const Select = (props: SelectProps) => {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -68,20 +68,20 @@ export const Select = (props: SelectProps) => {
 
   return (
     <div
-      className={cn("select", {
-        select_small: variant === "small",
+      className={cn('select', {
+        select_small: variant === 'small'
       })}
       ref={selectRef}
     >
       <button
-        type="button"
-        className={cn("select__button", {
-          select__button_small: variant === "small",
+        type='button'
+        className={cn('select__button', {
+          select__button_small: variant === 'small'
         })}
         onClick={handleClick}
       >
-        {variant === "small" ? (
-          <div className="select__button-inner">
+        {variant === 'small' ? (
+          <div className='select__button-inner'>
             <SelectOptionComponent value={selected?.label || value} />
           </div>
         ) : (
@@ -91,19 +91,19 @@ export const Select = (props: SelectProps) => {
       </button>
       {display && options.length && (
         <ul
-          className={cn("select__options", {
-            select__options_small: variant === "small",
+          className={cn('select__options', {
+            select__options_small: variant === 'small'
           })}
-          role="listbox"
+          role='listbox'
         >
           {options.map((item) => (
             <li
               key={item.value}
-              className={cn("select__option", {
+              className={cn('select__option', {
                 select__option_selected: item.value === selected?.value,
-                select__option_small: variant === "small",
+                select__option_small: variant === 'small'
               })}
-              role="option"
+              role='option'
               onClick={() => handleClickOption(item)}
             >
               <SelectOptionComponent value={item.label} />
