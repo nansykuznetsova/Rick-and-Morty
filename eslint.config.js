@@ -28,6 +28,7 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       ...react.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off',
       'import/order': [
         'error',
         {
@@ -56,18 +57,14 @@ export default tseslint.config(
             caseInsensitive: true // Без учета регистра
           }
         }
-      ],
-      // Дополнительное правило: автоматическое удаление неиспользуемых импортов
-      // 'import/no-unused-modules': [1, { unusedExports: true }]
+      ]
     },
-    // Важно: добавляем резолвер для TypeScript, чтобы плагин понимал алиасы
     settings: {
       react: {
-        version: 'detect' // Автоматически определяет версию из node_modules
+        version: 'detect'
       },
       'import/resolver': {
         typescript: {
-          // Указывает на ваш tsconfig.json
           project: './tsconfig.json'
         }
       }

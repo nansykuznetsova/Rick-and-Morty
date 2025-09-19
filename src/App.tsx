@@ -1,6 +1,8 @@
-import { CharacterList } from './pages/СharacterList.tsx';
-import { CharacterDetails } from './pages/CharacterDetails.tsx';
 import { Route, Routes } from 'react-router';
+
+import { CharacterDetails } from './pages/CharacterDetails.tsx';
+import { CharacterList } from './pages/СharacterList.tsx';
+
 import './App.css';
 
 function App() {

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+
 import cn from 'classnames';
 
 import ArrowCloseIcon from '@/assets/icons/arrow-close.svg?react';
