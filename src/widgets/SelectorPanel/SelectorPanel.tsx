@@ -1,16 +1,27 @@
-import { Select } from '@/components/Select/Select';
+import { useState } from 'react';
+
 import { Input } from '@/components/Input/Input';
-import { SPECIES_OPTIONS, GENDER_OPTIONS, STATUS_OPTIONS } from '@/constants';
+import { Select } from '@/components/Select/Select';
+import { GENDER_OPTIONS, SPECIES_OPTIONS, STATUS_OPTIONS } from '@/constants';
 
 import './SelectorPanel.css';
 
 export const SelectorPanel: React.FunctionComponent = () => {
+  const [currentValue, setCurrentValue] = useState('');
+
+  const handleInputChange = (value: string) => {
+    setCurrentValue(value);
+  };
+
   return (
     <div className='selector-panel'>
       <Input
         variant='filter'
         placeholder='Filter by name...'
         name='search'
+        value={currentValue}
+        onChange={handleInputChange}
+        size='small'
       />
       <Select
         placeholder='Species'

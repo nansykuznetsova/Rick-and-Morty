@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 240px;
   padding: 16px 14px;
   border: 1px solid #00000061;
   border-radius: 6px;
@@ -15,11 +14,7 @@
   display: flex;
   justify-content: flex-start;
   border-bottom: 1px solid black;
-  width: 208px;
-  height: 30px;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 30px;
 }
 
 .input__inner {
@@ -33,22 +28,21 @@
 .input {
   border: none;
   font-family: 'Roboto', 'sans-serif';
-  font-size: 20px;
 }
 
-.input_filter {
+.input_size_small {
   font-size: 16px;
+  width: 240px;
 }
 
-.input_form {
+.input_size_big {
   font-size: 20px;
+  width: 208px;
+  height: 30px;
+  line-height: 30px;
 }
 
-.input:hover {
-  outline: none;
-  box-shadow: none;
-}
-
+.input:hover,
 .input:focus {
   outline: none;
   box-shadow: none;

@@ -1,13 +1,14 @@
 import cn from 'classnames';
+
 import './Status.css';
 
 const STATUS_COLORS = {
-  alive: 'green',
-  dead: 'red',
-  unknown: 'orange',
   Alive: 'green',
   Dead: 'red',
-  Unknown: 'orange'
+  Unknown: 'orange',
+  alive: 'green',
+  dead: 'red',
+  unknown: 'orange'
 };
 
 export type StatusesType = keyof typeof STATUS_COLORS;

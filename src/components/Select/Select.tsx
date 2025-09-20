@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import cn from 'classnames';
 
@@ -12,7 +12,7 @@ export interface Option {
   value: string;
 }
 
-interface SelectOptionContentProps {
+export interface SelectOptionContentProps {
   value?: string;
 }
 

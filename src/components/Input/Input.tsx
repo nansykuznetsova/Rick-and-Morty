@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import cn from 'classnames';
 
 import Search from '@/assets/icons/search.svg?react';
@@ -12,14 +10,13 @@ export interface InputProps {
   placeholder?: string;
   value?: string;
   onChange?: (value: string) => void;
+  size?: 'small' | 'big';
 }
 
 export const Input = (props: InputProps) => {
-  const { variant, name, placeholder, value, onChange } = props;
-  const [currentValue, setCurrentValue] = useState(value);
+  const { variant, name, placeholder, value, onChange, size = 'big' } = props;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrentValue(e.target.value);
     onChange?.(e.target.value);
   };
 
@@ -34,13 +31,10 @@ export const Input = (props: InputProps) => {
         {variant === 'filter' && <Search />}
         <input
           name={name}
-          className={cn('input', {
-            input_filter: variant === 'filter',
-            input_form: variant === 'form'
-          })}
+          className={cn('input', `input_size_${size}`)}
           placeholder={placeholder}
           type='text'
-          value={currentValue}
+          value={value}
           onChange={handleChange}
         />
       </div>

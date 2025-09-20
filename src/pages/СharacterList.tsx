@@ -1,17 +1,25 @@
-// import { STATUS_OPTIONS } from "@/constants";
+import { useState } from 'react';
 
+import { Input } from '@/components/Input/Input.tsx';
 import { Layout } from '@/components/Layout/Layout';
+import { Loader } from '@/components/Loader/Loader';
 import { Logo } from '@/components/Logo/Logo';
-// import { Loader } from "@/components/Loader/Loader";
-// import { Select } from "@/components/Select/Select";
-// import { StatusCircle, type StatusesType } from "@/components/Status/Status";
-
+import { Select } from '@/components/Select/Select';
+import { StatusCircle, type StatusesType } from '@/components/Status/Status';
+import { STATUS_OPTIONS } from '@/constants';
 import { SelectorPanel } from '@/widgets/SelectorPanel/SelectorPanel';
 
+import { type SelectOptionContentProps } from '../components/Select/Select.tsx';
+
 import './CharacterList.css';
-import { Input } from '@/components/Input/Input.tsx';
 
 export const CharacterList: React.FunctionComponent = () => {
+  const [currentValue, setCurrentValue] = useState('');
+
+  const handleInputChange = (value: string) => {
+    setCurrentValue(value);
+  };
+
   return (
     <Layout>
       <div className='character-list'>
@@ -19,21 +27,26 @@ export const CharacterList: React.FunctionComponent = () => {
         <SelectorPanel />
         <Input
           variant='form'
-          value='Rick Sanchez'
-          name='search'
+          value={currentValue}
+          name='character-name'
+          onChange={handleInputChange}
+          size='big'
         />
-        {/*<Select*/}
-        {/*  variant="small"*/}
-        {/*  options={STATUS_OPTIONS}*/}
-        {/*  SelectOptionComponent={(props) => (*/}
-        {/*    <>*/}
-        {/*      {props.value}*/}
+        <Select
+          variant='small'
+          options={STATUS_OPTIONS}
+          SelectOptionComponent={(props: SelectOptionContentProps) => (
+            <>
+              {props.value}
 
-        {/*      <StatusCircle status={props.value as StatusesType} />*/}
-        {/*    </>*/}
-        {/*  )}*/}
-        {/*/>*/}
-        {/*<Loader text="Loading characters..." size="large" />*/}
+              <StatusCircle status={props.value as StatusesType} />
+            </>
+          )}
+        />
+        <Loader
+          text='Loading characters...'
+          size='large'
+        />
       </div>
     </Layout>
   );
