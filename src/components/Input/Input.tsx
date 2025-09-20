@@ -1,5 +1,7 @@
-import cn from 'classnames';
 import { useState } from 'react';
+
+import cn from 'classnames';
+
 import Search from '@/assets/icons/search.svg?react';
 
 import './Input.css';

@@ -3,7 +3,6 @@
   justify-content: space-between;
   align-items: center;
   width: 240px;
-  font-family: 'Roboto', 'sans-serif';
   padding: 16px 14px;
   border: 1px solid #00000061;
   border-radius: 6px;
@@ -18,7 +17,6 @@
   border-bottom: 1px solid black;
   width: 208px;
   height: 30px;
-  font-family: 'Roboto', 'sans-serif';
   font-weight: 500;
   font-size: 20px;
   line-height: 30px;

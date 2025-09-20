@@ -12,7 +12,7 @@ export const Loader = ({ text, size }: LoaderProps) => {
     <div className='loader'>
       <img
         src='/src/assets/images/loader.png'
-        alt='загружаем информацию'
+        alt='Loading...'
         className={cn('loader-rotating', {
           small: size === 'small',
           large: size === 'large'
