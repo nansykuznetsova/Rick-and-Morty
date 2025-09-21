@@ -1,16 +1,22 @@
-import { Route, Routes } from "react-router";
+import { Route, Routes } from 'react-router';
 
-import { CharacterList } from "./pages/СharacterList.tsx";
-import { CharacterDetails } from "./pages/CharacterDetails.tsx";
+import { CharacterDetails } from './pages/CharacterDetails.tsx';
+import { CharacterList } from './pages/СharacterList.tsx';
 
-import "./App.css";
+import './App.css';
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<CharacterList />} />
-        <Route path="characters/:id" element={<CharacterDetails />} />
+        <Route
+          path='/'
+          element={<CharacterList />}
+        />
+        <Route
+          path='characters/:id'
+          element={<CharacterDetails />}
+        />
       </Routes>
     </>
   );

@@ -1,28 +1,41 @@
-import { STATUS_OPTIONS } from "@/constants";
+import { useState } from 'react';
 
-import { Layout } from "../components/Layout/Layout.tsx";
-import { Logo } from "../components/Logo/Logo.tsx";
-import { Loader } from "../components/Loader/Loader.tsx";
-import { Select } from "../components/Select/Select.tsx";
-import {
-  StatusCircle,
-  type StatusesType,
-} from "@/components/Status/Status.tsx";
+import { Input } from '@/components/Input/Input.tsx';
+import { Layout } from '@/components/Layout/Layout';
+import { Loader } from '@/components/Loader/Loader';
+import { Logo } from '@/components/Logo/Logo';
+import { Select } from '@/components/Select/Select';
+import { StatusCircle, type StatusesType } from '@/components/Status/Status';
+import { STATUS_OPTIONS } from '@/constants';
+import { SelectorPanel } from '@/widgets/SelectorPanel/SelectorPanel';
 
-import { SelectorPanel } from "../widgets/SelectorPanel/SelectorPanel.tsx";
+import { type SelectOptionContentProps } from '../components/Select/Select.tsx';
 
-import "./CharacterList.css";
+import './CharacterList.css';
 
 export const CharacterList: React.FunctionComponent = () => {
+  const [currentValue, setCurrentValue] = useState('');
+
+  const handleInputChange = (value: string) => {
+    setCurrentValue(value);
+  };
+
   return (
     <Layout>
-      <div className="character-list">
+      <div className='character-list'>
         <Logo />
         <SelectorPanel />
+        <Input
+          variant='form'
+          value={currentValue}
+          name='character-name'
+          onChange={handleInputChange}
+          size='big'
+        />
         <Select
-          variant="small"
+          variant='small'
           options={STATUS_OPTIONS}
-          SelectOptionComponent={(props) => (
+          SelectOptionComponent={(props: SelectOptionContentProps) => (
             <>
               {props.value}
 
@@ -30,7 +43,10 @@ export const CharacterList: React.FunctionComponent = () => {
             </>
           )}
         />
-        <Loader text="Loading characters..." size="large" />
+        <Loader
+          text='Loading characters...'
+          size='large'
+        />
       </div>
     </Layout>
   );
