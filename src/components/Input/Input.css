@@ -18,7 +18,7 @@
 }
 
 .input__inner {
-  min-width: 208px;
+  max-width: 178px;
   display: flex;
   align-items: center;
   column-gap: 8px;
@@ -27,19 +27,22 @@
 
 .input {
   border: none;
-  font-family: 'Roboto', 'sans-serif';
+  font: inherit; /* 👈 делает шрифт и line-height как у текста */
+  color: inherit;
+  line-height: 1; /* можно подогнать под текст */
+  height: auto;
 }
 
-.input_size_small {
-  font-size: 16px;
+.input_small {
+  /*font-size: 16px;*/
   width: 240px;
 }
 
-.input_size_big {
-  font-size: 20px;
+.input_big {
+  /*font-size: 20px;*/
   width: 208px;
-  height: 30px;
-  line-height: 30px;
+  /*height: 30px;*/
+  /*line-height: 30px;*/
 }
 
 .input:hover,
