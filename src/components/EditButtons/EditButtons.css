@@ -1,0 +1,24 @@
+.edit_buttons {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease;
+  display: flex;
+  position: absolute;
+  gap: 4px;
+  right: 6px;
+}
+
+.editing {
+  visibility: visible;
+  opacity: 1;
+}
+
+.character_card:hover .edit_buttons {
+  opacity: 1;
+  visibility: visible;
+}
+
+.character_card__icon {
+  all: unset;
+  cursor: pointer;
+}

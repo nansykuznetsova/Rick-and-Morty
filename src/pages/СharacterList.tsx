@@ -7,11 +7,22 @@ import { Logo } from '@/components/Logo/Logo';
 import { Select } from '@/components/Select/Select';
 import { StatusCircle, type StatusesType } from '@/components/Status/Status';
 import { STATUS_OPTIONS } from '@/constants';
+import { CharacterCard } from '@/widgets/CharacterCard/CharacterCard.tsx';
 import { SelectorPanel } from '@/widgets/SelectorPanel/SelectorPanel';
 
-import { type SelectOptionContentProps } from '../components/Select/Select.tsx';
+import { type SelectOptionContentProps } from '../components/Select/Select';
 
 import './CharacterList.css';
+
+const CHARACTER_CARD_INFO = {
+  id: 1,
+  name: 'Rick Sanches',
+  gender: 'Male',
+  species: 'Human',
+  location: 'Earth',
+  status: 'alive',
+  imageSrc: '/src/assets/images/avatar.png'
+};
 
 export const CharacterList: React.FunctionComponent = () => {
   const [currentValue, setCurrentValue] = useState('');
@@ -43,6 +54,7 @@ export const CharacterList: React.FunctionComponent = () => {
             </>
           )}
         />
+        <CharacterCard character={CHARACTER_CARD_INFO} />
         <Loader
           text='Loading characters...'
           size='large'

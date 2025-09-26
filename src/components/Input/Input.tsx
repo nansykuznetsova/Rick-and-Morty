@@ -11,10 +11,19 @@ export interface InputProps {
   value?: string;
   onChange?: (value: string) => void;
   size?: 'small' | 'big';
+  className?: string;
 }
 
 export const Input = (props: InputProps) => {
-  const { variant, name, placeholder, value, onChange, size = 'big' } = props;
+  const {
+    variant,
+    name,
+    placeholder,
+    value,
+    onChange,
+    size = 'big',
+    className
+  } = props;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
@@ -31,7 +40,7 @@ export const Input = (props: InputProps) => {
         {variant === 'filter' && <Search />}
         <input
           name={name}
-          className={cn('input', `input_size_${size}`)}
+          className={cn('input', `input_${size}`, className)}
           placeholder={placeholder}
           type='text'
           value={value}
