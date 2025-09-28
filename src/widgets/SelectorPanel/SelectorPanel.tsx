@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { Input } from '@/components/Input/Input';
-import { Select } from '@/components/Select/Select';
+import { Input } from '@/components';
+import { Select } from '@/components';
 import { GENDER_OPTIONS, SPECIES_OPTIONS, STATUS_OPTIONS } from '@/constants';
 
 import './SelectorPanel.css';

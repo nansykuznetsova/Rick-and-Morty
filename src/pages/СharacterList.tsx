@@ -1,16 +1,15 @@
 import { useState } from 'react';
 
-import { Input } from '@/components/Input/Input.tsx';
-import { Layout } from '@/components/Layout/Layout';
-import { Loader } from '@/components/Loader/Loader';
-import { Logo } from '@/components/Logo/Logo';
-import { Select } from '@/components/Select/Select';
-import { StatusCircle, type StatusesType } from '@/components/Status/Status';
+import { Input } from '@/components';
+import { Layout } from '@/components';
+import { Loader } from '@/components';
+import { Logo } from '@/components';
+import { Select } from '@/components';
+import { StatusCircle, type StatusesType } from '@/components';
+import { type SelectOptionContentProps } from '@/components';
 import { STATUS_OPTIONS } from '@/constants';
-import { CharacterCard } from '@/widgets/CharacterCard/CharacterCard.tsx';
-import { SelectorPanel } from '@/widgets/SelectorPanel/SelectorPanel';
-
-import { type SelectOptionContentProps } from '../components/Select/Select';
+import { CharacterCard } from '@/widgets';
+import { SelectorPanel } from '@/widgets';
 
 import './CharacterList.css';
 

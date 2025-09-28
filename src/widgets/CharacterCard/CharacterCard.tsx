@@ -1,32 +1,17 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { EditButtons } from '@/components/EditButtons/EditButtons.tsx';
-import { Input } from '@/components/Input/Input.tsx';
-import {
-  Select,
-  type SelectOptionContentProps
-} from '@/components/Select/Select.tsx';
-import {
-  StatusCircle,
-  type StatusesType
-} from '@/components/Status/Status.tsx';
+import { Input } from '@/components';
+import { EditButtons } from '@/components';
+import { Select, type SelectOptionContentProps } from '@/components';
+import { StatusCircle, type StatusesType } from '@/components';
 import { STATUS_OPTIONS } from '@/constants';
+import { type CharacterCardTypes } from '@/types';
 
 import './CharacterCard.css';
 
-interface CharacterCard {
-  id: number;
-  name: string;
-  gender: string;
-  species: string;
-  location: string;
-  status: 'alive' | 'dead' | 'unknown';
-  imageSrc: string;
-}
-
 interface CharacterCardProps {
-  character: CharacterCard;
+  character: CharacterCardTypes;
   onEditCharacter: () => void;
 }
 

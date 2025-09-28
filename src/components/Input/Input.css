@@ -27,22 +27,18 @@
 
 .input {
   border: none;
-  font: inherit; /* 👈 делает шрифт и line-height как у текста */
+  font: inherit;
   color: inherit;
-  line-height: 1; /* можно подогнать под текст */
+  line-height: 1;
   height: auto;
 }
 
 .input_small {
-  /*font-size: 16px;*/
   width: 240px;
 }
 
 .input_big {
-  /*font-size: 20px;*/
   width: 208px;
-  /*height: 30px;*/
-  /*line-height: 30px;*/
 }
 
 .input:hover,
