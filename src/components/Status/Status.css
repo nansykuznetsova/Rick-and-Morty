@@ -4,14 +4,14 @@
   height: 10px;
 }
 
-.red {
+.circle_red {
   background-color: #df0000;
 }
 
-.green {
+.circle_green {
   background-color: #12b800;
 }
 
-.orange {
+.circle_orange {
   background-color: #ff9900;
 }

@@ -19,5 +19,7 @@ export const StatusCircle = (props: StatusProps) => {
   const key = status.toLowerCase() as StatusesType;
   const statusValue = STATUS_COLORS[key];
 
-  return statusValue ? <div className={cn('circle', statusValue)} /> : null;
+  return statusValue ? (
+    <div className={cn('circle', `circle_${statusValue}`)} />
+  ) : null;
 };

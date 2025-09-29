@@ -32,11 +32,11 @@ export const Input = (props: InputProps) => {
   return (
     <div
       className={cn({
-        input__wrapper_filter: variant === 'filter',
-        input__wrapper_form: variant === 'form'
+        'input-wrapper__filter': variant === 'filter',
+        'input-wrapper__form': variant === 'form'
       })}
     >
-      <div className='input__inner'>
+      <div className='input-wrapper__inner'>
         {variant === 'filter' && <Search />}
         <input
           name={name}

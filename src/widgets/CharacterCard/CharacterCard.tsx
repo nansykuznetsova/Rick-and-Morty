@@ -44,20 +44,19 @@ export const CharacterCard = (props: CharacterCardProps) => {
   };
 
   return (
-    <div className='character_card'>
-      <div className='character_card__image'>
+    <div className='character-card'>
+      <div className='character-card__image'>
         <img
           src={character.imageSrc}
           alt={`avatar ${character.name}`}
-          className='character_card__avatar'
         />
       </div>
-      <div className='character_card__info'>
-        <div className='character_card__header'>
+      <div className='character-card__info'>
+        <div className='character-card__title'>
           {readOnly ? (
             <Link
               to='characters/:id'
-              className='character_card__link'
+              className='character-card__name-link'
               aria-label='go to character'
             >
               {character.name}
@@ -69,7 +68,7 @@ export const CharacterCard = (props: CharacterCardProps) => {
               name={character.name}
               value={currentName}
               onChange={handleInputNameChange}
-              className='custom_input__name'
+              className='character-card__name-input'
             />
           )}
 
@@ -80,19 +79,23 @@ export const CharacterCard = (props: CharacterCardProps) => {
             onSave={onSave}
           />
         </div>
-        <div className='character_card__body'>
-          <dl className='character_card__item'>
-            <dt className='character_card__title'>Gender</dt>
-            <dd className='character_card__definition'>{character.gender}</dd>
+        <div className='character-card__description'>
+          <dl className='character-card__description-item'>
+            <dt className='character-card__description-title'>Gender</dt>
+            <dd className='character-card__description-content'>
+              {character.gender}
+            </dd>
           </dl>
-          <dl className='character_card__item'>
-            <dt className='character_card__title'>Species</dt>
-            <dd className='character_card__definition'>{character.species}</dd>
+          <dl className='character-card__description-item'>
+            <dt className='character-card__description-title'>Species</dt>
+            <dd className='character-card__description-content'>
+              {character.species}
+            </dd>
           </dl>
-          <dl className='character_card__item'>
-            <dt className='character_card__title'>Location</dt>
+          <dl className='character-card__description-item'>
+            <dt className='character-card__description-title'>Location</dt>
             {readOnly ? (
-              <dd className='character_card__definition'>
+              <dd className='character-card__description-content'>
                 {character.location}
               </dd>
             ) : (
@@ -102,14 +105,14 @@ export const CharacterCard = (props: CharacterCardProps) => {
                 name={character.location}
                 value={currentLocation}
                 onChange={handleInputLocationChange}
-                className='custom_input__location'
+                className='character-card__location-input'
               />
             )}
           </dl>
-          <dl className='character_card__item'>
-            <dt className='character_card__title'>Status</dt>
+          <dl className='character-card__description-item'>
+            <dt className='character-card__description-title'>Status</dt>
             {readOnly ? (
-              <dd className='character_card__definition'>
+              <dd className='character-card__description-content'>
                 {character.status}
                 <StatusCircle status={character.status} />
               </dd>

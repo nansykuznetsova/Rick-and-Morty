@@ -1,4 +1,4 @@
-.edit_buttons {
+.edit-buttons {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.2s ease;
@@ -13,12 +13,12 @@
   opacity: 1;
 }
 
-.character_card:hover .edit_buttons {
+.character-card:hover .edit-buttons {
   opacity: 1;
   visibility: visible;
 }
 
-.character_card__icon {
+.character-card__btn-icon {
   all: unset;
   cursor: pointer;
 }

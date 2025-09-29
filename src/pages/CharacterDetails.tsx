@@ -12,10 +12,10 @@ export const CharacterDetails: React.FunctionComponent = () => {
       <div className='character-details'>
         <Link
           to='/'
-          className='go-back-character-details'
+          className='character-details__link'
           aria-label='назад в меню'
         >
-          <ArrowBack className='arrow-back' />
+          <ArrowBack className='character-details__link-icon' />
           GO BACK
         </Link>
         <Loader

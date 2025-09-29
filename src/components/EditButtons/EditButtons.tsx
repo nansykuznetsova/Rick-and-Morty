@@ -17,18 +17,18 @@ export const EditButtons = (props: EditButtonsProps) => {
   const { isEditing, onEdit, onCancel, onSave } = props;
 
   return (
-    <div className={cn('edit_buttons', { editing: isEditing })}>
+    <div className={cn('edit-buttons', { editing: isEditing })}>
       {isEditing ? (
         <>
           <button
-            className='character_card__icon'
+            className='character-card__btn-icon'
             onClick={onCancel}
             type='button'
           >
             <CloseIcon />
           </button>
           <button
-            className='character_card__icon'
+            className='character-card__btn-icon'
             onClick={onSave}
             type='button'
           >
@@ -38,14 +38,14 @@ export const EditButtons = (props: EditButtonsProps) => {
       ) : (
         <>
           <button
-            className='character_card__icon'
+            className='character-card__btn-icon'
             onClick={onCancel}
             type='button'
           >
             <CloseIcon />
           </button>
           <button
-            className='character_card__icon'
+            className='character-card__btn-icon'
             onClick={onEdit}
             type='button'
           >

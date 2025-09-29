@@ -19,7 +19,7 @@ const CHARACTER_CARD_INFO = {
   gender: 'Male',
   species: 'Human',
   location: 'Earth',
-  status: 'alive',
+  status: 'Alive',
   imageSrc: '/src/assets/images/avatar.png'
 };
 

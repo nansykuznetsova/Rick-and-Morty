@@ -1,4 +1,4 @@
-.input__wrapper_filter {
+.input-wrapper__filter {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,14 +10,14 @@
   cursor: pointer;
 }
 
-.input__wrapper_form {
+.input-wrapper__form {
   display: flex;
   justify-content: flex-start;
   border-bottom: 1px solid black;
   font-weight: 500;
 }
 
-.input__inner {
+.input-wrapper__inner {
   max-width: 178px;
   display: flex;
   align-items: center;
