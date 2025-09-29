@@ -31,7 +31,7 @@ export const Input = (props: InputProps) => {
 
   return (
     <div
-      className={cn({
+      className={cn(`input-wrapper_${size}`, className, {
         'input-wrapper__filter': variant === 'filter',
         'input-wrapper__form': variant === 'form'
       })}
@@ -40,7 +40,7 @@ export const Input = (props: InputProps) => {
         {variant === 'filter' && <Search />}
         <input
           name={name}
-          className={cn('input', `input_${size}`, className)}
+          className={cn('input')}
           placeholder={placeholder}
           type='text'
           value={value}

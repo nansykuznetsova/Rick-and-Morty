@@ -18,7 +18,6 @@
 }
 
 .input-wrapper__inner {
-  max-width: 178px;
   display: flex;
   align-items: center;
   column-gap: 8px;
@@ -33,11 +32,11 @@
   height: auto;
 }
 
-.input_small {
+.input-wrapper_small {
   width: 240px;
 }
 
-.input_big {
+.input-wrapper_big {
   width: 208px;
 }
 

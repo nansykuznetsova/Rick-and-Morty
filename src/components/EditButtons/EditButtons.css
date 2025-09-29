@@ -22,3 +22,7 @@
   all: unset;
   cursor: pointer;
 }
+
+.character-card__btn-icon_edit {
+  width: 24px;
+}

@@ -1,8 +1,9 @@
 .selector-panel {
-  width: 100%;
+  /*width: 100%;*/
+  max-width: 1044px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  gap: 28px;
   margin-block: 16px;
 }
