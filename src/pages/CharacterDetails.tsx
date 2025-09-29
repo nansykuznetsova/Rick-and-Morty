@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
 import ArrowBack from '@/assets/icons/arrow-back.svg?react';
-import { Layout } from '@/components/Layout/Layout';
-import { Loader } from '@/components/Loader/Loader';
+import { Layout } from '@/components';
+import { Loader } from '@/components';
 
 import './CharacterDetails.css';
 
@@ -12,10 +12,10 @@ export const CharacterDetails: React.FunctionComponent = () => {
       <div className='character-details'>
         <Link
           to='/'
-          className='go-back-character-details'
+          className='character-details__link'
           aria-label='назад в меню'
         >
-          <ArrowBack className='arrow-back' />
+          <ArrowBack className='character-details__link-icon' />
           GO BACK
         </Link>
         <Loader

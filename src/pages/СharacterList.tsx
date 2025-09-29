@@ -1,17 +1,27 @@
 import { useState } from 'react';
 
-import { Input } from '@/components/Input/Input.tsx';
-import { Layout } from '@/components/Layout/Layout';
-import { Loader } from '@/components/Loader/Loader';
-import { Logo } from '@/components/Logo/Logo';
-import { Select } from '@/components/Select/Select';
-import { StatusCircle, type StatusesType } from '@/components/Status/Status';
+import { Input } from '@/components';
+import { Layout } from '@/components';
+import { Loader } from '@/components';
+import { Logo } from '@/components';
+import { Select } from '@/components';
+import { StatusCircle, type StatusesType } from '@/components';
+import { type SelectOptionContentProps } from '@/components';
 import { STATUS_OPTIONS } from '@/constants';
-import { SelectorPanel } from '@/widgets/SelectorPanel/SelectorPanel';
-
-import { type SelectOptionContentProps } from '../components/Select/Select.tsx';
+import { CharacterCard } from '@/widgets';
+import { SelectorPanel } from '@/widgets';
 
 import './CharacterList.css';
+
+const CHARACTER_CARD_INFO = {
+  id: 1,
+  name: 'Rick Sanches',
+  gender: 'Male',
+  species: 'Human',
+  location: 'Earth',
+  status: 'Alive',
+  imageSrc: '/src/assets/images/avatar.png'
+};
 
 export const CharacterList: React.FunctionComponent = () => {
   const [currentValue, setCurrentValue] = useState('');
@@ -43,6 +53,7 @@ export const CharacterList: React.FunctionComponent = () => {
             </>
           )}
         />
+        <CharacterCard character={CHARACTER_CARD_INFO} />
         <Loader
           text='Loading characters...'
           size='large'

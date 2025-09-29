@@ -1,4 +1,4 @@
-.input__wrapper_filter {
+.input-wrapper__filter {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,15 +10,15 @@
   cursor: pointer;
 }
 
-.input__wrapper_form {
+.input-wrapper__form {
   display: flex;
   justify-content: flex-start;
   border-bottom: 1px solid black;
   font-weight: 500;
 }
 
-.input__inner {
-  min-width: 208px;
+.input-wrapper__inner {
+  max-width: 178px;
   display: flex;
   align-items: center;
   column-gap: 8px;
@@ -27,19 +27,18 @@
 
 .input {
   border: none;
-  font-family: 'Roboto', 'sans-serif';
+  font: inherit;
+  color: inherit;
+  line-height: 1;
+  height: auto;
 }
 
-.input_size_small {
-  font-size: 16px;
+.input_small {
   width: 240px;
 }
 
-.input_size_big {
-  font-size: 20px;
+.input_big {
   width: 208px;
-  height: 30px;
-  line-height: 30px;
 }
 
 .input:hover,

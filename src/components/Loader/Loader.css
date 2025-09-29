@@ -5,15 +5,15 @@
   align-items: center;
 }
 
-.small {
+.loader__img_small {
   width: 103px;
 }
 
-.large {
+.loader__img_large {
   width: 475px;
 }
 
-.loader-rotating {
+.loader__img {
   animation: spin 4s linear infinite;
 }
 

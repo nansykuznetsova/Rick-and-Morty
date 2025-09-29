@@ -6,7 +6,7 @@
   min-height: 100vh;
 }
 
-.go-back-character-details {
+.character-details__link {
   font-family: 'Karla', sans-serif;
   font-weight: 700;
   font-size: 18px;
@@ -18,7 +18,7 @@
   color: inherit;
 }
 
-.arrow-back {
+.character-details__link-icon {
   width: 24px;
   height: 24px;
 }

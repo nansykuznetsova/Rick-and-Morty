@@ -12,7 +12,7 @@ export const Header: React.FunctionComponent = () => {
         <img
           src='/src/assets/images/logo-black.png'
           alt='logo'
-          className='logo'
+          className='header__logo'
         />
       </Link>
     </header>

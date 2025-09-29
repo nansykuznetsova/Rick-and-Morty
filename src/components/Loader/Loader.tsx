@@ -13,9 +13,9 @@ export const Loader = ({ text, size }: LoaderProps) => {
       <img
         src='/src/assets/images/loader.png'
         alt='Loading...'
-        className={cn('loader-rotating', {
-          large: size === 'large',
-          small: size === 'small'
+        className={cn('loader__img', {
+          loader__img_large: size === 'large',
+          loader__img_small: size === 'small'
         })}
       />
       <p>{text}</p>
