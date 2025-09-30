@@ -40,7 +40,7 @@ export const Input = (props: InputProps) => {
         {variant === 'filter' && <Search />}
         <input
           name={name}
-          className={cn('input')}
+          className='input'
           placeholder={placeholder}
           type='text'
           value={value}

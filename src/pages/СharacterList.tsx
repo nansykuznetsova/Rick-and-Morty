@@ -9,7 +9,7 @@ import { StatusCircle, type StatusesType } from '@/components';
 import { type SelectOptionContentProps } from '@/components';
 import { STATUS_OPTIONS } from '@/constants';
 import { CharacterCard } from '@/widgets';
-import { SelectorPanel } from '@/widgets';
+import { FilterPanel } from '@/widgets';
 
 import './CharacterList.css';
 
@@ -34,7 +34,7 @@ export const CharacterList: React.FunctionComponent = () => {
     <Layout>
       <div className='character-list'>
         <Logo />
-        <SelectorPanel />
+        <FilterPanel />
         <Input
           variant='form'
           value={currentValue}
