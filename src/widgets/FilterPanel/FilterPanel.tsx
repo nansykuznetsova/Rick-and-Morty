@@ -4,9 +4,9 @@ import { Input } from '@/components';
 import { Select } from '@/components';
 import { GENDER_OPTIONS, SPECIES_OPTIONS, STATUS_OPTIONS } from '@/constants';
 
-import './SelectorPanel.css';
+import './FilterPanel.css';
 
-export const SelectorPanel: React.FunctionComponent = () => {
+export const FilterPanel: React.FunctionComponent = () => {
   const [currentValue, setCurrentValue] = useState('');
 
   const handleInputChange = (value: string) => {

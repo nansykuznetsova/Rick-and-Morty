@@ -49,7 +49,7 @@ export const EditButtons = (props: EditButtonsProps) => {
             onClick={onEdit}
             type='button'
           >
-            <EditIcon />
+            <EditIcon className='character-card__btn-icon_edit' />
           </button>
         </>
       )}
