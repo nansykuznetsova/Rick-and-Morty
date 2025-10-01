@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router';
 
 import { CharacterDetails } from '@/pages/CharacterDetails';
@@ -18,6 +19,17 @@ function App() {
           element={<CharacterDetails />}
         />
       </Routes>
+      <Toaster
+        position='bottom-right'
+        reverseOrder={false}
+        toastOptions={{
+          duration: 7000,
+          className: 'toast',
+          error: {
+            className: 'toast toast-error'
+          }
+        }}
+      />
     </>
   );
 }
