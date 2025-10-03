@@ -6,3 +6,11 @@
   align-items: center;
   min-height: 100vh;
 }
+
+.character-list__cards-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}

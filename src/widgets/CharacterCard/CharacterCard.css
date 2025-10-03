@@ -9,6 +9,11 @@
   border-radius: 6px;
 }
 
+.character-card__image-wrapper {
+  width: 240px;
+  height: 234px;
+}
+
 .character-card__image {
   width: 100%;
   height: 100%;
@@ -35,6 +40,9 @@
   font-size: 20px;
   color: inherit;
   text-decoration: none;
+  overflow: hidden;
+  max-width: 178px;
+  white-space: nowrap;
 }
 
 .character-card__name-link:hover {
@@ -82,4 +90,5 @@
   color: inherit;
   text-decoration: none;
   max-width: 178px;
+  overflow: hidden;
 }

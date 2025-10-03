@@ -6,6 +6,7 @@ import { EditButtons } from '@/components';
 import { Select, type SelectOptionContentProps } from '@/components';
 import { StatusCircle, type StatusesType } from '@/components';
 import { STATUS_OPTIONS } from '@/constants';
+import { formatStatus } from '@/lib/helpers/helpers.ts';
 import { type CharacterCardTypes } from '@/types';
 
 import './CharacterCard.css';
@@ -20,7 +21,9 @@ export const CharacterCard = (props: CharacterCardProps) => {
 
   const [readOnly, setReadOnly] = useState(true);
   const [currentName, setCurrentName] = useState(character.name);
-  const [currentLocation, setCurrentLocation] = useState(character.location);
+  const [currentLocationName, setCurrentLocationName] = useState(
+    character.location.name
+  );
 
   const onEdit = () => {
     setReadOnly(false);
@@ -40,14 +43,15 @@ export const CharacterCard = (props: CharacterCardProps) => {
   };
 
   const handleInputLocationChange = (value: string) => {
-    setCurrentLocation(value);
+    setCurrentLocationName(value);
   };
 
   return (
     <div className='character-card'>
-      <div className='character-card__image'>
+      <div className='character-card__image-wrapper'>
         <img
-          src={character.imageSrc}
+          className='character-card__image'
+          src={character.image}
           alt={`avatar ${character.name}`}
         />
       </div>
@@ -96,14 +100,14 @@ export const CharacterCard = (props: CharacterCardProps) => {
             <dt className='character-card__description-title'>Location</dt>
             {readOnly ? (
               <dd className='character-card__description-content'>
-                {character.location}
+                {character.location.name}
               </dd>
             ) : (
               <Input
                 size='big'
                 variant='form'
-                name={character.location}
-                value={currentLocation}
+                name={character.location.name}
+                value={currentLocationName}
                 onChange={handleInputLocationChange}
                 className='character-card__location-input'
               />
@@ -113,7 +117,7 @@ export const CharacterCard = (props: CharacterCardProps) => {
             <dt className='character-card__description-title'>Status</dt>
             {readOnly ? (
               <dd className='character-card__description-content'>
-                {character.status}
+                {formatStatus(character.status)}
                 <StatusCircle status={character.status} />
               </dd>
             ) : (
@@ -123,7 +127,6 @@ export const CharacterCard = (props: CharacterCardProps) => {
                 SelectOptionComponent={(props: SelectOptionContentProps) => (
                   <>
                     {props.value}
-
                     <StatusCircle status={props.value as StatusesType} />
                   </>
                 )}
