@@ -6,14 +6,14 @@ import { EditButtons } from '@/components';
 import { Select, type SelectOptionContentProps } from '@/components';
 import { StatusCircle, type StatusesType } from '@/components';
 import { STATUS_OPTIONS } from '@/constants';
-import { formatStatus } from '@/lib/helpers/helpers.ts';
+import { formatStatus } from '@/shared/lib/helpers/helpers.ts';
 import { type CharacterCardTypes } from '@/types';
 
 import './CharacterCard.css';
 
 interface CharacterCardProps {
   character: CharacterCardTypes;
-  onEditCharacter: () => void;
+  onEditCharacter?: () => void;
 }
 
 export const CharacterCard = (props: CharacterCardProps) => {

@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react';
 
-import { getCharacters } from '@/api';
 import { Layout } from '@/components';
 import { Loader } from '@/components';
 import { Logo } from '@/components';
-import { type Character } from '@/types/character';
+import { getCharacters } from '@/shared';
+import { type CharacterCardTypes } from '@/types/character';
 import { CharacterCard } from '@/widgets';
 import { FilterPanel } from '@/widgets';
 
 import './CharacterList.css';
 
 export const CharacterList: React.FunctionComponent = () => {
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const [characters, setCharacters] = useState<CharacterCardTypes[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export const CharacterList: React.FunctionComponent = () => {
               size='large'
             />
           ) : (
-            <ul className='character-list__cards-list'>
+            <ul className='character-list__cards'>
               {characters.map((character) => (
                 <li key={character.id}>
                   <CharacterCard character={character} />

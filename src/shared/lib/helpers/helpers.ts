@@ -1,4 +1,4 @@
-import { type CharacterStatus } from '@/types/character';
+import { type CharacterStatus } from '@/types/character.ts';
 
 export const formatStatus = (status: CharacterStatus) => {
   switch (status) {

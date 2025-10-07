@@ -1,16 +1,11 @@
 import toast from 'react-hot-toast';
 
-import axios from 'axios';
-
+import { apiClient } from '@/shared';
 import {
   type ApiResponse,
   type CharacterCardTypes,
   type CharacterStatus
 } from '@/types/character';
-
-const apiClient = axios.create({
-  baseURL: 'https://rickandmortyapi.com/api'
-});
 
 export const getCharacters = async () => {
   try {
