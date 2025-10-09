@@ -4,6 +4,7 @@ import { Layout } from '@/components';
 import { Loader } from '@/components';
 import { Logo } from '@/components';
 import { getCharacters } from '@/shared';
+import { useDebounce } from '@/shared';
 import { type CharacterFilters } from '@/types';
 import { type CharacterCardTypes } from '@/types/character';
 import { CharacterCard } from '@/widgets';
@@ -14,36 +15,24 @@ import './CharacterList.css';
 export const CharacterList: React.FunctionComponent = () => {
   const [characters, setCharacters] = useState<CharacterCardTypes[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState<CharacterFilters>({ page: 1 });
+  const [filters, setFilters] = useState<CharacterFilters>({});
+  const [page, setPage] = useState(1);
 
-  const [debouncedName, setDebouncedName] = useState(filters.name || '');
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setDebouncedName(filters.name || '');
-    }, 400);
-    return () => clearTimeout(timeout);
-  }, [filters.name]);
+  const debouncedName = useDebounce(filters.name, 400);
 
   useEffect(() => {
     setLoading(true);
-    getCharacters({ ...filters, name: debouncedName })
+    getCharacters({ ...filters, page, name: debouncedName })
       .then((data) => setCharacters(data))
       .finally(() => setLoading(false));
-  }, [
-    filters.species,
-    filters.gender,
-    filters.status,
-    debouncedName,
-    filters.page
-  ]);
+  }, [filters.species, filters.gender, filters.status, debouncedName, page]);
 
   const handleFilterChange = (newFilters: Partial<CharacterFilters>) => {
     setFilters((prev) => ({
       ...prev,
-      ...newFilters,
-      page: newFilters.page ?? 1 // сбрасываем страницу при изменении фильтров
+      ...newFilters
     }));
+    setPage(1);
   };
 
   return (
