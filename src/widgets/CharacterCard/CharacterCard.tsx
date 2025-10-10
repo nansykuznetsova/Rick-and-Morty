@@ -1,19 +1,23 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Input } from '@/components';
-import { EditButtons } from '@/components';
-import { Select, type SelectOptionContentProps } from '@/components';
-import { StatusCircle, type StatusesType } from '@/components';
+import {
+  EditButtons,
+  Input,
+  Select,
+  type SelectOptionContentProps,
+  StatusCircle,
+  type StatusesType
+} from '@/components';
 import { STATUS_OPTIONS } from '@/constants';
-import { formatStatus } from '@/lib/helpers/helpers.ts';
+import { formatStatus } from '@/shared';
 import { type CharacterCardTypes } from '@/types';
 
 import './CharacterCard.css';
 
 interface CharacterCardProps {
   character: CharacterCardTypes;
-  onEditCharacter: () => void;
+  onEditCharacter?: () => void;
 }
 
 export const CharacterCard = (props: CharacterCardProps) => {

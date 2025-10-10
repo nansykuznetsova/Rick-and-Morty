@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import ArrowBack from '@/assets/icons/arrow-back.svg?react';
-import { Layout } from '@/components';
-import { Loader } from '@/components';
+import { Layout, Loader } from '@/components';
 
 import './CharacterDetails.css';
 

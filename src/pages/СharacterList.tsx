@@ -1,33 +1,44 @@
 import { useEffect, useState } from 'react';
 
-import { getCharacters } from '@/api';
-import { Layout } from '@/components';
-import { Loader } from '@/components';
-import { Logo } from '@/components';
-import { type Character } from '@/types/character';
-import { CharacterCard } from '@/widgets';
-import { FilterPanel } from '@/widgets';
+import { Layout, Loader, Logo } from '@/components';
+import { DEBOUNCE_DELAY, FIRST_PAGE_PAGINATION } from '@/constants';
+import { getCharacters, useDebounce } from '@/shared';
+import { type CharacterCardTypes, type CharacterFilters } from '@/types';
+import { CharacterCard, FilterPanel } from '@/widgets';
 
 import './CharacterList.css';
 
 export const CharacterList: React.FunctionComponent = () => {
-  const [characters, setCharacters] = useState<Character[]>([]);
+  const [characters, setCharacters] = useState<CharacterCardTypes[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState<CharacterFilters>({});
+  const [page, setPage] = useState(FIRST_PAGE_PAGINATION);
+
+  const debouncedName = useDebounce(filters.name, DEBOUNCE_DELAY);
 
   useEffect(() => {
     setLoading(true);
-    getCharacters()
-      .then((data) => {
-        setCharacters(data);
-      })
+    getCharacters({ ...filters, page, name: debouncedName })
+      .then((data) => setCharacters(data))
       .finally(() => setLoading(false));
-  }, []);
+  }, [filters.species, filters.gender, filters.status, debouncedName, page]);
+
+  const handleFilterChange = (newFilters: CharacterFilters) => {
+    setFilters((prev) => ({
+      ...prev,
+      ...newFilters
+    }));
+    setPage(FIRST_PAGE_PAGINATION);
+  };
 
   return (
     <Layout>
       <div className='character-list'>
         <Logo />
-        <FilterPanel />
+        <FilterPanel
+          filters={filters}
+          onChange={handleFilterChange}
+        />
         <div className='character-list__cards-wrapper'>
           {loading ? (
             <Loader
@@ -35,7 +46,7 @@ export const CharacterList: React.FunctionComponent = () => {
               size='large'
             />
           ) : (
-            <ul className='character-list__cards-list'>
+            <ul className='character-list__cards'>
               {characters.map((character) => (
                 <li key={character.id}>
                   <CharacterCard character={character} />
