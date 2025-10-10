@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { Layout } from '@/components';
-import { Loader } from '@/components';
-import { Logo } from '@/components';
-import { getCharacters } from '@/shared';
-import { useDebounce } from '@/shared';
-import { type CharacterFilters } from '@/types';
-import { type CharacterCardTypes } from '@/types/character';
-import { CharacterCard } from '@/widgets';
-import { FilterPanel } from '@/widgets';
+import { Layout, Loader, Logo } from '@/components';
+import { DEBOUNCE_DELAY, FIRST_PAGE_PAGINATION } from '@/constants';
+import { getCharacters, useDebounce } from '@/shared';
+import { type CharacterCardTypes, type CharacterFilters } from '@/types';
+import { CharacterCard, FilterPanel } from '@/widgets';
 
 import './CharacterList.css';
 
@@ -16,9 +12,9 @@ export const CharacterList: React.FunctionComponent = () => {
   const [characters, setCharacters] = useState<CharacterCardTypes[]>([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState<CharacterFilters>({});
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(FIRST_PAGE_PAGINATION);
 
-  const debouncedName = useDebounce(filters.name, 400);
+  const debouncedName = useDebounce(filters.name, DEBOUNCE_DELAY);
 
   useEffect(() => {
     setLoading(true);
@@ -27,12 +23,12 @@ export const CharacterList: React.FunctionComponent = () => {
       .finally(() => setLoading(false));
   }, [filters.species, filters.gender, filters.status, debouncedName, page]);
 
-  const handleFilterChange = (newFilters: Partial<CharacterFilters>) => {
+  const handleFilterChange = (newFilters: CharacterFilters) => {
     setFilters((prev) => ({
       ...prev,
       ...newFilters
     }));
-    setPage(1);
+    setPage(FIRST_PAGE_PAGINATION);
   };
 
   return (

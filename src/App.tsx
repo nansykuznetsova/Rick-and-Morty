@@ -1,8 +1,7 @@
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router';
 
-import { CharacterDetails } from '@/pages/CharacterDetails';
-import { CharacterList } from '@/pages/СharacterList';
+import { CharacterDetails, CharacterList } from '@/pages';
 
 import './App.css';
 

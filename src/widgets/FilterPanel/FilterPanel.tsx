@@ -1,5 +1,4 @@
-import { Input } from '@/components';
-import { Select } from '@/components';
+import { Input, Select } from '@/components';
 import { GENDER_OPTIONS, SPECIES_OPTIONS, STATUS_OPTIONS } from '@/constants';
 import { type CharacterFilters } from '@/types';
 
@@ -19,15 +18,15 @@ export const FilterPanel: React.FunctionComponent<FilterPanelProps> = ({
   };
 
   const handleSelectSpecies = (value: string) => {
-    onChange({ species: value || undefined });
+    onChange({ species: value });
   };
 
   const handleSelectGender = (value: string) => {
-    onChange({ gender: value || undefined });
+    onChange({ gender: value });
   };
 
   const handleSelectStatus = (value: string) => {
-    onChange({ status: value || undefined });
+    onChange({ status: value });
   };
 
   return (

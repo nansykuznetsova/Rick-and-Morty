@@ -1,7 +1,7 @@
 export interface CharacterFilters {
   name?: string;
-  status?: string | undefined;
+  status?: string;
   species?: string;
-  gender?: string | undefined;
+  gender?: string;
   page?: number;
 }

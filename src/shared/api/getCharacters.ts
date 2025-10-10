@@ -5,8 +5,8 @@ import {
   type ApiResponse,
   type CharacterCardTypes,
   type CharacterStatus
-} from '@/types/character';
-import { type CharacterFilters } from '@/types/filters';
+} from '@/types';
+import { type CharacterFilters } from '@/types';
 
 export const getCharacters = async (filters: CharacterFilters) => {
   try {
