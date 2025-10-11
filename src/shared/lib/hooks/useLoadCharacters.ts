@@ -4,8 +4,6 @@ import { DEBOUNCE_DELAY, FIRST_PAGE_PAGINATION } from '@/constants';
 import { getCharacters, useDebounce } from '@/shared';
 import { type CharacterCardTypes, type CharacterFilters } from '@/types';
 
-import './CharacterList.css';
-
 export function useLoadCharacters() {
   const [characters, setCharacters] = useState<CharacterCardTypes[]>([]);
   const [loading, setLoading] = useState(true);
