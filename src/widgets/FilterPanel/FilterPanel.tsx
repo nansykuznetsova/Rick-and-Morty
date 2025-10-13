@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Input, Select } from '@/components';
 import { GENDER_OPTIONS, SPECIES_OPTIONS, STATUS_OPTIONS } from '@/constants';
 import { type CharacterFilters } from '@/types';
@@ -6,27 +8,32 @@ import './FilterPanel.css';
 
 interface FilterPanelProps {
   filters: CharacterFilters;
-  onChange: (newFilters: CharacterFilters) => void;
+  onChangeFilters: (newFilters: CharacterFilters) => void;
+  onChangeInput: (value: CharacterFilters) => void;
 }
 
 export const FilterPanel: React.FunctionComponent<FilterPanelProps> = ({
   filters,
-  onChange
+  onChangeFilters,
+  onChangeInput
 }) => {
+  const [localValue, setLocalValue] = useState(filters.name || '');
+
   const handleInputChange = (value: string) => {
-    onChange({ name: value });
+    setLocalValue(value);
+    onChangeInput({ name: value });
   };
 
   const handleSelectSpecies = (value: string) => {
-    onChange({ species: value });
+    onChangeFilters({ species: value });
   };
 
   const handleSelectGender = (value: string) => {
-    onChange({ gender: value });
+    onChangeFilters({ gender: value });
   };
 
   const handleSelectStatus = (value: string) => {
-    onChange({ status: value });
+    onChangeFilters({ status: value });
   };
 
   return (
@@ -35,7 +42,7 @@ export const FilterPanel: React.FunctionComponent<FilterPanelProps> = ({
         variant='filter'
         placeholder='Filter by name...'
         name='search'
-        value={filters.name || ''}
+        value={localValue}
         onChange={handleInputChange}
         size='small'
       />

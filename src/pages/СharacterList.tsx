@@ -1,35 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
 
 import { Layout, Loader, Logo } from '@/components';
 import { DEBOUNCE_DELAY, FIRST_PAGE_PAGINATION } from '@/constants';
-import { getCharacters, useDebounce } from '@/shared';
-import { type CharacterCardTypes, type CharacterFilters } from '@/types';
+import { useDebounce, useLoadCharacters } from '@/shared';
+import { type CharacterFilters } from '@/types';
 import { CharacterCard, FilterPanel } from '@/widgets';
 
 import './CharacterList.css';
 
 export const CharacterList: React.FunctionComponent = () => {
-  const [characters, setCharacters] = useState<CharacterCardTypes[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState<CharacterFilters>({});
-  const [page, setPage] = useState(FIRST_PAGE_PAGINATION);
+  const { characters, isLoading, filters, setFilters, setPage } =
+    useLoadCharacters();
 
-  const debouncedName = useDebounce(filters.name, DEBOUNCE_DELAY);
-
-  useEffect(() => {
-    setLoading(true);
-    getCharacters({ ...filters, page, name: debouncedName })
-      .then((data) => setCharacters(data))
-      .finally(() => setLoading(false));
-  }, [filters.species, filters.gender, filters.status, debouncedName, page]);
-
-  const handleFilterChange = (newFilters: CharacterFilters) => {
+  const handleFilterChange = useCallback((newFilters: CharacterFilters) => {
     setFilters((prev) => ({
       ...prev,
       ...newFilters
     }));
     setPage(FIRST_PAGE_PAGINATION);
-  };
+  }, []);
+
+  const handleName = useCallback((value: CharacterFilters) => {
+    setFilters((prev) => ({
+      ...prev,
+      ...value
+    }));
+    setPage(FIRST_PAGE_PAGINATION);
+  }, []);
+
+  const handleInputFilterChange = useDebounce<CharacterFilters>(
+    handleName,
+    DEBOUNCE_DELAY
+  );
 
   return (
     <Layout>
@@ -37,10 +39,11 @@ export const CharacterList: React.FunctionComponent = () => {
         <Logo />
         <FilterPanel
           filters={filters}
-          onChange={handleFilterChange}
+          onChangeFilters={handleFilterChange}
+          onChangeInput={handleInputFilterChange}
         />
         <div className='character-list__cards-wrapper'>
-          {loading ? (
+          {isLoading ? (
             <Loader
               text='Loading characters...'
               size='large'
