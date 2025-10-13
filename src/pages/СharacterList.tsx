@@ -1,22 +1,37 @@
+import { useCallback } from 'react';
+
 import { Layout, Loader, Logo } from '@/components';
-import { FIRST_PAGE_PAGINATION } from '@/constants';
-import { useLoadCharacters } from '@/shared';
+import { DEBOUNCE_DELAY, FIRST_PAGE_PAGINATION } from '@/constants';
+import { useDebounce, useLoadCharacters } from '@/shared';
 import { type CharacterFilters } from '@/types';
 import { CharacterCard, FilterPanel } from '@/widgets';
 
 import './CharacterList.css';
 
 export const CharacterList: React.FunctionComponent = () => {
-  const { characters, loading, filters, setFilters, setPage } =
+  const { characters, isLoading, filters, setFilters, setPage } =
     useLoadCharacters();
 
-  const handleFilterChange = (newFilters: CharacterFilters) => {
+  const handleFilterChange = useCallback((newFilters: CharacterFilters) => {
     setFilters((prev) => ({
       ...prev,
       ...newFilters
     }));
     setPage(FIRST_PAGE_PAGINATION);
-  };
+  }, []);
+
+  const handleName = useCallback((value: CharacterFilters) => {
+    setFilters((prev) => ({
+      ...prev,
+      ...value
+    }));
+    setPage(FIRST_PAGE_PAGINATION);
+  }, []);
+
+  const handleInputFilterChange = useDebounce<CharacterFilters>(
+    handleName,
+    DEBOUNCE_DELAY
+  );
 
   return (
     <Layout>
@@ -24,10 +39,11 @@ export const CharacterList: React.FunctionComponent = () => {
         <Logo />
         <FilterPanel
           filters={filters}
-          onChange={handleFilterChange}
+          onChangeFilters={handleFilterChange}
+          onChangeInput={handleInputFilterChange}
         />
         <div className='character-list__cards-wrapper'>
-          {loading ? (
+          {isLoading ? (
             <Loader
               text='Loading characters...'
               size='large'
