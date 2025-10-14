@@ -5,12 +5,20 @@ import { DEBOUNCE_DELAY, FIRST_PAGE_PAGINATION } from '@/constants';
 import { useDebounce, useLoadCharacters } from '@/shared';
 import { type CharacterFilters } from '@/types';
 import { CharacterCard, FilterPanel } from '@/widgets';
+import { InfiniteScroll } from '@/widgets';
 
 import './CharacterList.css';
 
 export const CharacterList: React.FunctionComponent = () => {
-  const { characters, isLoading, filters, setFilters, setPage } =
-    useLoadCharacters();
+  const {
+    characters,
+    isLoading,
+    filters,
+    setFilters,
+    setPage,
+    hasMore,
+    isLoadingMore
+  } = useLoadCharacters();
 
   const handleFilterChange = useCallback((newFilters: CharacterFilters) => {
     setFilters((prev) => ({
@@ -33,6 +41,12 @@ export const CharacterList: React.FunctionComponent = () => {
     DEBOUNCE_DELAY
   );
 
+  const handleLoadMore = useCallback(() => {
+    if (!isLoading && hasMore) {
+      setPage((prev) => prev + 1);
+    }
+  }, [isLoading, hasMore]);
+
   return (
     <Layout>
       <div className='character-list'>
@@ -49,13 +63,23 @@ export const CharacterList: React.FunctionComponent = () => {
               size='large'
             />
           ) : (
-            <ul className='character-list__cards'>
-              {characters.map((character) => (
-                <li key={character.id}>
-                  <CharacterCard character={character} />
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul className='character-list__cards'>
+                {characters.map((character) => (
+                  <li key={character.id}>
+                    <CharacterCard character={character} />
+                  </li>
+                ))}
+              </ul>
+              {isLoadingMore && <Loader size='small' />}
+              {hasMore && (
+                <InfiniteScroll
+                  loadMore={handleLoadMore}
+                  isLoading={isLoading}
+                  hasMore={hasMore}
+                />
+              )}
+            </>
           )}
         </div>
       </div>

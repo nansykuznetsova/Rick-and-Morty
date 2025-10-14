@@ -17,10 +17,10 @@ export const FilterPanel: React.FunctionComponent<FilterPanelProps> = ({
   onChangeFilters,
   onChangeInput
 }) => {
-  const [localValue, setLocalValue] = useState(filters.name || '');
+  const [searchValue, setSearchValue] = useState(filters.name || '');
 
   const handleInputChange = (value: string) => {
-    setLocalValue(value);
+    setSearchValue(value);
     onChangeInput({ name: value });
   };
 
@@ -42,7 +42,7 @@ export const FilterPanel: React.FunctionComponent<FilterPanelProps> = ({
         variant='filter'
         placeholder='Filter by name...'
         name='search'
-        value={localValue}
+        value={searchValue}
         onChange={handleInputChange}
         size='small'
       />
