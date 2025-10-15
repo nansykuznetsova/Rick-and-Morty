@@ -17,7 +17,7 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!hasMore || isLoading) return;
+    if (!hasMore) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -37,7 +37,7 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
       if (loaderRef.current) observer.unobserve(loaderRef.current);
       observer.disconnect();
     };
-  }, [isLoading, hasMore, loadMore]);
+  }, [hasMore, loadMore]);
 
   return <div ref={loaderRef}>{isLoading && <Loader size='small' />}</div>;
 };

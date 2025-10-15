@@ -71,11 +71,10 @@ export const CharacterList: React.FunctionComponent = () => {
                   </li>
                 ))}
               </ul>
-              {isLoadingMore && <Loader size='small' />}
               {hasMore && (
                 <InfiniteScroll
                   loadMore={handleLoadMore}
-                  isLoading={isLoading}
+                  isLoading={isLoadingMore}
                   hasMore={hasMore}
                 />
               )}
