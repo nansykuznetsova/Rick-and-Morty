@@ -9,26 +9,43 @@ export function useLoadCharacters() {
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState<CharacterFilters>({});
   const [page, setPage] = useState(FIRST_PAGE_PAGINATION);
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const loadCharacters = useCallback(
     (filters: CharacterFilters) => {
-      setIsLoading(true);
+      if (page === FIRST_PAGE_PAGINATION) {
+        setIsLoading(true);
+      } else {
+        setIsLoadingMore(true);
+      }
+
       getCharacters({ ...filters, page })
-        .then((data) => setCharacters(data))
+        .then((data) => {
+          if (page === FIRST_PAGE_PAGINATION) {
+            setCharacters(data.results);
+          } else {
+            setCharacters((prev) => [...prev, ...data.results]);
+          }
+
+          setHasMore(Boolean(data.info?.next));
+        })
         .finally(() => setIsLoading(false));
     },
-    [page]
+    [filters, page]
   );
 
   useEffect(() => {
     loadCharacters(filters);
-  }, [filters, loadCharacters]);
+  }, [loadCharacters]);
 
   return {
     characters,
     isLoading,
     filters,
     setFilters,
-    setPage
+    setPage,
+    hasMore,
+    isLoadingMore
   };
 }
