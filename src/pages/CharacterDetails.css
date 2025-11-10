@@ -83,3 +83,17 @@
   flex-direction: column;
   gap: 2px;
 }
+
+.not-found {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+.not-found-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 50px;
+}

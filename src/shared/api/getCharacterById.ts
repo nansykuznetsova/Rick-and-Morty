@@ -1,5 +1,3 @@
-import toast from 'react-hot-toast';
-
 import { apiClient } from '@/shared';
 import {
   type ApiResponseCharacter,
@@ -29,8 +27,7 @@ export const getCharacterById = async (
       image: char.image
     };
   } catch (error) {
-    console.error(error);
-    toast.error('Failed to load character details');
-    return null;
+    console.error(`Data with id=${id} not found`, error);
+    throw error;
   }
 };

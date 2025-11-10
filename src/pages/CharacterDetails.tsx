@@ -1,33 +1,25 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import ArrowBack from '@/assets/icons/arrow-back.svg?react';
 import { Layout, Loader } from '@/components';
-import { formatStatus } from '@/shared';
-import { getCharacterById } from '@/shared/api/getCharacterById.ts';
-import type { CharacterDetailsType } from '@/types';
+import { formatStatus, useLoadCharacter } from '@/shared';
 
 import './CharacterDetails.css';
 
 export const CharacterDetails: React.FunctionComponent = () => {
   const { id } = useParams();
   const numericId = Number(id);
-  const [character, setCharacter] = useState<CharacterDetailsType | null>(null);
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const { character, loading, isError } = useLoadCharacter(numericId);
 
   useEffect(() => {
-    const fetchCharacter = async () => {
-      try {
-        setLoading(true);
-        const data = await getCharacterById(numericId);
-        setCharacter(data);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCharacter();
-  }, [id]);
+    if (isError) {
+      navigate('/404');
+      toast.error(isError);
+    }
+  }, [isError, navigate]);
 
   return (
     <Layout>
@@ -85,7 +77,7 @@ export const CharacterDetails: React.FunctionComponent = () => {
             </div>
           </div>
         ) : (
-          <div className='character-details__content'>Character not found.</div>
+          <div className='character-details__content'>{isError}</div>
         )}
       </div>
     </Layout>
