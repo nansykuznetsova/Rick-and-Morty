@@ -37,7 +37,7 @@ export const getCharacters = async (filters: CharacterFilters) => {
     };
   } catch (error) {
     console.error(error);
-    toast.error('Не удалось загрузить список персонажей');
+    toast.error('Failed to load character list');
     return { results: [], info: { next: null } };
   }
 };

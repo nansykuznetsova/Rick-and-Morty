@@ -1,24 +1,85 @@
 .character-details {
-  display: flex;
-  flex-direction: column;
-  padding-block: 42px;
-  width: 100%;
-  min-height: 100vh;
+  height: 100%;
+  width: 1050px;
+  display: grid;
+  grid-template-columns: 1fr 10fr 2fr;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .character-details__link {
   font-family: 'Karla', sans-serif;
   font-weight: 700;
   font-size: 18px;
-  margin-left: 96px;
   display: flex;
-  align-items: center;
   gap: 8px;
   text-decoration: none;
   color: inherit;
+  white-space: nowrap;
+  padding-top: 30px;
 }
 
 .character-details__link-icon {
   width: 24px;
   height: 24px;
+}
+
+.character-details__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.character-details__image {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+.character-details__image > img {
+  height: 300px;
+  width: 300px;
+  border-radius: 150px;
+  border: 5px solid #f2f2f7;
+}
+
+.character-details__info {
+  width: 46%;
+  margin-top: 3px;
+  display: flex;
+  flex-direction: column;
+}
+
+.character-details__info > h1 {
+  padding-left: 15px;
+  text-align: center;
+  font-size: 48px;
+  font-weight: 400;
+}
+
+.character-details__info > span {
+  padding-right: 35px;
+  text-align: center;
+  margin-top: 40px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #8e8e93;
+}
+
+.character-details__description {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  width: 400px;
+  margin-top: 45px;
+}
+
+.character-details__description > div {
+  border-bottom: 2px solid rgb(216, 214, 214);
+  display: flex;
+  padding-bottom: 10px;
+  flex-direction: column;
+  gap: 2px;
 }

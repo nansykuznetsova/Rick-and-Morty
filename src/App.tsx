@@ -14,7 +14,7 @@ function App() {
           element={<CharacterList />}
         />
         <Route
-          path='characters/:id'
+          path='character/:id'
           element={<CharacterDetails />}
         />
       </Routes>

@@ -4,6 +4,7 @@ import cn from 'classnames';
 
 import ArrowCloseIcon from '@/assets/icons/arrow-close.svg?react';
 import ArrowOpenIcon from '@/assets/icons/arrow-open.svg?react';
+import type { CharacterStatus } from '@/types';
 
 import './Select.css';
 
@@ -25,7 +26,7 @@ export interface SelectProps {
   variant?: 'default' | 'small';
   value?: string;
   placeholder?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value: CharacterStatus) => void;
   SelectOptionComponent?: React.FC<SelectOptionContentProps>;
 }
 
@@ -90,7 +91,7 @@ export const Select = (props: SelectProps) => {
         )}
         {display ? <ArrowOpenIcon /> : <ArrowCloseIcon />}
       </button>
-      {display && options.length && (
+      {display && options.length > 0 && (
         <ul
           className={cn('select__options', {
             select__options_small: variant === 'small'
