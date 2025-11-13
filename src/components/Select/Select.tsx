@@ -65,7 +65,7 @@ export const Select = (props: SelectProps) => {
   const handleClickOption = (item: Option) => {
     setSelected(item);
     setDisplay(false);
-    onChange?.(item.value);
+    onChange?.(item.value.toLowerCase() as CharacterStatus);
   };
 
   return (

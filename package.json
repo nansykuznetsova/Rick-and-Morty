@@ -1,4 +1,5 @@
 {
+  "homepage": "https://nansykuznetsova.github.io/Rick-and-Morty/",
   "name": "rick-and-morty",
   "private": true,
   "version": "0.0.0",
@@ -8,7 +9,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "axios": "^1.12.2",
@@ -36,6 +39,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-simple-import-sort": "^12.1.1",
+    "gh-pages": "^6.3.0",
     "globals": "^16.3.0",
     "prettier": "^3.6.2",
     "typescript": "~5.8.3",

@@ -18,7 +18,7 @@ function App() {
           element={<CharacterDetails />}
         />
         <Route
-          path='/404'
+          path='*'
           element={<NotFoundPage />}
         />
       </Routes>
