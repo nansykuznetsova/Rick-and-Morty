@@ -5,6 +5,8 @@ import { Layout } from '@/components';
 
 import './CharacterDetails.css';
 
+import NotFoundImage from '/src/assets/images/404.jpg';
+
 export const NotFoundPage = () => {
   return (
     <Layout>
@@ -19,7 +21,7 @@ export const NotFoundPage = () => {
         </Link>
         <div className='not-found'>
           <img
-            src='/src/assets/images/404.jpg'
+            src={NotFoundImage}
             alt='Page do not found'
             className='not-found-image'
           />
