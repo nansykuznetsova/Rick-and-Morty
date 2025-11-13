@@ -17,7 +17,7 @@ import './CharacterCard.css';
 
 interface CharacterCardProps {
   character: CharacterCardTypes;
-  onEditCharacter?: () => void;
+  onEditCharacter: (updatedCharacter: CharacterCardTypes) => void;
 }
 
 export const CharacterCard = (props: CharacterCardProps) => {
@@ -28,6 +28,7 @@ export const CharacterCard = (props: CharacterCardProps) => {
   const [currentLocationName, setCurrentLocationName] = useState(
     character.location.name
   );
+  const [currentStatus, setCurrentStatus] = useState(character.status);
 
   const onEdit = () => {
     setReadOnly(false);
@@ -35,10 +36,20 @@ export const CharacterCard = (props: CharacterCardProps) => {
 
   const onCancel = () => {
     setReadOnly(true);
+    setCurrentName(character.name);
+    setCurrentLocationName(character.location.name);
+    setCurrentStatus(character.status);
   };
 
   const onSave = () => {
-    onEditCharacter({});
+    const updatedCharacter: CharacterCardTypes = {
+      ...character,
+      name: currentName,
+      location: { ...character.location, name: currentLocationName },
+      status: currentStatus
+    };
+
+    onEditCharacter(updatedCharacter);
     setReadOnly(true);
   };
 
@@ -63,7 +74,7 @@ export const CharacterCard = (props: CharacterCardProps) => {
         <div className='character-card__title'>
           {readOnly ? (
             <Link
-              to='characters/:id'
+              to={`/character/${character.id}`}
               className='character-card__name-link'
               aria-label='go to character'
             >
@@ -127,7 +138,9 @@ export const CharacterCard = (props: CharacterCardProps) => {
             ) : (
               <Select
                 variant='small'
+                value={formatStatus(currentStatus)}
                 options={STATUS_OPTIONS}
+                onChange={setCurrentStatus}
                 SelectOptionComponent={(props: SelectOptionContentProps) => (
                   <>
                     {props.value}

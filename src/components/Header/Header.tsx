@@ -7,7 +7,7 @@ export const Header: React.FunctionComponent = () => {
     <header className='header'>
       <Link
         to='/'
-        aria-label='назад в меню'
+        aria-label='back to menu'
       >
         <img
           src='/src/assets/images/logo-black.png'

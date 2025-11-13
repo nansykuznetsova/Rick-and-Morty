@@ -1,9 +1,9 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { Layout, Loader, Logo } from '@/components';
 import { DEBOUNCE_DELAY, FIRST_PAGE_PAGINATION } from '@/constants';
 import { useDebounce, useLoadCharacters } from '@/shared';
-import { type CharacterFilters } from '@/types';
+import { type CharacterCardTypes, type CharacterFilters } from '@/types';
 import { CharacterCard, FilterPanel } from '@/widgets';
 import { InfiniteScroll } from '@/widgets';
 
@@ -11,7 +11,7 @@ import './CharacterList.css';
 
 export const CharacterList: React.FunctionComponent = () => {
   const {
-    characters,
+    characters: loadedCharacters,
     isLoading,
     filters,
     setFilters,
@@ -19,6 +19,12 @@ export const CharacterList: React.FunctionComponent = () => {
     hasMore,
     isLoadingMore
   } = useLoadCharacters();
+
+  const [characters, setCharacters] = useState<CharacterCardTypes[]>([]);
+
+  useEffect(() => {
+    setCharacters(loadedCharacters);
+  }, [loadedCharacters]);
 
   const handleFilterChange = useCallback((newFilters: CharacterFilters) => {
     setFilters((prev) => ({
@@ -47,6 +53,17 @@ export const CharacterList: React.FunctionComponent = () => {
     }
   }, [isLoading, hasMore]);
 
+  const handleEditCharacter = useCallback(
+    (updatedCharacter: CharacterCardTypes) => {
+      setCharacters((prev) =>
+        prev.map((char) =>
+          char.id === updatedCharacter.id ? updatedCharacter : char
+        )
+      );
+    },
+    []
+  );
+
   return (
     <Layout>
       <div className='character-list'>
@@ -67,7 +84,10 @@ export const CharacterList: React.FunctionComponent = () => {
               <ul className='character-list__cards'>
                 {characters.map((character) => (
                   <li key={character.id}>
-                    <CharacterCard character={character} />
+                    <CharacterCard
+                      character={character}
+                      onEditCharacter={handleEditCharacter}
+                    />
                   </li>
                 ))}
               </ul>

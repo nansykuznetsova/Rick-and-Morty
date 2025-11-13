@@ -6,7 +6,7 @@ const STATUS_COLORS = {
   alive: 'green',
   dead: 'red',
   unknown: 'orange'
-} as const;
+};
 
 export type StatusesType = keyof typeof STATUS_COLORS;
 

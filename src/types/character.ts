@@ -43,3 +43,27 @@ export interface ApiResponse {
   };
   results: Character[];
 }
+
+export interface CharacterDetailsType {
+  id: number;
+  name: string;
+  status: CharacterStatus;
+  type: string;
+  species: string;
+  origin: { name: string };
+  gender: string;
+  location: { name: string; url: string };
+  image: string;
+}
+
+export interface ApiResponseCharacter {
+  id: number;
+  name: string;
+  status: 'Alive' | 'Dead' | 'unknown';
+  species: string;
+  gender: string;
+  type: string;
+  origin: { name: string };
+  location: { name: string; url: string };
+  image: string;
+}

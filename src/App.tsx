@@ -1,7 +1,7 @@
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router';
 
-import { CharacterDetails, CharacterList } from '@/pages';
+import { CharacterDetails, CharacterList, NotFoundPage } from '@/pages';
 
 import './App.css';
 
@@ -14,8 +14,12 @@ function App() {
           element={<CharacterList />}
         />
         <Route
-          path='characters/:id'
+          path='character/:id'
           element={<CharacterDetails />}
+        />
+        <Route
+          path='/404'
+          element={<NotFoundPage />}
         />
       </Routes>
       <Toaster
