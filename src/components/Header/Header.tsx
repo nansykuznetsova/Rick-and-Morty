@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 
 import './Header.css';
 
+import LogoBlackImage from '/src/assets/images/logo-black.png';
+
 export const Header: React.FunctionComponent = () => {
   return (
     <header className='header'>
@@ -10,7 +12,7 @@ export const Header: React.FunctionComponent = () => {
         aria-label='back to menu'
       >
         <img
-          src='/src/assets/images/logo-black.png'
+          src={LogoBlackImage}
           alt='logo'
           className='header__logo'
         />

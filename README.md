@@ -5,7 +5,7 @@
 использованием React + TypeScript + Vite.
 
 Проект развёрнут на **GitHub Pages**.
-`https://nansykuznetsova.github.io/Rick-and-Morty/`
+https://nansykuznetsova.github.io/Rick-and-Morty/
 
 ------------------------------------------------------------------------
 
