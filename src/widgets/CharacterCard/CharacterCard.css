@@ -43,6 +43,9 @@
   overflow: hidden;
   max-width: 178px;
   white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  min-width: 0;
 }
 
 .character-card__name-link:hover {
@@ -76,6 +79,15 @@
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.character-card__description-content-location {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 240px;
 }
 
 .character-card__location-input {

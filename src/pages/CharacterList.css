@@ -13,4 +13,12 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 24px;
+  width: 1050px;
+  min-height: 465px;
+  align-items: center;
+}
+
+.character-list__cards-empty-list {
+  font-size: 24px;
+  font-weight: 500;
 }

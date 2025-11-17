@@ -36,7 +36,7 @@ export const getCharacters = async (filters: CharacterFilters) => {
       info: response.data.info
     };
   } catch (error) {
-    console.error(error);
+    console.error('Failed to load character list', error);
     toast.error('Failed to load character list');
     return { results: [], info: { next: null } };
   }

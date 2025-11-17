@@ -115,7 +115,9 @@ export const CharacterCard = (props: CharacterCardProps) => {
             <dt className='character-card__description-title'>Location</dt>
             {readOnly ? (
               <dd className='character-card__description-content'>
-                {character.location.name}
+                <span className='character-card__description-content-location'>
+                  {character.location.name}
+                </span>
               </dd>
             ) : (
               <Input
