@@ -39,13 +39,6 @@ export const EditButtons = (props: EditButtonsProps) => {
         <>
           <button
             className='character-card__btn-icon'
-            onClick={onCancel}
-            type='button'
-          >
-            <CloseIcon />
-          </button>
-          <button
-            className='character-card__btn-icon'
             onClick={onEdit}
             type='button'
           >

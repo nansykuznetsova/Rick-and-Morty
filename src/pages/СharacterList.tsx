@@ -82,14 +82,20 @@ export const CharacterList: React.FunctionComponent = () => {
           ) : (
             <>
               <ul className='character-list__cards'>
-                {characters.map((character) => (
-                  <li key={character.id}>
-                    <CharacterCard
-                      character={character}
-                      onEditCharacter={handleEditCharacter}
-                    />
-                  </li>
-                ))}
+                {characters.length > 0 ? (
+                  characters.map((character) => (
+                    <li key={character.id}>
+                      <CharacterCard
+                        character={character}
+                        onEditCharacter={handleEditCharacter}
+                      />
+                    </li>
+                  ))
+                ) : (
+                  <span className='character-list__cards-empty-list'>
+                    No character found
+                  </span>
+                )}
               </ul>
               {hasMore && (
                 <InfiniteScroll
