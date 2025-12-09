@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { Layout, Loader, Logo } from '@/components';
 import { DEBOUNCE_DELAY, FIRST_PAGE_PAGINATION } from '@/constants';
 import { useDebounce, useLoadCharacters } from '@/shared';
+import { Layout, Loader, Logo } from '@/shared';
 import { type CharacterCardTypes, type CharacterFilters } from '@/types';
 import { CharacterCard, FilterPanel } from '@/widgets';
 import { InfiniteScroll } from '@/widgets';
@@ -22,6 +22,7 @@ export const CharacterList: React.FunctionComponent = () => {
 
   const [characters, setCharacters] = useState<CharacterCardTypes[]>([]);
 
+  //синхронизирует локальное состояние characters с обновлёнными данными loadedCharacters каждый раз, когда они меняются
   useEffect(() => {
     setCharacters(loadedCharacters);
   }, [loadedCharacters]);

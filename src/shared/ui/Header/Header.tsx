@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-import './Header.css';
+import LogoBlackImage from '@/shared/assets/images/logo-black.png';
 
-import LogoBlackImage from '/src/assets/images/logo-black.png';
+import './Header.css';
 
 export const Header: React.FunctionComponent = () => {
   return (

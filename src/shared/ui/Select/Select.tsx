@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import cn from 'classnames';
 
-import ArrowCloseIcon from '@/assets/icons/arrow-close.svg?react';
-import ArrowOpenIcon from '@/assets/icons/arrow-open.svg?react';
-import type { CharacterStatus } from '@/types';
+import ArrowCloseIcon from '@/shared/assets/icons/arrow-close.svg?react';
+import ArrowOpenIcon from '@/shared/assets/icons/arrow-open.svg?react';
+import { type CharacterStatus } from '@/types';
 
 import './Select.css';
 
@@ -44,6 +44,7 @@ export const Select = (props: SelectProps) => {
   const [selected, setSelected] = useState<Option | null>(null);
   const selectRef = useRef<HTMLDivElement>(null);
 
+  //закрывает селект при клике вне компонента
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (

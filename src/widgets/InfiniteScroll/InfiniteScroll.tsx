@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
-import { Loader } from '@/components';
 import { ROOT_MARGIN } from '@/constants';
+import { Loader } from '@/shared';
 
 interface InfiniteScrollProps {
   loadMore: () => void;
@@ -16,6 +16,7 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
 }) => {
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
+  //подгрузка новых данных при прокрутке
   useEffect(() => {
     if (!hasMore) return;
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { Input, Select } from '@/components';
 import { GENDER_OPTIONS, SPECIES_OPTIONS, STATUS_OPTIONS } from '@/constants';
+import { Input, Select } from '@/shared';
 import { type CharacterFilters } from '@/types';
 
 import './FilterPanel.css';
