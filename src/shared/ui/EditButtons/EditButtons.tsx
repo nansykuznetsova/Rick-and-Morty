@@ -1,8 +1,8 @@
 import cn from 'classnames';
 
-import CheckIcon from '@/assets/icons/check.svg?react';
-import CloseIcon from '@/assets/icons/close.svg?react';
-import EditIcon from '@/assets/icons/edit.svg?react';
+import CheckIcon from '@/shared/assets/icons/check.svg?react';
+import CloseIcon from '@/shared/assets/icons/close.svg?react';
+import EditIcon from '@/shared/assets/icons/edit.svg?react';
 
 import './EditButtons.css';
 
@@ -25,14 +25,14 @@ export const EditButtons = (props: EditButtonsProps) => {
             onClick={onCancel}
             type='button'
           >
-            <CloseIcon />
+            <CloseIcon aria-label='Close editing' />
           </button>
           <button
             className='character-card__btn-icon'
             onClick={onSave}
             type='button'
           >
-            <CheckIcon />
+            <CheckIcon aria-label='Confirm changes' />
           </button>
         </>
       ) : (
@@ -42,7 +42,10 @@ export const EditButtons = (props: EditButtonsProps) => {
             onClick={onEdit}
             type='button'
           >
-            <EditIcon className='character-card__btn-icon_edit' />
+            <EditIcon
+              className='character-card__btn-icon_edit'
+              aria-label='Edit card'
+            />
           </button>
         </>
       )}

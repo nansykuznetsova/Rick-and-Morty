@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import { STATUS_OPTIONS } from '@/constants';
+import { formatStatus } from '@/shared';
 import {
   EditButtons,
   Input,
@@ -8,9 +10,7 @@ import {
   type SelectOptionContentProps,
   StatusCircle,
   type StatusesType
-} from '@/components';
-import { STATUS_OPTIONS } from '@/constants';
-import { formatStatus } from '@/shared';
+} from '@/shared';
 import { type CharacterCardTypes } from '@/types';
 
 import './CharacterCard.css';

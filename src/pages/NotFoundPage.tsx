@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import ArrowBack from '@/assets/icons/arrow-back.svg?react';
-import { Layout } from '@/components';
+import { Layout } from '@/shared';
+import ArrowBack from '@/shared/assets/icons/arrow-back.svg?react';
+import NotFoundImage from '@/shared/assets/images/404.jpg';
 
 import './CharacterDetails.css';
-
-import NotFoundImage from '/src/assets/images/404.jpg';
 
 export const NotFoundPage = () => {
   return (

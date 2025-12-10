@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import ArrowBack from '@/assets/icons/arrow-back.svg?react';
-import { Layout, Loader } from '@/components';
 import { formatStatus, useLoadCharacter } from '@/shared';
+import { Layout, Loader } from '@/shared';
+import ArrowBack from '@/shared/assets/icons/arrow-back.svg?react';
 
 import './CharacterDetails.css';
 
@@ -14,6 +14,7 @@ export const CharacterDetails: React.FunctionComponent = () => {
   const navigate = useNavigate();
   const { character, loading, isError } = useLoadCharacter(numericId);
 
+  //обрабатывает 404, выводит тост
   useEffect(() => {
     if (isError) {
       navigate('/404');

@@ -1,6 +1,6 @@
 import { type PropsWithChildren } from 'react';
 
-import { Footer, Header } from '@/components';
+import { Footer, Header } from '@/shared';
 
 import './Layout.css';
 

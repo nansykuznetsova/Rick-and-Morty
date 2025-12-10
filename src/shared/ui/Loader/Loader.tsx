@@ -1,8 +1,8 @@
 import cn from 'classnames';
 
-import './Loader.css';
+import LoaderImage from '@/shared/assets/images/loader.png';
 
-import LoaderImage from '/src/assets/images/loader.png';
+import './Loader.css';
 
 interface LoaderProps {
   text?: string;

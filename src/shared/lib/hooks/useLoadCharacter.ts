@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 
+import type { AxiosError } from 'axios';
+
 import { getCharacterById } from '@/shared/api/getCharacterById';
-import type { CharacterDetailsType } from '@/types';
+import { type CharacterDetailsType } from '@/types';
 
 export const useLoadCharacter = (id: number) => {
   const [character, setCharacter] = useState<CharacterDetailsType | null>(null);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState<string | null>(null);
 
+  //загружает данные персонажа по id, обработка ошибок, 404
   useEffect(() => {
     const fetchCharacter = async () => {
       try {
@@ -15,8 +18,9 @@ export const useLoadCharacter = (id: number) => {
         const data = await getCharacterById(id);
         setCharacter(data);
       } catch (error: unknown) {
-        const status = (error as { response?: { status?: number } })?.response
-          ?.status;
+        const axiosError = error as AxiosError;
+
+        const status = axiosError.response?.status;
 
         if (status === 404) {
           setCharacter(null);

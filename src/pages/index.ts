@@ -1,3 +1,3 @@
 export * from './CharacterDetails';
-export * from './NotFoundPage.tsx';
+export * from './NotFoundPage';
 export * from './СharacterList';
