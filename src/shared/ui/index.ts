@@ -1,4 +1,5 @@
 export * from './EditButtons/EditButtons';
+export * from './ErrorBoundary/ErrorBoundary';
 export * from './Footer/Footer';
 export * from './Header/Header';
 export * from './Input/Input';

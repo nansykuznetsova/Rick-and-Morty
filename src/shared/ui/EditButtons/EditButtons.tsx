@@ -1,8 +1,6 @@
 import cn from 'classnames';
 
-import CheckIcon from '@/shared/assets/icons/check.svg?react';
-import CloseIcon from '@/shared/assets/icons/close.svg?react';
-import EditIcon from '@/shared/assets/icons/edit.svg?react';
+import { CheckIcon, CloseIcon, EditIcon } from '@/shared/assets';
 
 import './EditButtons.css';
 

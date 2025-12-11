@@ -10,7 +10,7 @@ export const useLoadCharacter = (id: number) => {
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState<string | null>(null);
 
-  //загружает данные персонажа по id, обработка ошибок, 404
+  // загружает данные персонажа по id, обработка ошибок, 404
   useEffect(() => {
     const fetchCharacter = async () => {
       try {

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import LogoBlackImage from '@/shared/assets/images/logo-black.png';
+import { EnIcon, LogoBlackImage, MoonIcon } from '@/shared/assets';
 
 import './Header.css';
 
@@ -11,12 +11,25 @@ export const Header: React.FunctionComponent = () => {
         to='/'
         aria-label='back to menu'
       >
-        <img
-          src={LogoBlackImage}
+        <LogoBlackImage
           alt='logo'
           className='header__logo'
         />
       </Link>
+      <div className='header__switchers'>
+        <button
+          className='header__switcher-button'
+          type='button'
+        >
+          <MoonIcon />
+        </button>
+        <button
+          className='header__switcher-button'
+          type='button'
+        >
+          <EnIcon />
+        </button>
+      </div>
     </header>
   );
 };

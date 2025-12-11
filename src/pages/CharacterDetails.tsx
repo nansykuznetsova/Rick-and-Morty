@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { formatStatus, useLoadCharacter } from '@/shared';
 import { Layout, Loader } from '@/shared';
-import ArrowBack from '@/shared/assets/icons/arrow-back.svg?react';
+import { ArrowBack } from '@/shared/assets';
 
 import './CharacterDetails.css';
 
@@ -14,7 +14,7 @@ export const CharacterDetails: React.FunctionComponent = () => {
   const navigate = useNavigate();
   const { character, loading, isError } = useLoadCharacter(numericId);
 
-  //обрабатывает 404, выводит тост
+  // обрабатывает 404, выводит тост
   useEffect(() => {
     if (isError) {
       navigate('/404');

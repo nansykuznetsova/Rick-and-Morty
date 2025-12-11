@@ -1,6 +1,6 @@
 import cn from 'classnames';
 
-import LoaderImage from '@/shared/assets/images/loader.png';
+import { LoaderImage } from '@/shared/assets';
 
 import './Loader.css';
 

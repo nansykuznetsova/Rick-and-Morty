@@ -1,4 +1,4 @@
-import LogoImage from '@/shared/assets/images/rick&morty.png';
+import { LogoImage } from '@/shared/assets';
 
 import './Logo.css';
 
