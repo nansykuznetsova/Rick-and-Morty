@@ -22,7 +22,7 @@ export const CharacterList: React.FunctionComponent = () => {
 
   const [characters, setCharacters] = useState<CharacterCardTypes[]>([]);
 
-  //синхронизирует локальное состояние characters с обновлёнными данными loadedCharacters каждый раз, когда они меняются
+  // синхронизирует локальное состояние characters с обновлёнными данными loadedCharacters каждый раз, когда они меняются
   useEffect(() => {
     setCharacters(loadedCharacters);
   }, [loadedCharacters]);

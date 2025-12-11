@@ -1,6 +1,6 @@
 import cn from 'classnames';
 
-import Search from '@/shared/assets/icons/search.svg?react';
+import { Search } from '@/shared/assets';
 
 import './Input.css';
 

@@ -16,7 +16,7 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
 }) => {
   const loaderRef = useRef<HTMLDivElement | null>(null);
 
-  //подгрузка новых данных при прокрутке
+  // подгрузка новых данных при прокрутке
   useEffect(() => {
     if (!hasMore) return;
 
