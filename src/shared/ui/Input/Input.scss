@@ -1,0 +1,49 @@
+.input-wrapper {
+  &__filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 14px;
+    border: 1px solid #00000061;
+    border-radius: 6px;
+    color: #0009;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &__form {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 1px solid black;
+    font-weight: 500;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    padding: 0;
+  }
+
+  &_small {
+    width: 240px;
+  }
+
+  &_big {
+    width: 208px;
+  }
+}
+
+.input {
+  border: none;
+  font: inherit;
+  color: inherit;
+  line-height: 1;
+  height: auto;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}

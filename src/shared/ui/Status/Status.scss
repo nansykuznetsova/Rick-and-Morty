@@ -1,0 +1,17 @@
+.circle {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+
+  &_red {
+    background-color: #df0000;
+  }
+
+  &_green {
+    background-color: #12b800;
+  }
+
+  &_orange {
+    background-color: #f90;
+  }
+}

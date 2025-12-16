@@ -2,7 +2,7 @@ import { type PropsWithChildren } from 'react';
 
 import { Footer, Header } from '@/shared';
 
-import './Layout.css';
+import './Layout.scss';
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (

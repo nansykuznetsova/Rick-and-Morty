@@ -3,25 +3,26 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-}
 
-.loader__img_small {
-  width: 103px;
-  margin-top: 50px;
-}
+  &__img {
+    animation: spin 4s linear infinite;
 
-.loader__img_large {
-  width: 475px;
-}
+    &_small {
+      width: 103px;
+      margin-top: 50px;
+    }
 
-.loader__img {
-  animation: spin 4s linear infinite;
+    &_large {
+      width: 475px;
+    }
+  }
 }
 
 @keyframes spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

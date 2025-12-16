@@ -6,7 +6,7 @@ import { ErrorBoundary } from '@/shared';
 
 import App from './App';
 
-import './index.css';
+import './styles/index.scss';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

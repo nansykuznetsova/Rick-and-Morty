@@ -4,7 +4,7 @@ import { GENDER_OPTIONS, SPECIES_OPTIONS, STATUS_OPTIONS } from '@/constants';
 import { Input, Select } from '@/shared';
 import { type CharacterFilters } from '@/types';
 
-import './FilterPanel.css';
+import './FilterPanel.scss';
 
 interface FilterPanelProps {
   filters: CharacterFilters;

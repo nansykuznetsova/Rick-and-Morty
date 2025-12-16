@@ -8,7 +8,10 @@ import {
 } from '@/types';
 import { type CharacterFilters } from '@/types';
 
-export const getCharacters = async (filters: CharacterFilters) => {
+export const getCharacters = async (
+  filters: CharacterFilters,
+  signal?: AbortSignal
+) => {
   try {
     const params = new URLSearchParams();
 
@@ -19,7 +22,8 @@ export const getCharacters = async (filters: CharacterFilters) => {
     });
 
     const response = await apiClient.get<ApiResponse>('character/', {
-      params
+      params,
+      signal
     });
     return {
       results: response.data.results.map(

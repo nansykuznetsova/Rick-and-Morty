@@ -6,7 +6,7 @@ import { formatStatus, useLoadCharacter } from '@/shared';
 import { Layout, Loader } from '@/shared';
 import { ArrowBack } from '@/shared/assets';
 
-import './CharacterDetails.css';
+import './CharacterDetails.scss';
 
 export const CharacterDetails: React.FunctionComponent = () => {
   const { id } = useParams();

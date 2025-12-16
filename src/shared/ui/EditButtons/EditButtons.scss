@@ -13,16 +13,20 @@
   opacity: 1;
 }
 
-.character-card:hover .edit-buttons {
-  opacity: 1;
-  visibility: visible;
-}
+.character-card {
+  &:hover {
+    .edit-buttons {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 
-.character-card__btn-icon {
-  all: unset;
-  cursor: pointer;
-}
+  &__btn-icon {
+    all: unset;
+    cursor: pointer;
 
-.character-card__btn-icon_edit {
-  width: 24px;
+    &_edit {
+      width: 24px;
+    }
+  }
 }

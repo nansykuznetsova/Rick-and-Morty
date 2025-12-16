@@ -1,0 +1,82 @@
+@use '../../../styles/variables' as *;
+
+.select {
+  height: 56px;
+  width: 240px;
+
+  &_small {
+    width: 94px;
+    border: none;
+    height: 21px;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+    font-family: $font-main;
+    font-size: 16px;
+    padding: 16px 14px;
+    border: 1px solid #00000061;
+    border-radius: 6px;
+    color: #0009;
+    background-color: transparent;
+    cursor: pointer;
+
+    &_small {
+      display: flex;
+      font-size: 14px;
+      padding: 2px 5px;
+    }
+  }
+
+  &__button-inner {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+  }
+
+  &__options {
+    position: absolute;
+    width: 100%;
+    max-width: 240px;
+    border: 1px solid #00000061;
+    border-radius: 6px;
+    background-color: #fff;
+    z-index: 10;
+    margin-top: 8px;
+    padding: 0;
+    list-style: none;
+
+    &_small {
+      position: absolute;
+      width: 94px;
+      z-index: 10;
+    }
+  }
+
+  &__option {
+    padding: 10px 14px;
+    cursor: pointer;
+    color: #0009;
+    border-radius: 4px;
+
+    &_small {
+      padding: 5px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+    }
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    &_selected {
+      background-color: #d0eaff;
+    }
+  }
+}

@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router';
 
 import { CharacterDetails, CharacterList, NotFoundPage } from '@/pages';
 
-import './App.css';
+import './App.scss';
 
 function App() {
   return (

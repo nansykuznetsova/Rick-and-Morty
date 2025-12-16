@@ -12,14 +12,23 @@ export const useLoadCharacter = (id: number) => {
 
   // загружает данные персонажа по id, обработка ошибок, 404
   useEffect(() => {
+    if (!id) return;
+
+    const controller = new AbortController();
+
     const fetchCharacter = async () => {
       try {
         setLoading(true);
-        const data = await getCharacterById(id);
+        setIsError(null);
+
+        const data = await getCharacterById(id, controller.signal);
         setCharacter(data);
       } catch (error: unknown) {
-        const axiosError = error as AxiosError;
+        if (controller.signal.aborted) {
+          return;
+        }
 
+        const axiosError = error as AxiosError;
         const status = axiosError.response?.status;
 
         if (status === 404) {
@@ -30,11 +39,17 @@ export const useLoadCharacter = (id: number) => {
           setIsError('Something went wrong.');
         }
       } finally {
-        setLoading(false);
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
       }
     };
 
-    if (id) fetchCharacter();
+    fetchCharacter();
+
+    return () => {
+      controller.abort();
+    };
   }, [id]);
 
   return { character, loading, isError };

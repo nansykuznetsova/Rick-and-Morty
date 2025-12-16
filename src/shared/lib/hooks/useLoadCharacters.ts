@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { FIRST_PAGE_PAGINATION } from '@/constants';
 import { getCharacters } from '@/shared';
@@ -11,17 +11,25 @@ export function useLoadCharacters() {
   const [page, setPage] = useState(FIRST_PAGE_PAGINATION);
   const [hasMore, setHasMore] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const loadCharacters = useCallback(
     (filters: CharacterFilters) => {
+      abortControllerRef.current?.abort();
+
+      const controller = new AbortController();
+      abortControllerRef.current = controller;
+
       if (page === FIRST_PAGE_PAGINATION) {
         setIsLoading(true);
       } else {
         setIsLoadingMore(true);
       }
 
-      getCharacters({ ...filters, page })
+      getCharacters({ ...filters, page }, controller.signal)
         .then((data) => {
+          if (controller.signal.aborted) return;
+
           if (page === FIRST_PAGE_PAGINATION) {
             setCharacters(data.results);
           } else {
@@ -30,13 +38,25 @@ export function useLoadCharacters() {
 
           setHasMore(Boolean(data.info?.next));
         })
-        .finally(() => setIsLoading(false));
+        .catch((error) => {
+          if (controller.signal.aborted) return;
+          console.error('Failed to fetch characters:', error);
+        })
+        .finally(() => {
+          if (controller.signal.aborted) return;
+          setIsLoading(false);
+          setIsLoadingMore(false); //???
+        });
     },
     [filters, page]
   );
 
   useEffect(() => {
     loadCharacters(filters);
+
+    return () => {
+      abortControllerRef.current?.abort();
+    };
   }, [loadCharacters]);
 
   return {

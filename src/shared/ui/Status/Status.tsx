@@ -1,6 +1,6 @@
 import cn from 'classnames';
 
-import './Status.css';
+import './Status.scss';
 
 const STATUS_COLORS = {
   alive: 'green',
