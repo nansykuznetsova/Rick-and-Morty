@@ -2,7 +2,7 @@ import { Component, type ReactNode } from 'react';
 
 import { Layout } from '@/shared';
 
-import './ErrorBoundary.css';
+import './ErrorBoundary.scss';
 
 type Props = {
   children: ReactNode;

@@ -7,7 +7,7 @@ import { type CharacterCardTypes, type CharacterFilters } from '@/types';
 import { CharacterCard, FilterPanel } from '@/widgets';
 import { InfiniteScroll } from '@/widgets';
 
-import './CharacterList.css';
+import './CharacterList.scss';
 
 export const CharacterList: React.FunctionComponent = () => {
   const {

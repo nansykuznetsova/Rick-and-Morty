@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Layout } from '@/shared';
 import { NotFoundImage } from '@/shared/assets';
 
-import './NotFoundPage.css';
+import './NotFoundPage.scss';
 
 export const NotFoundPage = () => {
   return (

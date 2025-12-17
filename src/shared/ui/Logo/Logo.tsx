@@ -1,6 +1,6 @@
 import { LogoImage } from '@/shared/assets';
 
-import './Logo.css';
+import './Logo.scss';
 
 export const Logo: React.FunctionComponent = () => {
   return (

@@ -2,7 +2,7 @@ import cn from 'classnames';
 
 import { LoaderImage } from '@/shared/assets';
 
-import './Loader.css';
+import './Loader.scss';
 
 interface LoaderProps {
   text?: string;

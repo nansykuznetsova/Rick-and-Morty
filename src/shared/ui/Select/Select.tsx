@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { ArrowCloseIcon, ArrowOpenIcon } from '@/shared/assets';
 import { type CharacterStatus } from '@/types';
 
-import './Select.css';
+import './Select.scss';
 
 export interface Option {
   label: string;

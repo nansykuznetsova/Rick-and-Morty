@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { EnIcon, LogoBlackImage, MoonIcon } from '@/shared/assets';
 
-import './Header.css';
+import './Header.scss';
 
 export const Header: React.FunctionComponent = () => {
   return (
@@ -12,7 +12,7 @@ export const Header: React.FunctionComponent = () => {
         aria-label='back to menu'
       >
         <LogoBlackImage
-          alt='logo'
+          aria-label='logo'
           className='header__logo'
         />
       </Link>

@@ -13,7 +13,7 @@ import {
 } from '@/shared';
 import { type CharacterCardTypes } from '@/types';
 
-import './CharacterCard.css';
+import './CharacterCard.scss';
 
 interface CharacterCardProps {
   character: CharacterCardTypes;

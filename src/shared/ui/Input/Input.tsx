@@ -2,7 +2,7 @@ import cn from 'classnames';
 
 import { Search } from '@/shared/assets';
 
-import './Input.css';
+import './Input.scss';
 
 export interface InputProps {
   variant: 'filter' | 'form';

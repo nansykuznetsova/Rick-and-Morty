@@ -11,7 +11,9 @@
     "preview": "vite preview",
     "prettier": "prettier --write .",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "lint:styles": "stylelint \"src/**/*.{css,scss,sass}\" --config .stylelintrc.cjs",
+    "lint:styles:fix": "stylelint \"src/**/*.{css,scss,sass}\" --fix --config .stylelintrc.cjs"
   },
   "dependencies": {
     "axios": "^1.12.2",
@@ -40,7 +42,11 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "gh-pages": "^6.3.0",
     "globals": "^16.3.0",
+    "postcss-scss": "^4.0.9",
     "prettier": "^3.6.2",
+    "sass": "^1.96.0",
+    "stylelint": "^16.26.1",
+    "stylelint-config-standard-scss": "^16.0.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
     "vite": "^7.0.4",

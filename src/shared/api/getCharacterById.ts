@@ -6,11 +6,15 @@ import {
 } from '@/types';
 
 export const getCharacterById = async (
-  id: number | string
+  id: number | string,
+  signal?: AbortSignal
 ): Promise<CharacterDetailsType | null> => {
   try {
     const response = await apiClient.get<ApiResponseCharacter>(
-      `character/${id}`
+      `character/${id}`,
+      {
+        signal
+      }
     );
 
     const char = response.data;

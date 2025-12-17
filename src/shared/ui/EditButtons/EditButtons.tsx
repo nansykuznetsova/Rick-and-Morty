@@ -2,7 +2,7 @@ import cn from 'classnames';
 
 import { CheckIcon, CloseIcon, EditIcon } from '@/shared/assets';
 
-import './EditButtons.css';
+import './EditButtons.scss';
 
 export interface EditButtonsProps {
   isEditing: boolean;
