@@ -45,12 +45,13 @@ export function useLoadCharacters() {
         .finally(() => {
           if (controller.signal.aborted) return;
           setIsLoading(false);
-          setIsLoadingMore(false); //???
+          setIsLoadingMore(false);
         });
     },
     [filters, page]
   );
 
+  // запускает загрузку персонажей и отменяет незавершённый запрос через AbortController
   useEffect(() => {
     loadCharacters(filters);
 
