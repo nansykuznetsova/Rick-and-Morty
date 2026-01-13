@@ -5,14 +5,18 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { formatStatus, useLoadCharacter } from '@/shared';
 import { Layout, Loader } from '@/shared';
 import { ArrowBack } from '@/shared/assets';
+import { useCharacterDetailsStore } from '@/store';
 
 import './CharacterDetails.scss';
 
 export const CharacterDetails: React.FunctionComponent = () => {
+  const { character, isLoading, isError } = useCharacterDetailsStore();
+
   const { id } = useParams();
   const numericId = Number(id);
   const navigate = useNavigate();
-  const { character, loading, isError } = useLoadCharacter(numericId);
+
+  useLoadCharacter(numericId);
 
   // обрабатывает 404, выводит тост
   useEffect(() => {
@@ -33,7 +37,7 @@ export const CharacterDetails: React.FunctionComponent = () => {
           <ArrowBack className='character-details__link-icon' />
           GO BACK
         </Link>
-        {loading ? (
+        {isLoading ? (
           <Loader
             text='Loading character...'
             size='large'
