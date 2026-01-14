@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useState, useTransition } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import { FIRST_PAGE_PAGINATION } from '@/constants';
-import { useLoadCharacters } from '@/shared';
+import { DEBOUNCE_DELAY, FIRST_PAGE_PAGINATION } from '@/constants';
+import { useDebounce, useLoadCharacters } from '@/shared';
 import { Layout, Loader, Logo } from '@/shared';
+import { useCharactersStore } from '@/store';
 import { type CharacterCardTypes, type CharacterFilters } from '@/types';
 import { CharacterCard, FilterPanel } from '@/widgets';
 import { InfiniteScroll } from '@/widgets';
@@ -13,15 +14,17 @@ export const CharacterList: React.FunctionComponent = () => {
   const {
     characters: loadedCharacters,
     isLoading,
+    isLoadingMore,
     filters,
-    setFilters,
-    setPage,
     hasMore,
-    isLoadingMore
-  } = useLoadCharacters();
+    setFilters,
+    addNextPage,
+    setPage
+  } = useCharactersStore();
+
+  useLoadCharacters();
 
   const [characters, setCharacters] = useState<CharacterCardTypes[]>([]);
-  const [isPending, startTransition] = useTransition();
 
   // синхронизирует локальное состояние characters с обновлёнными данными loadedCharacters каждый раз, когда они меняются
   useEffect(() => {
@@ -29,45 +32,25 @@ export const CharacterList: React.FunctionComponent = () => {
   }, [loadedCharacters]);
 
   const handleFilterChange = useCallback((newFilters: CharacterFilters) => {
-    setFilters((prev) => ({
-      ...prev,
-      ...newFilters
-    }));
+    setFilters(newFilters);
     setPage(FIRST_PAGE_PAGINATION);
   }, []);
 
-  // const handleName = useCallback((value: CharacterFilters) => {
-  //   setFilters((prev) => ({
-  //     ...prev,
-  //     ...value
-  //   }));
-  //   setPage(FIRST_PAGE_PAGINATION);
-  // }, []);
+  const handleName = useCallback((value: CharacterFilters) => {
+    setFilters(value);
+    setPage(FIRST_PAGE_PAGINATION);
+  }, []);
 
-  // const handleInputFilterChange = useDebounce<CharacterFilters>(
-  //   handleName,
-  //   DEBOUNCE_DELAY
-  // );
-
-  const handleInputFilterChange = useCallback(
-    (value: CharacterFilters) => {
-      startTransition(() => {
-        console.log('transition started');
-        setFilters((prev) => ({
-          ...prev,
-          ...value
-        }));
-        setPage(FIRST_PAGE_PAGINATION);
-      });
-    },
-    [setFilters, setPage, startTransition]
+  const handleInputFilterChange = useDebounce<CharacterFilters>(
+    handleName,
+    DEBOUNCE_DELAY
   );
 
   const handleLoadMore = useCallback(() => {
     if (!isLoading && hasMore) {
-      setPage((prev) => prev + 1);
+      addNextPage();
     }
-  }, [isLoading, hasMore]);
+  }, [isLoading, hasMore, addNextPage]);
 
   const handleEditCharacter = useCallback(
     (updatedCharacter: CharacterCardTypes) => {
@@ -89,10 +72,6 @@ export const CharacterList: React.FunctionComponent = () => {
           onChangeFilters={handleFilterChange}
           onChangeInput={handleInputFilterChange}
         />
-
-        {isPending ? (
-          <div className='character-list__pending'>Updating…</div>
-        ) : null}
 
         <div className='character-list__cards-wrapper'>
           {isLoading ? (

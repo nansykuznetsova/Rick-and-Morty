@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import type { AxiosError } from 'axios';
 
 import { getCharacterById } from '@/shared/api/getCharacterById';
-import { type CharacterDetailsType } from '@/types';
+import { useCharacterDetailsStore } from '@/store/characterDetailsStore.ts';
 
 export const useLoadCharacter = (id: number) => {
-  const [character, setCharacter] = useState<CharacterDetailsType | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [isError, setIsError] = useState<string | null>(null);
+  const { setCharacter, startLoading, setError, finishLoading } =
+    useCharacterDetailsStore();
 
   // загружает данные персонажа по id, обработка ошибок, 404
   useEffect(() => {
@@ -18,8 +17,7 @@ export const useLoadCharacter = (id: number) => {
 
     const fetchCharacter = async () => {
       try {
-        setLoading(true);
-        setIsError(null);
+        startLoading();
 
         const data = await getCharacterById(id, controller.signal);
         setCharacter(data);
@@ -33,14 +31,14 @@ export const useLoadCharacter = (id: number) => {
 
         if (status === 404) {
           setCharacter(null);
-          setIsError('Error 404: Character not found.');
+          setError('Error 404: Character not found.');
         } else {
           console.error('Failed to fetch character:', error);
-          setIsError('Something went wrong.');
+          setError('Something went wrong.');
         }
       } finally {
         if (!controller.signal.aborted) {
-          setLoading(false);
+          finishLoading();
         }
       }
     };
@@ -51,6 +49,4 @@ export const useLoadCharacter = (id: number) => {
       controller.abort();
     };
   }, [id]);
-
-  return { character, loading, isError };
 };
