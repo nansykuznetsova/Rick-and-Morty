@@ -15,4 +15,4 @@ export function useDebounce<T>(callback: (value: T) => void, delay: number) {
     },
     [callback, delay]
   );
-} /**/
+}
