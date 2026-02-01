@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { STATUS_OPTIONS } from '@/constants';
@@ -11,55 +11,57 @@ import {
   StatusCircle,
   type StatusesType
 } from '@/shared';
+import { useDraftStore } from '@/store';
 import { type CharacterCardTypes } from '@/types';
 
 import './CharacterCard.scss';
 
 interface CharacterCardProps {
   character: CharacterCardTypes;
-  onEditCharacter: (updatedCharacter: CharacterCardTypes) => void;
 }
 
-export const CharacterCard = (props: CharacterCardProps) => {
-  const { character, onEditCharacter } = props;
+export const CharacterCard = memo(function CharacterCard({
+  character
+}: CharacterCardProps) {
+  const { drafts, setDraft } = useDraftStore();
+  const draftFromStore = drafts[character.id];
 
+  const [draft, setLocalDraft] = useState<CharacterCardTypes>(() => ({
+    ...character,
+    ...draftFromStore
+  }));
   const [readOnly, setReadOnly] = useState(true);
-  const [currentName, setCurrentName] = useState(character.name);
-  const [currentLocationName, setCurrentLocationName] = useState(
-    character.location.name
-  );
-  const [currentStatus, setCurrentStatus] = useState(character.status);
 
-  const onEdit = () => {
-    setReadOnly(false);
-  };
+  const onEdit = () => setReadOnly(false);
 
   const onCancel = () => {
+    setLocalDraft({ ...character, ...draftFromStore });
     setReadOnly(true);
-    setCurrentName(character.name);
-    setCurrentLocationName(character.location.name);
-    setCurrentStatus(character.status);
   };
 
   const onSave = () => {
-    const updatedCharacter: CharacterCardTypes = {
-      ...character,
-      name: currentName,
-      location: { ...character.location, name: currentLocationName },
-      status: currentStatus
-    };
-
-    onEditCharacter(updatedCharacter);
+    setDraft(character.id, draft);
     setReadOnly(true);
   };
 
-  const handleInputNameChange = (value: string) => {
-    setCurrentName(value);
-  };
+  const handleInputNameChange = useCallback((value: string) => {
+    setLocalDraft((prev) => ({ ...prev, name: value }));
+  }, []);
 
-  const handleInputLocationChange = (value: string) => {
-    setCurrentLocationName(value);
-  };
+  const handleInputLocationChange = useCallback((value: string) => {
+    setLocalDraft((prev) => ({
+      ...prev,
+      location: { ...prev.location, name: value }
+    }));
+  }, []);
+
+  const handleStatusChange = useCallback((status: StatusesType) => {
+    setLocalDraft((prev) => ({ ...prev, status }));
+  }, []);
+
+  const viewModel = draftFromStore
+    ? { ...character, ...draftFromStore }
+    : character;
 
   return (
     <div className='character-card'>
@@ -78,14 +80,14 @@ export const CharacterCard = (props: CharacterCardProps) => {
               className='character-card__name-link'
               aria-label='go to character'
             >
-              {character.name}
+              {viewModel.name}
             </Link>
           ) : (
             <Input
               size='big'
               variant='form'
-              name={character.name}
-              value={currentName}
+              name={viewModel.name}
+              value={draft.name}
               onChange={handleInputNameChange}
               className='character-card__name-input'
             />
@@ -102,13 +104,13 @@ export const CharacterCard = (props: CharacterCardProps) => {
           <dl className='character-card__description-item'>
             <dt className='character-card__description-title'>Gender</dt>
             <dd className='character-card__description-content'>
-              {character.gender}
+              {viewModel.gender}
             </dd>
           </dl>
           <dl className='character-card__description-item'>
             <dt className='character-card__description-title'>Species</dt>
             <dd className='character-card__description-content'>
-              {character.species}
+              {viewModel.species}
             </dd>
           </dl>
           <dl className='character-card__description-item'>
@@ -116,15 +118,15 @@ export const CharacterCard = (props: CharacterCardProps) => {
             {readOnly ? (
               <dd className='character-card__description-content'>
                 <span className='character-card__description-content-location'>
-                  {character.location.name}
+                  {viewModel.location.name}
                 </span>
               </dd>
             ) : (
               <Input
                 size='big'
                 variant='form'
-                name={character.location.name}
-                value={currentLocationName}
+                name={viewModel.location.name}
+                value={draft.location.name}
                 onChange={handleInputLocationChange}
                 className='character-card__location-input'
               />
@@ -134,15 +136,15 @@ export const CharacterCard = (props: CharacterCardProps) => {
             <dt className='character-card__description-title'>Status</dt>
             {readOnly ? (
               <dd className='character-card__description-content'>
-                {formatStatus(character.status)}
-                <StatusCircle status={character.status} />
+                {formatStatus(viewModel.status)}
+                <StatusCircle status={viewModel.status} />
               </dd>
             ) : (
               <Select
                 variant='small'
-                value={formatStatus(currentStatus)}
+                value={formatStatus(draft.status ?? character.status)}
                 options={STATUS_OPTIONS}
-                onChange={setCurrentStatus}
+                onChange={handleStatusChange}
                 SelectOptionComponent={(props: SelectOptionContentProps) => (
                   <>
                     {props.value}
@@ -156,4 +158,4 @@ export const CharacterCard = (props: CharacterCardProps) => {
       </div>
     </div>
   );
-};
+});

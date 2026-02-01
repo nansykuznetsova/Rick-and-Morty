@@ -1,113 +1,91 @@
-import { useCallback, useEffect, useState } from 'react';
+import { memo, useCallback } from 'react';
 
-import { DEBOUNCE_DELAY, FIRST_PAGE_PAGINATION } from '@/constants';
+import { DEBOUNCE_DELAY } from '@/constants';
 import { useDebounce, useLoadCharacters } from '@/shared';
 import { Layout, Loader, Logo } from '@/shared';
-import { useCharactersStore } from '@/store';
-import { type CharacterCardTypes, type CharacterFilters } from '@/types';
+import { useFilterStore } from '@/store';
+import { type CharacterFilters } from '@/types';
 import { CharacterCard, FilterPanel } from '@/widgets';
 import { InfiniteScroll } from '@/widgets';
 
 import './CharacterList.scss';
 
-export const CharacterList: React.FunctionComponent = () => {
-  const {
-    characters: loadedCharacters,
-    isLoading,
-    isLoadingMore,
-    filters,
-    hasMore,
-    setFilters,
-    addNextPage,
-    setPage
-  } = useCharactersStore();
+export const CharacterList: React.FunctionComponent = memo(
+  function CharacterList() {
+    const { setFilters } = useFilterStore();
 
-  useLoadCharacters();
+    const {
+      data,
+      fetchNextPage,
+      isFetching,
+      hasNextPage,
+      isLoading,
+      isFetchingNextPage
+    } = useLoadCharacters();
 
-  const [characters, setCharacters] = useState<CharacterCardTypes[]>([]);
+    const characters = data?.pages.flatMap((page) => page.results) ?? [];
 
-  // синхронизирует локальное состояние characters с обновлёнными данными loadedCharacters каждый раз, когда они меняются
-  useEffect(() => {
-    setCharacters(loadedCharacters);
-  }, [loadedCharacters]);
+    const handleFilterChange = useCallback((newFilters: CharacterFilters) => {
+      setFilters(newFilters);
+    }, []);
 
-  const handleFilterChange = useCallback((newFilters: CharacterFilters) => {
-    setFilters(newFilters);
-    setPage(FIRST_PAGE_PAGINATION);
-  }, []);
+    const handleName = useCallback((value: CharacterFilters) => {
+      setFilters(value);
+    }, []);
 
-  const handleName = useCallback((value: CharacterFilters) => {
-    setFilters(value);
-    setPage(FIRST_PAGE_PAGINATION);
-  }, []);
+    const handleInputFilterChange = useDebounce<CharacterFilters>(
+      handleName,
+      DEBOUNCE_DELAY
+    );
 
-  const handleInputFilterChange = useDebounce<CharacterFilters>(
-    handleName,
-    DEBOUNCE_DELAY
-  );
+    const handleLoadMore = useCallback(() => {
+      if (!isFetching && hasNextPage) {
+        fetchNextPage();
+      }
+    }, [isFetching, hasNextPage, fetchNextPage]);
 
-  const handleLoadMore = useCallback(() => {
-    if (!isLoading && hasMore) {
-      addNextPage();
-    }
-  }, [isLoading, hasMore, addNextPage]);
+    return (
+      <Layout>
+        <div className='character-list'>
+          <Logo />
+          <FilterPanel
+            onChangeFilters={handleFilterChange}
+            onChangeInput={handleInputFilterChange}
+          />
 
-  const handleEditCharacter = useCallback(
-    (updatedCharacter: CharacterCardTypes) => {
-      setCharacters((prev) =>
-        prev.map((char) =>
-          char.id === updatedCharacter.id ? updatedCharacter : char
-        )
-      );
-    },
-    []
-  );
-
-  return (
-    <Layout>
-      <div className='character-list'>
-        <Logo />
-        <FilterPanel
-          filters={filters}
-          onChangeFilters={handleFilterChange}
-          onChangeInput={handleInputFilterChange}
-        />
-
-        <div className='character-list__cards-wrapper'>
-          {isLoading ? (
-            <Loader
-              text='Loading characters...'
-              size='large'
-            />
-          ) : (
-            <>
-              <ul className='character-list__cards'>
-                {characters.length > 0 ? (
-                  characters.map((character) => (
-                    <li key={character.id}>
-                      <CharacterCard
-                        character={character}
-                        onEditCharacter={handleEditCharacter}
-                      />
-                    </li>
-                  ))
-                ) : (
-                  <span className='character-list__cards-empty-list'>
-                    No character found
-                  </span>
+          <div className='character-list__cards-wrapper'>
+            {isLoading ? (
+              <Loader
+                text='Loading characters...'
+                size='large'
+              />
+            ) : (
+              <>
+                <ul className='character-list__cards'>
+                  {characters.length > 0 ? (
+                    characters.map((character) => (
+                      <li key={character.id}>
+                        <CharacterCard character={character} />
+                      </li>
+                    ))
+                  ) : (
+                    <span className='character-list__cards-empty-list'>
+                      No character found
+                    </span>
+                  )}
+                </ul>
+                {hasNextPage && (
+                  <InfiniteScroll
+                    loadMore={handleLoadMore}
+                    isLoading={isFetchingNextPage}
+                    hasMore={hasNextPage}
+                  />
                 )}
-              </ul>
-              {hasMore && (
-                <InfiniteScroll
-                  loadMore={handleLoadMore}
-                  isLoading={isLoadingMore}
-                  hasMore={hasMore}
-                />
-              )}
-            </>
-          )}
+              </>
+            )}
+          </div>
         </div>
-      </div>
-    </Layout>
-  );
-};
+      </Layout>
+    );
+  }
+);

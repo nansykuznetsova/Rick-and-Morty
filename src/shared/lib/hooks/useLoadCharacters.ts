@@ -1,72 +1,39 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { type InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
 import { FIRST_PAGE_PAGINATION } from '@/constants';
 import { getCharacters } from '@/shared';
-import { useCharactersStore } from '@/store/characterListStore.ts';
+import { useFilterStore } from '@/store';
+import type { CharacterCardTypes } from '@/types';
+
+interface CharactersPage {
+  results: CharacterCardTypes[];
+  hasNextPage: boolean;
+}
 
 export function useLoadCharacters() {
-  const {
-    filters,
-    page,
-    replaceCharacters,
-    appendCharacters,
-    startInitialLoading,
-    startLoadMore,
-    finishLoading,
-    setHasMore
-  } = useCharactersStore();
+  const { filters } = useFilterStore();
 
-  const abortControllerRef = useRef<AbortController | null>(null);
+  return useInfiniteQuery<
+    CharactersPage,
+    Error,
+    InfiniteData<CharactersPage>,
+    ['charactersLoad', typeof filters],
+    number
+  >({
+    queryKey: ['charactersLoad', filters],
+    initialPageParam: FIRST_PAGE_PAGINATION,
+    queryFn: async ({ pageParam, signal }) => {
+      const response = await getCharacters(
+        { ...filters, page: pageParam },
+        signal
+      );
 
-  const loadCharacters = useCallback(() => {
-    abortControllerRef.current?.abort();
-
-    const controller = new AbortController();
-    abortControllerRef.current = controller;
-
-    if (page === FIRST_PAGE_PAGINATION) {
-      startInitialLoading();
-    } else {
-      startLoadMore();
-    }
-
-    getCharacters({ ...filters, page }, controller.signal)
-      .then((data) => {
-        if (controller.signal.aborted) return;
-
-        if (page === FIRST_PAGE_PAGINATION) {
-          replaceCharacters(data.results);
-        } else {
-          appendCharacters(data.results);
-        }
-
-        setHasMore(Boolean(data.info?.next));
-      })
-      .catch((error) => {
-        if (controller.signal.aborted) return;
-        console.error('Failed to fetch characters:', error);
-      })
-      .finally(() => {
-        if (controller.signal.aborted) return;
-        finishLoading();
-      });
-  }, [
-    page,
-    filters,
-    replaceCharacters,
-    appendCharacters,
-    startInitialLoading,
-    startLoadMore,
-    finishLoading,
-    setHasMore
-  ]);
-
-  // запускает загрузку персонажей и отменяет незавершённый запрос через AbortController
-  useEffect(() => {
-    loadCharacters();
-
-    return () => {
-      abortControllerRef.current?.abort();
-    };
-  }, [loadCharacters]);
+      return {
+        results: response.results,
+        hasNextPage: Boolean(response.info.next)
+      };
+    },
+    getNextPageParam: (lastPage, allPages) =>
+      lastPage.hasNextPage ? allPages.length + 1 : undefined
+  });
 }

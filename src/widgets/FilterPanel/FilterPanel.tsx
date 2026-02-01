@@ -2,21 +2,21 @@ import { useState } from 'react';
 
 import { GENDER_OPTIONS, SPECIES_OPTIONS, STATUS_OPTIONS } from '@/constants';
 import { Input, Select } from '@/shared';
+import { useFilterStore } from '@/store';
 import { type CharacterFilters } from '@/types';
 
 import './FilterPanel.scss';
 
 interface FilterPanelProps {
-  filters: CharacterFilters;
   onChangeFilters: (newFilters: CharacterFilters) => void;
   onChangeInput: (value: CharacterFilters) => void;
 }
 
 export const FilterPanel: React.FunctionComponent<FilterPanelProps> = ({
-  filters,
   onChangeFilters,
   onChangeInput
 }) => {
+  const { filters } = useFilterStore();
   const [searchValue, setSearchValue] = useState(filters.name || '');
 
   const handleInputChange = (value: string) => {

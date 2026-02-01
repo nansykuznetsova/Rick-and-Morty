@@ -40,8 +40,10 @@ export const getCharacters = async (
       info: response.data.info
     };
   } catch (error) {
-    console.error('Failed to load character list', error);
+    if ((error as any)?.name === 'CanceledError') {
+      throw error;
+    }
     toast.error('Failed to load character list');
-    return { results: [], info: { next: null } };
+    throw error;
   }
 };

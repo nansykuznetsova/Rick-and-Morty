@@ -2,29 +2,37 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
+import type { AxiosError } from 'axios';
+
 import { formatStatus, useLoadCharacter } from '@/shared';
 import { Layout, Loader } from '@/shared';
 import { ArrowBack } from '@/shared/assets';
-import { useCharacterDetailsStore } from '@/store';
 
 import './CharacterDetails.scss';
 
 export const CharacterDetails: React.FunctionComponent = () => {
-  const { character, isLoading, isError } = useCharacterDetailsStore();
-
   const { id } = useParams();
   const numericId = Number(id);
   const navigate = useNavigate();
 
-  useLoadCharacter(numericId);
+  const {
+    data: character,
+    isLoading,
+    isError,
+    error
+  } = useLoadCharacter(numericId);
 
-  // обрабатывает 404, выводит тост
+  // обрабатываем 404
   useEffect(() => {
     if (isError) {
-      navigate('/404');
-      toast.error(isError);
+      const axiosError = error as AxiosError;
+      if (axiosError?.response?.status === 404) {
+        navigate('/404');
+      } else {
+        toast.error('Something went wrong.');
+      }
     }
-  }, [isError, navigate]);
+  }, [isError, error, navigate]);
 
   return (
     <Layout>
