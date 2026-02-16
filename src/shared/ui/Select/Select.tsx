@@ -3,13 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 
 import { ArrowCloseIcon, ArrowOpenIcon } from '@/shared/assets';
-import { type CharacterStatus } from '@/types';
 
 import './Select.scss';
 
-export interface Option {
+export interface Option<T extends string = string> {
   label: string;
-  value: string;
+  value: T;
 }
 
 export interface SelectOptionContentProps {
@@ -20,16 +19,16 @@ export const DefaultSelectOptionContent = (props: SelectOptionContentProps) => {
   return <>{props.value}</>;
 };
 
-export interface SelectProps {
-  options: Option[];
+export interface SelectProps<T extends string = string> {
+  options: Option<T>[];
   variant?: 'default' | 'small';
   value?: string;
   placeholder?: string;
-  onChange?: (value: CharacterStatus) => void;
+  onChange?: (value: T) => void;
   SelectOptionComponent?: React.FC<SelectOptionContentProps>;
 }
 
-export const Select = (props: SelectProps) => {
+export const Select = <T extends string = string>(props: SelectProps<T>) => {
   const {
     options,
     variant = 'default',
@@ -40,7 +39,7 @@ export const Select = (props: SelectProps) => {
   } = props;
 
   const [display, setDisplay] = useState<boolean>(false);
-  const [selected, setSelected] = useState<Option | null>(null);
+  const [selected, setSelected] = useState<Option<T> | null>(null);
   const selectRef = useRef<HTMLDivElement>(null);
 
   // закрывает селект при клике вне компонента
@@ -62,11 +61,13 @@ export const Select = (props: SelectProps) => {
 
   const handleClick = () => setDisplay(!display);
 
-  const handleClickOption = (item: Option) => {
+  const handleClickOption = (item: Option<T>) => {
     setSelected(item);
     setDisplay(false);
-    onChange?.(item.value.toLowerCase() as CharacterStatus);
+    onChange?.(item.value);
   };
+
+  const selectedLabel = selected?.label || options.find((item) => item.value === value)?.label || value;
 
   return (
     <div
@@ -84,7 +85,7 @@ export const Select = (props: SelectProps) => {
       >
         {variant === 'small' ? (
           <div className='select__button-inner'>
-            <SelectOptionComponent value={selected?.label || value} />
+            <SelectOptionComponent value={selectedLabel} />
           </div>
         ) : (
           <SelectOptionComponent value={selected?.label || placeholder} />

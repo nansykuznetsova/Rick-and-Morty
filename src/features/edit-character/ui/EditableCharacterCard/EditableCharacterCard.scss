@@ -1,0 +1,18 @@
+@use '@/styles/variables' as *;
+
+.character-card {
+  &__location-input {
+    font-size: 14px;
+    font-weight: 400;
+    color: #0009;
+    max-width: 178px;
+  }
+
+  &__name-input {
+    font-size: 20px;
+    color: inherit;
+    text-decoration: none;
+    max-width: 178px;
+    overflow: hidden;
+  }
+}

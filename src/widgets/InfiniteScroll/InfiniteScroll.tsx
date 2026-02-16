@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
-import { ROOT_MARGIN } from '@/constants';
 import { Loader } from '@/shared';
+import { ROOT_MARGIN } from '@/shared/config';
 
 interface InfiniteScrollProps {
   loadMore: () => void;
@@ -19,11 +19,12 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
   // подгрузка новых данных при прокрутке
   useEffect(() => {
     if (!hasMore) return;
+    const target = loaderRef.current;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const target = entries[0];
-        if (target.isIntersecting) {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
           loadMore();
         }
       },
@@ -32,10 +33,10 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
       }
     );
 
-    if (loaderRef.current) observer.observe(loaderRef.current);
+    if (target) observer.observe(target);
 
     return () => {
-      if (loaderRef.current) observer.unobserve(loaderRef.current);
+      if (target) observer.unobserve(target);
       observer.disconnect();
     };
   }, [hasMore, loadMore]);
