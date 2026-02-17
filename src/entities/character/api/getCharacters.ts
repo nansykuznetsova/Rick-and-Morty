@@ -6,7 +6,7 @@ import {
   type ApiResponse,
   type CharacterCardTypes,
   type CharacterFilters,
-  type CharacterStatus
+  normalizeStatus
 } from '@/entities/character';
 import { apiClient } from '@/shared/api';
 
@@ -35,7 +35,7 @@ export const getCharacters = async (
           gender: char.gender,
           species: char.species,
           location: char.location,
-          status: char.status.toLowerCase() as CharacterStatus,
+          status: normalizeStatus(char.status),
           image: char.image
         })
       ),

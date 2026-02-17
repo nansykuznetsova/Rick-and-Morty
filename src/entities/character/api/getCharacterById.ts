@@ -1,7 +1,7 @@
 import {
   type ApiResponseCharacter,
   type CharacterDetailsType,
-  type CharacterStatus
+  normalizeStatus
 } from '@/entities/character';
 import { apiClient } from '@/shared/api';
 
@@ -27,7 +27,7 @@ export const getCharacterById = async (
       type: char.type,
       origin: char.origin,
       location: char.location,
-      status: char.status.toLowerCase() as CharacterStatus,
+      status: normalizeStatus(char.status),
       image: char.image
     };
   } catch (error) {

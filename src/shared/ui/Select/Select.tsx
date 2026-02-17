@@ -11,28 +11,33 @@ export interface Option<T extends string = string> {
   value: T;
 }
 
-export interface SelectOptionContentProps {
+export interface SelectOptionContentProps<T extends string = string> {
   value?: string;
+  optionValue?: T;
 }
 
-export const DefaultSelectOptionContent = (props: SelectOptionContentProps) => {
+export const DefaultSelectOptionContent = <
+  T extends string = string
+>(
+  props: SelectOptionContentProps<T>
+) => {
   return <>{props.value}</>;
 };
 
 export interface SelectProps<T extends string = string> {
   options: Option<T>[];
   variant?: 'default' | 'small';
-  value?: string;
+  value?: T;
   placeholder?: string;
   onChange?: (value: T) => void;
-  SelectOptionComponent?: React.FC<SelectOptionContentProps>;
+  SelectOptionComponent?: React.FC<SelectOptionContentProps<T>>;
 }
 
 export const Select = <T extends string = string>(props: SelectProps<T>) => {
   const {
     options,
     variant = 'default',
-    value = 'Alive',
+    value,
     placeholder,
     onChange,
     SelectOptionComponent = DefaultSelectOptionContent
@@ -47,7 +52,8 @@ export const Select = <T extends string = string>(props: SelectProps<T>) => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         selectRef.current &&
-        !selectRef.current.contains(event.target as Node)
+        event.target instanceof Node &&
+        !selectRef.current.contains(event.target)
       ) {
         setDisplay(false);
       }
@@ -67,7 +73,8 @@ export const Select = <T extends string = string>(props: SelectProps<T>) => {
     onChange?.(item.value);
   };
 
-  const selectedLabel = selected?.label || options.find((item) => item.value === value)?.label || value;
+  const selectedLabel =
+    selected?.label || options.find((item) => item.value === value)?.label || value;
 
   return (
     <div
@@ -85,10 +92,16 @@ export const Select = <T extends string = string>(props: SelectProps<T>) => {
       >
         {variant === 'small' ? (
           <div className='select__button-inner'>
-            <SelectOptionComponent value={selectedLabel} />
+            <SelectOptionComponent
+              value={selectedLabel}
+              optionValue={selected?.value ?? value}
+            />
           </div>
         ) : (
-          <SelectOptionComponent value={selected?.label || placeholder} />
+          <SelectOptionComponent
+            value={selected?.label || placeholder}
+            optionValue={selected?.value}
+          />
         )}
         {display ? <ArrowOpenIcon /> : <ArrowCloseIcon />}
       </button>
@@ -109,7 +122,7 @@ export const Select = <T extends string = string>(props: SelectProps<T>) => {
               role='option'
               onClick={() => handleClickOption(item)}
             >
-              <SelectOptionComponent value={item.label} />
+              <SelectOptionComponent value={item.label} optionValue={item.value} />
             </li>
           ))}
         </ul>

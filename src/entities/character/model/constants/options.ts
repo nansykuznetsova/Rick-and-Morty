@@ -1,4 +1,4 @@
-import { type OptionTypes } from '@/entities/character';
+import { type CharacterStatus, type OptionTypes } from '@/entities/character';
 
 export const SPECIES_OPTIONS: OptionTypes = [
   { label: 'Human', value: 'human' },
@@ -15,7 +15,7 @@ export const GENDER_OPTIONS: OptionTypes = [
   { label: 'Unknown', value: 'unknown' }
 ];
 
-export const STATUS_OPTIONS: OptionTypes = [
+export const STATUS_OPTIONS: { label: string; value: CharacterStatus }[] = [
   { label: 'Alive', value: 'alive' },
   { label: 'Dead', value: 'dead' },
   { label: 'Unknown', value: 'unknown' }

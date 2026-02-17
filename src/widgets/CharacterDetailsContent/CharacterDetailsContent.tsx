@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import type { AxiosError } from 'axios';
+import axios from 'axios';
 
 import { formatStatus, useLoadCharacter } from '@/entities/character';
 import { Loader } from '@/shared';
@@ -24,8 +24,7 @@ export const CharacterDetailsContent: React.FunctionComponent = () => {
 
   useEffect(() => {
     if (isError) {
-      const axiosError = error as AxiosError;
-      if (axiosError?.response?.status === 404) {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
         navigate('/404');
       } else {
         toast.error('Something went wrong.');

@@ -1,4 +1,9 @@
+export type ApiCharacterStatus = 'Alive' | 'Dead' | 'unknown';
 export type CharacterStatus = 'alive' | 'dead' | 'unknown';
+
+export const normalizeStatus = <T extends ApiCharacterStatus>(
+  status: T
+): Lowercase<T> => status.toLowerCase() as Lowercase<T>;
 
 export interface CharacterCardTypes {
   id: number;
@@ -16,7 +21,7 @@ export interface CharacterCardTypes {
 export interface Character {
   id: number;
   name: string;
-  status: string;
+  status: ApiCharacterStatus;
   species: string;
   type: string;
   gender: string;
@@ -59,7 +64,7 @@ export interface CharacterDetailsType {
 export interface ApiResponseCharacter {
   id: number;
   name: string;
-  status: 'Alive' | 'Dead' | 'unknown';
+  status: ApiCharacterStatus;
   species: string;
   gender: string;
   type: string;

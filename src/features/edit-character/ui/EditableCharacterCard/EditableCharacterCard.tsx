@@ -132,17 +132,17 @@ export const EditableCharacterCard = memo(function EditableCharacterCard({
           </dl>
           <dl className='character-card__description-item'>
             <dt className='character-card__description-title'>Status</dt>
-            <Select
+            <Select<StatusesType>
               variant='small'
               value={draft.status}
-              options={
-                STATUS_OPTIONS as { label: string; value: StatusesType }[]
-              }
+              options={STATUS_OPTIONS}
               onChange={handleStatusChange}
-              SelectOptionComponent={(props: SelectOptionContentProps) => (
+              SelectOptionComponent={(
+                props: SelectOptionContentProps<StatusesType>
+              ) => (
                 <>
                   {props.value}
-                  <StatusCircle status={props.value as StatusesType} />
+                  <StatusCircle status={props.optionValue} />
                 </>
               )}
             />
