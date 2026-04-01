@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -13,7 +13,6 @@ import './CharacterDetailsContent.scss';
 export const CharacterDetailsContent: React.FunctionComponent = () => {
   const { id } = useParams();
   const numericId = Number(id);
-  const navigate = useNavigate();
 
   const {
     data: character,
@@ -23,14 +22,14 @@ export const CharacterDetailsContent: React.FunctionComponent = () => {
   } = useLoadCharacter(numericId);
 
   useEffect(() => {
-    if (isError) {
-      if (axios.isAxiosError(error) && error.response?.status === 404) {
-        navigate('/404');
-      } else {
-        toast.error('Something went wrong.');
-      }
+    if (isError && !(axios.isAxiosError(error) && error.response?.status === 404)) {
+      toast.error('Something went wrong.');
     }
-  }, [isError, error, navigate]);
+  }, [isError, error]);
+
+  if (isError && axios.isAxiosError(error) && error.response?.status === 404) {
+    return <Navigate to='/404' replace />;
+  }
 
   return (
     <div className='character-details'>

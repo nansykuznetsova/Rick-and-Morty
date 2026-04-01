@@ -15,7 +15,15 @@ import {
   type StatusesType
 } from '@/shared';
 
-import './EditableCharacterCard.scss';
+const StatusOptionContent = ({
+  value,
+  optionValue
+}: SelectOptionContentProps<StatusesType>) => (
+  <>
+    {value}
+    <StatusCircle status={optionValue} />
+  </>
+);
 
 interface EditableCharacterCardProps {
   character: CharacterCardTypes;
@@ -64,33 +72,19 @@ export const EditableCharacterCard = memo(function EditableCharacterCard({
     ? { ...character, ...draftFromStore }
     : character;
 
-  if (readOnly) {
-    return (
-      <CharacterCardView
-        character={viewModel}
-        titleAction={
-          <EditButtons
-            isEditing={false}
-            onEdit={onEdit}
-            onCancel={onCancel}
-            onSave={onSave}
-          />
-        }
-      />
-    );
-  }
-
   return (
-    <div className='character-card'>
-      <div className='character-card__image-wrapper'>
-        <img
-          className='character-card__image'
-          src={character.image}
-          alt={`avatar ${character.name}`}
+    <CharacterCardView
+      character={viewModel}
+      titleAction={
+        <EditButtons
+          isEditing={!readOnly}
+          onEdit={onEdit}
+          onCancel={onCancel}
+          onSave={onSave}
         />
-      </div>
-      <div className='character-card__info'>
-        <div className='character-card__title'>
+      }
+      nameSlot={
+        !readOnly ? (
           <Input
             size='big'
             variant='form'
@@ -99,56 +93,31 @@ export const EditableCharacterCard = memo(function EditableCharacterCard({
             onChange={handleInputNameChange}
             className='character-card__name-input'
           />
-          <EditButtons
-            isEditing={true}
-            onEdit={onEdit}
-            onCancel={onCancel}
-            onSave={onSave}
+        ) : undefined
+      }
+      locationSlot={
+        !readOnly ? (
+          <Input
+            size='big'
+            variant='form'
+            name={viewModel.location.name}
+            value={draft.location.name}
+            onChange={handleInputLocationChange}
+            className='character-card__location-input'
           />
-        </div>
-        <div className='character-card__description'>
-          <dl className='character-card__description-item'>
-            <dt className='character-card__description-title'>Gender</dt>
-            <dd className='character-card__description-content'>
-              {viewModel.gender}
-            </dd>
-          </dl>
-          <dl className='character-card__description-item'>
-            <dt className='character-card__description-title'>Species</dt>
-            <dd className='character-card__description-content'>
-              {viewModel.species}
-            </dd>
-          </dl>
-          <dl className='character-card__description-item'>
-            <dt className='character-card__description-title'>Location</dt>
-            <Input
-              size='big'
-              variant='form'
-              name={viewModel.location.name}
-              value={draft.location.name}
-              onChange={handleInputLocationChange}
-              className='character-card__location-input'
-            />
-          </dl>
-          <dl className='character-card__description-item'>
-            <dt className='character-card__description-title'>Status</dt>
-            <Select<StatusesType>
-              variant='small'
-              value={draft.status}
-              options={STATUS_OPTIONS}
-              onChange={handleStatusChange}
-              SelectOptionComponent={(
-                props: SelectOptionContentProps<StatusesType>
-              ) => (
-                <>
-                  {props.value}
-                  <StatusCircle status={props.optionValue} />
-                </>
-              )}
-            />
-          </dl>
-        </div>
-      </div>
-    </div>
+        ) : undefined
+      }
+      statusSlot={
+        !readOnly ? (
+          <Select
+            variant='small'
+            value={draft.status}
+            options={STATUS_OPTIONS}
+            onChange={handleStatusChange}
+            SelectOptionComponent={StatusOptionContent}
+          />
+        ) : undefined
+      }
+    />
   );
 });

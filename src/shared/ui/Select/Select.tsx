@@ -6,25 +6,23 @@ import { ArrowCloseIcon, ArrowOpenIcon } from '@/shared/assets';
 
 import './Select.scss';
 
-export interface Option<T extends string = string> {
+export interface Option<T extends string> {
   label: string;
   value: T;
 }
 
-export interface SelectOptionContentProps<T extends string = string> {
+export interface SelectOptionContentProps<T extends string> {
   value?: string;
   optionValue?: T;
 }
 
-export const DefaultSelectOptionContent = <
-  T extends string = string
->(
+export const DefaultSelectOptionContent = <T extends string>(
   props: SelectOptionContentProps<T>
 ) => {
   return <>{props.value}</>;
 };
 
-export interface SelectProps<T extends string = string> {
+export interface SelectProps<T extends string> {
   options: Option<T>[];
   variant?: 'default' | 'small';
   value?: T;
@@ -33,7 +31,7 @@ export interface SelectProps<T extends string = string> {
   SelectOptionComponent?: React.FC<SelectOptionContentProps<T>>;
 }
 
-export const Select = <T extends string = string>(props: SelectProps<T>) => {
+export const Select = <T extends string>(props: SelectProps<T>) => {
   const {
     options,
     variant = 'default',
@@ -74,7 +72,9 @@ export const Select = <T extends string = string>(props: SelectProps<T>) => {
   };
 
   const selectedLabel =
-    selected?.label || options.find((item) => item.value === value)?.label || value;
+    selected?.label ||
+    options.find((item) => item.value === value)?.label ||
+    value;
 
   return (
     <div
@@ -122,7 +122,10 @@ export const Select = <T extends string = string>(props: SelectProps<T>) => {
               role='option'
               onClick={() => handleClickOption(item)}
             >
-              <SelectOptionComponent value={item.label} optionValue={item.value} />
+              <SelectOptionComponent
+                value={item.label}
+                optionValue={item.value}
+              />
             </li>
           ))}
         </ul>
