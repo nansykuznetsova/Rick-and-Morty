@@ -3,44 +3,46 @@ import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 
 import { ArrowCloseIcon, ArrowOpenIcon } from '@/shared/assets';
-import { type CharacterStatus } from '@/types';
 
 import './Select.scss';
 
-export interface Option {
+export interface Option<T extends string> {
   label: string;
-  value: string;
+  value: T;
 }
 
-export interface SelectOptionContentProps {
+export interface SelectOptionContentProps<T extends string> {
   value?: string;
+  optionValue?: T;
 }
 
-export const DefaultSelectOptionContent = (props: SelectOptionContentProps) => {
+export const DefaultSelectOptionContent = <T extends string>(
+  props: SelectOptionContentProps<T>
+) => {
   return <>{props.value}</>;
 };
 
-export interface SelectProps {
-  options: Option[];
+export interface SelectProps<T extends string> {
+  options: Option<T>[];
   variant?: 'default' | 'small';
-  value?: string;
+  value?: T;
   placeholder?: string;
-  onChange?: (value: CharacterStatus) => void;
-  SelectOptionComponent?: React.FC<SelectOptionContentProps>;
+  onChange?: (value: T) => void;
+  SelectOptionComponent?: React.FC<SelectOptionContentProps<T>>;
 }
 
-export const Select = (props: SelectProps) => {
+export const Select = <T extends string>(props: SelectProps<T>) => {
   const {
     options,
     variant = 'default',
-    value = 'Alive',
+    value,
     placeholder,
     onChange,
     SelectOptionComponent = DefaultSelectOptionContent
   } = props;
 
   const [display, setDisplay] = useState<boolean>(false);
-  const [selected, setSelected] = useState<Option | null>(null);
+  const [selected, setSelected] = useState<Option<T> | null>(null);
   const selectRef = useRef<HTMLDivElement>(null);
 
   // закрывает селект при клике вне компонента
@@ -48,7 +50,8 @@ export const Select = (props: SelectProps) => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         selectRef.current &&
-        !selectRef.current.contains(event.target as Node)
+        event.target instanceof Node &&
+        !selectRef.current.contains(event.target)
       ) {
         setDisplay(false);
       }
@@ -62,11 +65,16 @@ export const Select = (props: SelectProps) => {
 
   const handleClick = () => setDisplay(!display);
 
-  const handleClickOption = (item: Option) => {
+  const handleClickOption = (item: Option<T>) => {
     setSelected(item);
     setDisplay(false);
-    onChange?.(item.value.toLowerCase() as CharacterStatus);
+    onChange?.(item.value);
   };
+
+  const selectedLabel =
+    selected?.label ||
+    options.find((item) => item.value === value)?.label ||
+    value;
 
   return (
     <div
@@ -84,10 +92,16 @@ export const Select = (props: SelectProps) => {
       >
         {variant === 'small' ? (
           <div className='select__button-inner'>
-            <SelectOptionComponent value={selected?.label || value} />
+            <SelectOptionComponent
+              value={selectedLabel}
+              optionValue={selected?.value ?? value}
+            />
           </div>
         ) : (
-          <SelectOptionComponent value={selected?.label || placeholder} />
+          <SelectOptionComponent
+            value={selected?.label || placeholder}
+            optionValue={selected?.value}
+          />
         )}
         {display ? <ArrowOpenIcon /> : <ArrowCloseIcon />}
       </button>
@@ -108,7 +122,10 @@ export const Select = (props: SelectProps) => {
               role='option'
               onClick={() => handleClickOption(item)}
             >
-              <SelectOptionComponent value={item.label} />
+              <SelectOptionComponent
+                value={item.label}
+                optionValue={item.value}
+              />
             </li>
           ))}
         </ul>

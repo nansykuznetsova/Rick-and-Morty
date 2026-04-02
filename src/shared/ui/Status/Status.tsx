@@ -15,9 +15,8 @@ export interface StatusProps {
 }
 
 export const StatusCircle = (props: StatusProps) => {
-  const { status = 'Unknown' } = props;
-  const key = status.toLowerCase() as StatusesType;
-  const statusValue = STATUS_COLORS[key];
+  const { status = 'unknown' } = props;
+  const statusValue = STATUS_COLORS[status];
 
   return statusValue ? (
     <div className={cn('circle', `circle_${statusValue}`)} />
