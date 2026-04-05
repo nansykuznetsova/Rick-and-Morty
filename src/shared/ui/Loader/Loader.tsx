@@ -1,6 +1,5 @@
-import cn from 'classnames';
-
 import { LoaderImage } from '@/shared/assets';
+import { classNames } from '@/shared/lib/classNames';
 
 import './Loader.scss';
 
@@ -15,7 +14,7 @@ export const Loader = ({ text, size }: LoaderProps) => {
       <img
         src={LoaderImage}
         alt='Loading...'
-        className={cn('loader__img', {
+        className={classNames('loader__img', {
           loader__img_large: size === 'large',
           loader__img_small: size === 'small'
         })}

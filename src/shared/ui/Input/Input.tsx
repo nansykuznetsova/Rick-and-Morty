@@ -1,8 +1,7 @@
 import { useRef } from 'react';
 
-import cn from 'classnames';
-
 import { Search } from '@/shared/assets';
+import { classNames } from '@/shared/lib/classNames';
 
 import './Input.scss';
 
@@ -39,7 +38,7 @@ export const Input = (props: InputProps) => {
 
   return (
     <div
-      className={cn(`input-wrapper_${size}`, className, {
+      className={classNames(`input-wrapper_${size}`, className, {
         'input-wrapper__filter': variant === 'filter',
         'input-wrapper__form': variant === 'form'
       })}

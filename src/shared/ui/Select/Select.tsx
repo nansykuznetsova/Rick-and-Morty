@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-import cn from 'classnames';
-
 import { ArrowCloseIcon, ArrowOpenIcon } from '@/shared/assets';
+import { classNames } from '@/shared/lib/classNames';
 
 import './Select.scss';
 
@@ -78,14 +77,14 @@ export const Select = <T extends string>(props: SelectProps<T>) => {
 
   return (
     <div
-      className={cn('select', {
+      className={classNames('select', {
         select_small: variant === 'small'
       })}
       ref={selectRef}
     >
       <button
         type='button'
-        className={cn('select__button', {
+        className={classNames('select__button', {
           select__button_small: variant === 'small'
         })}
         onClick={handleClick}
@@ -107,7 +106,7 @@ export const Select = <T extends string>(props: SelectProps<T>) => {
       </button>
       {display && options.length > 0 && (
         <ul
-          className={cn('select__options', {
+          className={classNames('select__options', {
             select__options_small: variant === 'small'
           })}
           role='listbox'
@@ -115,7 +114,7 @@ export const Select = <T extends string>(props: SelectProps<T>) => {
           {options.map((item) => (
             <li
               key={item.value}
-              className={cn('select__option', {
+              className={classNames('select__option', {
                 select__option_selected: item.value === selected?.value,
                 select__option_small: variant === 'small'
               })}

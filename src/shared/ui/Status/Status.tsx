@@ -1,4 +1,4 @@
-import cn from 'classnames';
+import { classNames } from '@/shared';
 
 import './Status.scss';
 
@@ -19,6 +19,6 @@ export const StatusCircle = (props: StatusProps) => {
   const statusValue = STATUS_COLORS[status];
 
   return statusValue ? (
-    <div className={cn('circle', `circle_${statusValue}`)} />
+    <div className={classNames('circle', `circle_${statusValue}`)} />
   ) : null;
 };

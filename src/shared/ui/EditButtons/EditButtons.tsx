@@ -1,6 +1,5 @@
-import cn from 'classnames';
-
 import { CheckIcon, CloseIcon, EditIcon } from '@/shared/assets';
+import { classNames } from '@/shared/lib/classNames';
 
 import './EditButtons.scss';
 
@@ -15,7 +14,7 @@ export const EditButtons = (props: EditButtonsProps) => {
   const { isEditing, onEdit, onCancel, onSave } = props;
 
   return (
-    <div className={cn('edit-buttons', { editing: isEditing })}>
+    <div className={classNames('edit-buttons', { editing: isEditing })}>
       {isEditing ? (
         <>
           <button
