@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 import { ArrowCloseIcon, ArrowOpenIcon } from '@/shared/assets';
-import { classNames } from '@/shared/lib/classNames';
+import { classNames } from '@/shared';
 
 import './Select.scss';
 

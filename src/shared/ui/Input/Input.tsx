@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import { Search } from '@/shared/assets';
-import { classNames } from '@/shared/lib/classNames';
+import { classNames } from '@/shared';
 
 import './Input.scss';
 
