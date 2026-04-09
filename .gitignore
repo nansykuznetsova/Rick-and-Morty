@@ -28,3 +28,10 @@ dist-ssr
 !.idea/codeStyles/
 !.idea/codeStyles/codeStyleConfig.xml
 !.idea/codeStyles/Project.xml
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

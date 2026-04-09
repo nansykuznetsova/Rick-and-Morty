@@ -1,5 +1,5 @@
+import { classNames } from '@/shared';
 import { CheckIcon, CloseIcon, EditIcon } from '@/shared/assets';
-import { classNames } from '@/shared/lib/classNames';
 
 import './EditButtons.scss';
 

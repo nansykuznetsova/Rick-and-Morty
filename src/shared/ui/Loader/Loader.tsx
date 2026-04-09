@@ -1,5 +1,5 @@
 import { LoaderImage } from '@/shared/assets';
-import { classNames } from '@/shared/lib/classNames';
+import { classNames } from '@/shared';
 
 import './Loader.scss';
 
