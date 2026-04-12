@@ -1,0 +1,12 @@
+.theme-switcher {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--br-color);
+  border-radius: 8px;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  cursor: pointer;
+}
