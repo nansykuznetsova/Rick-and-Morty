@@ -1,19 +1,11 @@
-import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router';
 
-import { useThemeStore } from '@/features';
 import { CharacterDetails, CharacterList, NotFoundPage } from '@/pages';
 
 import './App.scss';
 
 function App() {
-  const initializeTheme = useThemeStore((state) => state.initializeTheme);
-
-  useEffect(() => {
-    initializeTheme();
-  }, [initializeTheme]);
-
   return (
     <>
       <Routes>

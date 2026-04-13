@@ -4,13 +4,12 @@
   font-family: $font-second;
   font-weight: 700;
   font-size: 18px;
-  color: var(--text-color);
   display: flex;
   padding: 30px;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 60px;
-  background-color: var(--surface-color);
-  box-shadow: 0 -4px 6px -4px var(--shadow-color);
+  background-color: #fff;
+  box-shadow: 0 -4px 6px -4px rgba(0, 0, 0, 0.3);
 }
