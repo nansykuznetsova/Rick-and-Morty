@@ -1,4 +1,5 @@
 import { memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { type CharacterFilters } from '@/entities/character';
 import {
@@ -16,6 +17,7 @@ import './CharacterCatalog.scss';
 
 export const CharacterCatalog: React.FunctionComponent = memo(
   function CharacterCatalog() {
+    const { t } = useTranslation();
     const { setFilters } = useFilterStore();
 
     const {
@@ -65,7 +67,7 @@ export const CharacterCatalog: React.FunctionComponent = memo(
         <div className='character-list__cards-wrapper'>
           {isLoading ? (
             <Loader
-              text='Loading characters...'
+              text={t('loading.characters')}
               size='large'
             />
           ) : (
@@ -79,7 +81,7 @@ export const CharacterCatalog: React.FunctionComponent = memo(
                   ))
                 ) : (
                   <span className='character-list__cards-empty-list'>
-                    No character found
+                    {t('character.noCharacters')}
                   </span>
                 )}
               </ul>

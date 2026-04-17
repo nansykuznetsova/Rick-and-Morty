@@ -1,0 +1,73 @@
+{
+  "aria": {
+    "backToMenu": "back to menu",
+    "logo": "logo",
+    "goToCharacter": "go to character",
+    "avatar": "avatar {{name}}"
+  },
+  "actions": {
+    "goBack": "GO BACK",
+    "goToMainPage": "Go to main page",
+    "reloadPage": "Reload page"
+  },
+  "errors": {
+    "oops": "Oops! \ud83e\udde8",
+    "somethingWentWrong": "Something went wrong."
+  },
+  "loading": {
+    "characters": "Loading characters...",
+    "character": "Loading character...",
+    "default": "Loading..."
+  },
+  "character": {
+    "information": "Information",
+    "gender": "Gender",
+    "species": "Species",
+    "status": "Status",
+    "origin": "Origin",
+    "type": "Type",
+    "location": "Location",
+    "unknown": "Unknown",
+    "noCharacters": "No character found"
+  },
+  "filters": {
+    "name": "Filter by name...",
+    "species": "Species",
+    "gender": "Gender",
+    "status": "Status"
+  },
+  "statusOptions": {
+    "alive": "Alive",
+    "dead": "Dead",
+    "unknown": "Unknown"
+  },
+  "genderOptions": {
+    "female": "Female",
+    "male": "Male",
+    "genderless": "Genderless",
+    "unknown": "Unknown"
+  },
+  "speciesOptions": {
+    "human": "Human",
+    "alien": "Alien",
+    "humanoid": "Humanoid",
+    "animal": "Animal",
+    "robot": "Robot"
+  },
+  "theme": {
+    "switchToLight": "switch to light theme",
+    "switchToDark": "switch to dark theme"
+  },
+  "language": {
+    "switchToEnglish": "Switch language to English",
+    "switchToRussian": "Switch language to Russian"
+  },
+  "edit": {
+    "closeEditing": "Close editing",
+    "confirmChanges": "Confirm changes",
+    "editCard": "Edit card"
+  },
+  "footer": {
+    "madeWithLove": "Made with love by nansykuznetsova"
+  }
+}

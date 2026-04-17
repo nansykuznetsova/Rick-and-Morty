@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   type CharacterFilters,
@@ -19,8 +20,21 @@ interface CharacterFiltersProps {
 export const CharacterFiltersPanel: React.FunctionComponent<
   CharacterFiltersProps
 > = ({ onChangeFilters, onChangeInput }) => {
+  const { t } = useTranslation();
   const { filters } = useFilterStore();
   const [searchValue, setSearchValue] = useState(filters.name || '');
+  const speciesOptions = SPECIES_OPTIONS.map((option) => ({
+    ...option,
+    label: t(`speciesOptions.${option.value}`, { defaultValue: option.label })
+  }));
+  const genderOptions = GENDER_OPTIONS.map((option) => ({
+    ...option,
+    label: t(`genderOptions.${option.value}`, { defaultValue: option.label })
+  }));
+  const statusOptions = STATUS_OPTIONS.map((option) => ({
+    ...option,
+    label: t(`statusOptions.${option.value}`, { defaultValue: option.label })
+  }));
 
   const handleInputChange = (value: string) => {
     setSearchValue(value);
@@ -43,27 +57,27 @@ export const CharacterFiltersPanel: React.FunctionComponent<
     <div className='selector-panel'>
       <Input
         variant='filter'
-        placeholder='Filter by name...'
+        placeholder={t('filters.name')}
         name='search'
         value={searchValue}
         onChange={handleInputChange}
         size='small'
       />
       <Select
-        placeholder='Species'
-        options={SPECIES_OPTIONS}
+        placeholder={t('filters.species')}
+        options={speciesOptions}
         value={filters.species || ''}
         onChange={handleSelectSpecies}
       />
       <Select
-        placeholder='Gender'
-        options={GENDER_OPTIONS}
+        placeholder={t('filters.gender')}
+        options={genderOptions}
         value={filters.gender || ''}
         onChange={handleSelectGender}
       />
       <Select
-        placeholder='Status'
-        options={STATUS_OPTIONS}
+        placeholder={t('filters.status')}
+        options={statusOptions}
         value={filters.status || ''}
         onChange={handleSelectStatus}
       />

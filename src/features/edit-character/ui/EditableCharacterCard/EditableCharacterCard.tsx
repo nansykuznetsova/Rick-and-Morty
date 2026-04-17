@@ -1,4 +1,5 @@
 import { memo, useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   type CharacterCardTypes,
@@ -32,8 +33,13 @@ interface EditableCharacterCardProps {
 export const EditableCharacterCard = memo(function EditableCharacterCard({
   character
 }: EditableCharacterCardProps) {
+  const { t } = useTranslation();
   const { drafts, setDraft } = useDraftStore();
   const draftFromStore = drafts[character.id];
+  const statusOptions = STATUS_OPTIONS.map((option) => ({
+    ...option,
+    label: t(`statusOptions.${option.value}`, { defaultValue: option.label })
+  }));
 
   const [draft, setLocalDraft] = useState<CharacterCardTypes>(() => ({
     ...character,
@@ -112,7 +118,7 @@ export const EditableCharacterCard = memo(function EditableCharacterCard({
           <Select
             variant='small'
             value={draft.status}
-            options={STATUS_OPTIONS}
+            options={statusOptions}
             onChange={handleStatusChange}
             SelectOptionComponent={StatusOptionContent}
           />

@@ -3,6 +3,7 @@ export * from './ErrorBoundary/ErrorBoundary';
 export * from './Footer/Footer';
 export * from './Header/Header';
 export * from './Input/Input';
+export * from './LanguageSwitcher/LanguageSwitcher';
 export * from './Layout/Layout';
 export * from './Loader/Loader';
 export * from './Logo/Logo';
