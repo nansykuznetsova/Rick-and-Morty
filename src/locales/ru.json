@@ -1,0 +1,73 @@
+{
+  "aria": {
+    "backToMenu": "назад в меню",
+    "logo": "логотип",
+    "goToCharacter": "перейти к персонажу",
+    "avatar": "аватар {{name}}"
+  },
+  "actions": {
+    "goBack": "НАЗАД",
+    "goToMainPage": "Перейти на главную",
+    "reloadPage": "Перезагрузить страницу"
+  },
+  "errors": {
+    "oops": "Упс! \ud83e\udde8",
+    "somethingWentWrong": "Что-то пошло не так."
+  },
+  "loading": {
+    "characters": "Загружаем персонажей...",
+    "character": "Загружаем персонажа...",
+    "default": "Загрузка..."
+  },
+  "character": {
+    "information": "Информация",
+    "gender": "Пол",
+    "species": "Вид",
+    "status": "Статус",
+    "origin": "Происхождение",
+    "type": "Тип",
+    "location": "Локация",
+    "unknown": "Неизвестно",
+    "noCharacters": "Персонажи не найдены"
+  },
+  "filters": {
+    "name": "Фильтр по имени...",
+    "species": "Вид",
+    "gender": "Пол",
+    "status": "Статус"
+  },
+  "statusOptions": {
+    "alive": "Жив",
+    "dead": "Мертв",
+    "unknown": "Неизвестно"
+  },
+  "genderOptions": {
+    "female": "Женский",
+    "male": "Мужской",
+    "genderless": "Бесполый",
+    "unknown": "Неизвестно"
+  },
+  "speciesOptions": {
+    "human": "Человек",
+    "alien": "Инопланетянин",
+    "humanoid": "Гуманоид",
+    "animal": "Животное",
+    "robot": "Робот"
+  },
+  "theme": {
+    "switchToLight": "переключить на светлую тему",
+    "switchToDark": "переключить на темную тему"
+  },
+  "language": {
+    "switchToEnglish": "Переключить язык на английский",
+    "switchToRussian": "Переключить язык на русский"
+  },
+  "edit": {
+    "closeEditing": "Отменить редактирование",
+    "confirmChanges": "Подтвердить изменения",
+    "editCard": "Редактировать карточку"
+  },
+  "footer": {
+    "madeWithLove": "Сделано с любовью nansykuznetsova"
+  }
+}

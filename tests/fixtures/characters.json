@@ -22,9 +22,7 @@
         "url": "https://rickandmortyapi.com/api/location/3"
       },
       "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-      "episode": [
-        "https://rickandmortyapi.com/api/episode/1"
-      ],
+      "episode": ["https://rickandmortyapi.com/api/episode/1"],
       "url": "https://rickandmortyapi.com/api/character/1",
       "created": "2017-11-04T18:48:46.250Z"
     },
@@ -44,9 +42,7 @@
         "url": "https://rickandmortyapi.com/api/location/3"
       },
       "image": "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-      "episode": [
-        "https://rickandmortyapi.com/api/episode/1"
-      ],
+      "episode": ["https://rickandmortyapi.com/api/episode/1"],
       "url": "https://rickandmortyapi.com/api/character/2",
       "created": "2017-11-04T18:50:21.651Z"
     },
@@ -66,9 +62,7 @@
         "url": "https://rickandmortyapi.com/api/location/20"
       },
       "image": "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
-      "episode": [
-        "https://rickandmortyapi.com/api/episode/6"
-      ],
+      "episode": ["https://rickandmortyapi.com/api/episode/6"],
       "url": "https://rickandmortyapi.com/api/character/3",
       "created": "2017-11-04T19:09:56.428Z"
     },
@@ -88,9 +82,7 @@
         "url": "https://rickandmortyapi.com/api/location/20"
       },
       "image": "https://rickandmortyapi.com/api/character/avatar/4.jpeg",
-      "episode": [
-        "https://rickandmortyapi.com/api/episode/6"
-      ],
+      "episode": ["https://rickandmortyapi.com/api/episode/6"],
       "url": "https://rickandmortyapi.com/api/character/4",
       "created": "2017-11-04T19:22:43.665Z"
     },
@@ -110,9 +102,7 @@
         "url": "https://rickandmortyapi.com/api/location/20"
       },
       "image": "https://rickandmortyapi.com/api/character/avatar/5.jpeg",
-      "episode": [
-        "https://rickandmortyapi.com/api/episode/6"
-      ],
+      "episode": ["https://rickandmortyapi.com/api/episode/6"],
       "url": "https://rickandmortyapi.com/api/character/5",
       "created": "2017-11-04T19:26:56.301Z"
     }

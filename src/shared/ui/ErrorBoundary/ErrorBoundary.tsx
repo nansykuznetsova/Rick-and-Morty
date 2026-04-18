@@ -1,4 +1,5 @@
 import { Component, type ReactNode } from 'react';
+import { Translation } from 'react-i18next';
 
 import { Layout } from '@/shared';
 
@@ -30,16 +31,22 @@ export class ErrorBoundary extends Component<Props, State> {
         {this.state.hasError
           ? this.props.fallback || (
               <Layout>
-                <div className='error-page'>
-                  <h1 className='error-page__title'>Oops! 🧨</h1>
-                  <p className='error-page__text'>Something went wrong.</p>
-                  <button
-                    onClick={() => window.location.reload()}
-                    className='error-page__btn'
-                  >
-                    Reload page
-                  </button>
-                </div>
+                <Translation>
+                  {(t) => (
+                    <div className='error-page'>
+                      <h1 className='error-page__title'>{t('errors.oops')}</h1>
+                      <p className='error-page__text'>
+                        {t('errors.somethingWentWrong')}
+                      </p>
+                      <button
+                        onClick={() => window.location.reload()}
+                        className='error-page__btn'
+                      >
+                        {t('actions.reloadPage')}
+                      </button>
+                    </div>
+                  )}
+                </Translation>
               </Layout>
             )
           : this.props.children}

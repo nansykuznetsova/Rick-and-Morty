@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { classNames } from '@/shared';
 import { CheckIcon, CloseIcon, EditIcon } from '@/shared/assets';
 
@@ -12,6 +14,7 @@ export interface EditButtonsProps {
 
 export const EditButtons = (props: EditButtonsProps) => {
   const { isEditing, onEdit, onCancel, onSave } = props;
+  const { t } = useTranslation();
 
   return (
     <div className={classNames('edit-buttons', { editing: isEditing })}>
@@ -22,14 +25,14 @@ export const EditButtons = (props: EditButtonsProps) => {
             onClick={onCancel}
             type='button'
           >
-            <CloseIcon aria-label='Close editing' />
+            <CloseIcon aria-label={t('edit.closeEditing')} />
           </button>
           <button
             className='character-card__btn-icon'
             onClick={onSave}
             type='button'
           >
-            <CheckIcon aria-label='Confirm changes' />
+            <CheckIcon aria-label={t('edit.confirmChanges')} />
           </button>
         </>
       ) : (
@@ -41,7 +44,7 @@ export const EditButtons = (props: EditButtonsProps) => {
           >
             <EditIcon
               className='character-card__btn-icon_edit'
-              aria-label='Edit card'
+              aria-label={t('edit.editCard')}
             />
           </button>
         </>

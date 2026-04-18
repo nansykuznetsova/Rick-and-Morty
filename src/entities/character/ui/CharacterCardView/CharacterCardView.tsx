@@ -1,7 +1,8 @@
 import { type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import { type CharacterCardTypes, formatStatus } from '@/entities/character';
+import { type CharacterCardTypes } from '@/entities/character';
 import { StatusCircle } from '@/shared';
 
 import './CharacterCardView.scss';
@@ -21,13 +22,27 @@ export const CharacterCardView = ({
   locationSlot,
   statusSlot
 }: CharacterCardViewProps) => {
+  const { t } = useTranslation();
+  const translatedGender = t(
+    `genderOptions.${character.gender.toLowerCase()}`,
+    {
+      defaultValue: character.gender
+    }
+  );
+  const translatedSpecies = t(
+    `speciesOptions.${character.species.toLowerCase()}`,
+    {
+      defaultValue: character.species
+    }
+  );
+
   return (
     <div className='character-card'>
       <div className='character-card__image-wrapper'>
         <img
           className='character-card__image'
           src={character.image}
-          alt={`avatar ${character.name}`}
+          alt={t('aria.avatar', { name: character.name })}
         />
       </div>
       <div className='character-card__info'>
@@ -36,7 +51,7 @@ export const CharacterCardView = ({
             <Link
               to={`/character/${character.id}`}
               className='character-card__name-link'
-              aria-label='go to character'
+              aria-label={t('aria.goToCharacter')}
             >
               {character.name}
             </Link>
@@ -45,19 +60,25 @@ export const CharacterCardView = ({
         </div>
         <div className='character-card__description'>
           <dl className='character-card__description-item'>
-            <dt className='character-card__description-title'>Gender</dt>
+            <dt className='character-card__description-title'>
+              {t('character.gender')}
+            </dt>
             <dd className='character-card__description-content'>
-              {character.gender}
+              {translatedGender}
             </dd>
           </dl>
           <dl className='character-card__description-item'>
-            <dt className='character-card__description-title'>Species</dt>
+            <dt className='character-card__description-title'>
+              {t('character.species')}
+            </dt>
             <dd className='character-card__description-content'>
-              {character.species}
+              {translatedSpecies}
             </dd>
           </dl>
           <dl className='character-card__description-item'>
-            <dt className='character-card__description-title'>Location</dt>
+            <dt className='character-card__description-title'>
+              {t('character.location')}
+            </dt>
             {locationSlot ?? (
               <dd className='character-card__description-content'>
                 <span className='character-card__description-content-location'>
@@ -67,10 +88,12 @@ export const CharacterCardView = ({
             )}
           </dl>
           <dl className='character-card__description-item'>
-            <dt className='character-card__description-title'>Status</dt>
+            <dt className='character-card__description-title'>
+              {t('character.status')}
+            </dt>
             {statusSlot ?? (
               <dd className='character-card__description-content'>
-                {formatStatus(character.status)}
+                {t(`statusOptions.${character.status}`)}
                 <StatusCircle status={character.status} />
               </dd>
             )}
