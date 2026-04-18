@@ -6,7 +6,8 @@ import {
   CharacterFiltersPanel,
   EditableCharacterCard,
   useFilterStore,
-  useLoadCharacters
+  useLoadCharacters,
+  useUrlFilters
 } from '@/features';
 import { useDebounce } from '@/shared';
 import { Loader, Logo } from '@/shared';
@@ -19,6 +20,7 @@ export const CharacterCatalog: React.FunctionComponent = memo(
   function CharacterCatalog() {
     const { t } = useTranslation();
     const { setFilters } = useFilterStore();
+    useUrlFilters();
 
     const {
       data,
