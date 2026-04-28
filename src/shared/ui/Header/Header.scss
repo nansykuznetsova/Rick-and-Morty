@@ -35,7 +35,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .header {
     padding: 0 24px;
   }

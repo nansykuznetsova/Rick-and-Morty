@@ -33,7 +33,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .character-list {
     padding-block: 20px;
     align-items: stretch;

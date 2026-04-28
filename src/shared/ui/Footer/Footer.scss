@@ -17,7 +17,7 @@
   text-align: center;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .footer {
     flex-direction: column;
     gap: 2px;

@@ -1,9 +1,9 @@
 :root {
-  --bg-color: #ffffff;
-  --surface-color: #ffffff;
-  --text-color: #000000;
+  --bg-color: #fff;
+  --surface-color: #fff;
+  --text-color: #000;
   --label-color: rgba(0, 0, 0, 0.6);
-  --br-color: #000000;
+  --br-color: #000;
   --br-muted-color: rgba(0, 0, 0, 0.38);
   --shadow-color: rgba(0, 0, 0, 0.3);
   --card-shadow-color: rgba(0, 0, 0, 0.25);
@@ -14,13 +14,13 @@
 :root[data-theme='dark'] {
   --bg-color: #212121;
   --surface-color: #151515;
-  --text-color: #ffffff;
+  --text-color: #fff;
   --label-color: rgba(255, 255, 255, 0.65);
-  --br-color: #ffffff;
+  --br-color: #fff;
   --br-muted-color: rgba(255, 255, 255, 0.45);
   --shadow-color: rgba(0, 0, 0, 0.6);
   --card-shadow-color: rgba(0, 0, 0, 0.55);
-  --option-hover-color: #333333;
+  --option-hover-color: #333;
   --option-selected-color: #1f3b52;
 }
 

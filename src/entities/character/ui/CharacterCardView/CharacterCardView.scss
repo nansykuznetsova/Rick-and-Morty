@@ -94,7 +94,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .character-card {
     max-width: 100%;
     width: 100%;
@@ -132,10 +132,8 @@
 
     &__description {
       max-width: 100%;
-      flex-direction: row;
-      flex-wrap: wrap;
-      column-gap: 16px;
-      row-gap: 8px;
+      flex-flow: row wrap;
+      gap: 8px 16px;
     }
 
     &__description-item {

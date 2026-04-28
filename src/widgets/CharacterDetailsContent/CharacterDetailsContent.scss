@@ -86,7 +86,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .character-details {
     width: 100%;
     display: flex;

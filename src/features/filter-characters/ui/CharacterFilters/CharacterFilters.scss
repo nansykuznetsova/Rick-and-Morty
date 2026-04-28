@@ -16,7 +16,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .selector-panel {
     flex-direction: column;
     align-items: stretch;

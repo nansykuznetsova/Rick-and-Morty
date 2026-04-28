@@ -3,7 +3,7 @@
   height: 200px;
 }
 
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .logo-rm {
     width: 100%;
     max-width: 360px;
