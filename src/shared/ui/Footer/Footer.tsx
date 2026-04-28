@@ -7,7 +7,8 @@ export const Footer: React.FunctionComponent = () => {
 
   return (
     <footer className='footer'>
-      <p>{t('footer.madeWithLove')}</p>
+      <span>{t('footer.madeWithLove')}</span>
+      <span>{t('footer.madeBy')}</span>
     </footer>
   );
 };

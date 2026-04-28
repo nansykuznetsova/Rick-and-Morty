@@ -1,4 +1,5 @@
 import ArrowBack from './icons/arrow-back.svg?react';
+import FilterIcon from './icons/filter.svg?react';
 import ArrowCloseIcon from './icons/arrow-close.svg?react';
 import ArrowOpenIcon from './icons/arrow-open.svg?react';
 import CheckIcon from './icons/check.svg?react';
@@ -18,6 +19,7 @@ import LogoImage from './images/rick&morty.png';
 
 export {
   ArrowBack,
+  FilterIcon,
   ArrowCloseIcon,
   ArrowOpenIcon,
   CheckIcon,

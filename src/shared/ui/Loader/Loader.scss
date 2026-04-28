@@ -27,3 +27,18 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 768px) {
+  .loader {
+    &__img {
+      &_large {
+        width: 240px;
+      }
+
+      &_small {
+        width: 60px;
+        margin-top: 24px;
+      }
+    }
+  }
+}

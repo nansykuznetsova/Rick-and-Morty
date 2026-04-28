@@ -8,7 +8,9 @@ import {
   STATUS_OPTIONS
 } from '@/entities/character';
 import { useFilterStore } from '@/features';
+import { FilterIcon } from '@/shared/assets';
 import { Input, Select } from '@/shared';
+import { useMediaQuery } from '@/shared';
 
 import './CharacterFilters.scss';
 
@@ -23,6 +25,11 @@ export const CharacterFiltersPanel: React.FunctionComponent<
   const { t } = useTranslation();
   const { filters } = useFilterStore();
   const [searchValue, setSearchValue] = useState(filters.name || '');
+  const [showFilters, setShowFilters] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  const showSelects = !isMobile || showFilters;
+
   const speciesOptions = SPECIES_OPTIONS.map((option) => ({
     ...option,
     label: t(`speciesOptions.${option.value}`, { defaultValue: option.label })
@@ -63,24 +70,38 @@ export const CharacterFiltersPanel: React.FunctionComponent<
         onChange={handleInputChange}
         size='small'
       />
-      <Select
-        placeholder={t('filters.species')}
-        options={speciesOptions}
-        value={filters.species || ''}
-        onChange={handleSelectSpecies}
-      />
-      <Select
-        placeholder={t('filters.gender')}
-        options={genderOptions}
-        value={filters.gender || ''}
-        onChange={handleSelectGender}
-      />
-      <Select
-        placeholder={t('filters.status')}
-        options={statusOptions}
-        value={filters.status || ''}
-        onChange={handleSelectStatus}
-      />
+      {isMobile && (
+        <button
+          className='selector-panel__toggle'
+          onClick={() => setShowFilters((prev) => !prev)}
+          type='button'
+        >
+          <FilterIcon className='selector-panel__toggle-icon' />
+          {showFilters ? t('filters.lessFilters') : t('filters.moreFilters')}
+        </button>
+      )}
+      {showSelects && (
+        <div className='selector-panel__selects'>
+          <Select
+            placeholder={t('filters.species')}
+            options={speciesOptions}
+            value={filters.species || ''}
+            onChange={handleSelectSpecies}
+          />
+          <Select
+            placeholder={t('filters.gender')}
+            options={genderOptions}
+            value={filters.gender || ''}
+            onChange={handleSelectGender}
+          />
+          <Select
+            placeholder={t('filters.status')}
+            options={statusOptions}
+            value={filters.status || ''}
+            onChange={handleSelectStatus}
+          />
+        </div>
+      )}
     </div>
   );
 };

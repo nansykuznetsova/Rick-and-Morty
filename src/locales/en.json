@@ -34,7 +34,9 @@
     "name": "Filter by name...",
     "species": "Species",
     "gender": "Gender",
-    "status": "Status"
+    "status": "Status",
+    "moreFilters": "MORE FILTERS",
+    "lessFilters": "LESS FILTERS"
   },
   "statusOptions": {
     "alive": "Alive",
@@ -68,6 +70,7 @@
     "editCard": "Edit card"
   },
   "footer": {
-    "madeWithLove": "Made with love by nansykuznetsova"
+    "madeWithLove": "Made with love",
+    "madeBy": "by nansykuznetsova"
   }
 }

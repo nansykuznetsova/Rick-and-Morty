@@ -2,3 +2,13 @@
   width: 600px;
   height: 200px;
 }
+
+@media (max-width: 768px) {
+  .logo-rm {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+}
