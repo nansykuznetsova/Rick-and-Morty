@@ -86,7 +86,7 @@
   }
 }
 
-@media (width <= 768px) {
+@media (width <= $breakpoint-mobile) {
   .character-details {
     width: 100%;
     display: flex;

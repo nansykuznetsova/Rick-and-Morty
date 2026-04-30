@@ -1,3 +1,5 @@
+@use '@/styles/variables' as *;
+
 .header {
   display: flex;
   align-items: center;
@@ -35,7 +37,7 @@
   }
 }
 
-@media (width <= 768px) {
+@media (width <= $breakpoint-mobile) {
   .header {
     padding: 0 24px;
   }

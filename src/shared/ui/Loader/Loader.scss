@@ -1,3 +1,5 @@
+@use '@/styles/variables' as *;
+
 .loader {
   display: flex;
   justify-content: center;
@@ -28,7 +30,7 @@
   }
 }
 
-@media (width <= 768px) {
+@media (width <= $breakpoint-mobile) {
   .loader {
     &__img {
       &_large {

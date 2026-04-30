@@ -1,3 +1,5 @@
+@use '@/styles/variables' as *;
+
 .character-list {
   display: flex;
   flex-direction: column;
@@ -33,7 +35,7 @@
   }
 }
 
-@media (width <= 768px) {
+@media (width <= $breakpoint-mobile) {
   .character-list {
     padding-block: 20px;
     align-items: stretch;

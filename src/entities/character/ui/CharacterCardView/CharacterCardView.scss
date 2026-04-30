@@ -94,14 +94,12 @@
   }
 }
 
-@media (width <= 768px) {
+@media (width <= $breakpoint-mobile) {
   .character-card {
     max-width: 100%;
     width: 100%;
     height: auto;
     flex-direction: column;
-    column-gap: 0;
-    padding: 0;
     padding-bottom: 12px;
 
     &__image-wrapper {

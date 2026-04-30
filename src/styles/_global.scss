@@ -9,6 +9,8 @@
   --card-shadow-color: rgba(0, 0, 0, 0.25);
   --option-hover-color: #f0f0f0;
   --option-selected-color: #d0eaff;
+  --button-mobile-color: #1a73e8;
+  --bg-button-mobile-color: #e8f0fe;
 }
 
 :root[data-theme='dark'] {
@@ -22,6 +24,8 @@
   --card-shadow-color: rgba(0, 0, 0, 0.55);
   --option-hover-color: #333;
   --option-selected-color: #1f3b52;
+  --button-mobile-color: #12b800;
+  --bg-button-mobile-color: #333;
 }
 
 #root {

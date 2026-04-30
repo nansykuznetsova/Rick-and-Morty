@@ -8,9 +8,10 @@ import {
   STATUS_OPTIONS
 } from '@/entities/character';
 import { useFilterStore } from '@/features';
-import { FilterIcon } from '@/shared/assets';
 import { Input, Select } from '@/shared';
 import { useMediaQuery } from '@/shared';
+import { FilterIcon } from '@/shared/assets';
+import { BREAKPOINT_MOBILE_PX } from '@/shared/config/breakpoints';
 
 import './CharacterFilters.scss';
 
@@ -26,7 +27,7 @@ export const CharacterFiltersPanel: React.FunctionComponent<
   const { filters } = useFilterStore();
   const [searchValue, setSearchValue] = useState(filters.name || '');
   const [showFilters, setShowFilters] = useState(false);
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery(`(max-width: ${BREAKPOINT_MOBILE_PX}px)`);
 
   const showSelects = !isMobile || showFilters;
 

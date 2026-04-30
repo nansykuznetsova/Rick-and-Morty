@@ -14,10 +14,9 @@
   width: 100%;
   background-color: var(--surface-color);
   box-shadow: 0 -4px 6px -4px var(--shadow-color);
-  text-align: center;
 }
 
-@media (width <= 768px) {
+@media (width <= $breakpoint-mobile) {
   .footer {
     flex-direction: column;
     gap: 2px;
