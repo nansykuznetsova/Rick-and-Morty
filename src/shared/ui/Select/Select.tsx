@@ -41,7 +41,6 @@ export const Select = <T extends string>(props: SelectProps<T>) => {
   } = props;
 
   const [display, setDisplay] = useState<boolean>(false);
-  const [selected, setSelected] = useState<Option<T> | null>(null);
   const selectRef = useRef<HTMLDivElement>(null);
 
   // закрывает селект при клике вне компонента
@@ -65,15 +64,12 @@ export const Select = <T extends string>(props: SelectProps<T>) => {
   const handleClick = () => setDisplay(!display);
 
   const handleClickOption = (item: Option<T>) => {
-    setSelected(item);
     setDisplay(false);
     onChange?.(item.value);
   };
 
-  const selectedLabel =
-    selected?.label ||
-    options.find((item) => item.value === value)?.label ||
-    value;
+  const selectedOption = options.find((item) => item.value === value);
+  const selectedLabel = selectedOption?.label || value;
 
   return (
     <div
@@ -93,13 +89,13 @@ export const Select = <T extends string>(props: SelectProps<T>) => {
           <div className='select__button-inner'>
             <SelectOptionComponent
               value={selectedLabel}
-              optionValue={selected?.value ?? value}
+              optionValue={value}
             />
           </div>
         ) : (
           <SelectOptionComponent
-            value={selected?.label || placeholder}
-            optionValue={selected?.value}
+            value={selectedOption?.label || placeholder}
+            optionValue={value}
           />
         )}
         {display ? <ArrowOpenIcon /> : <ArrowCloseIcon />}
@@ -115,7 +111,7 @@ export const Select = <T extends string>(props: SelectProps<T>) => {
             <li
               key={item.value}
               className={classNames('select__option', {
-                select__option_selected: item.value === selected?.value,
+                select__option_selected: item.value === value,
                 select__option_small: variant === 'small'
               })}
               role='option'

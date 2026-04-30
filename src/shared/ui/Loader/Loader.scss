@@ -1,3 +1,5 @@
+@use '@/styles/variables' as *;
+
 .loader {
   display: flex;
   justify-content: center;
@@ -25,5 +27,20 @@
 
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (width <= $breakpoint-mobile) {
+  .loader {
+    &__img {
+      &_large {
+        width: 240px;
+      }
+
+      &_small {
+        width: 60px;
+        margin-top: 24px;
+      }
+    }
   }
 }

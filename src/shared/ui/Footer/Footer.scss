@@ -6,11 +6,19 @@
   font-size: 18px;
   color: var(--text-color);
   display: flex;
-  padding: 30px;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 4px;
+  padding: 16px 30px;
   width: 100%;
-  height: 60px;
   background-color: var(--surface-color);
   box-shadow: 0 -4px 6px -4px var(--shadow-color);
+}
+
+@media (width <= $breakpoint-mobile) {
+  .footer {
+    flex-direction: column;
+    gap: 2px;
+  }
 }

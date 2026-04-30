@@ -34,7 +34,9 @@
     "name": "Фильтр по имени...",
     "species": "Вид",
     "gender": "Пол",
-    "status": "Статус"
+    "status": "Статус",
+    "moreFilters": "БОЛЬШЕ ФИЛЬТРОВ",
+    "lessFilters": "МЕНЬШЕ ФИЛЬТРОВ"
   },
   "statusOptions": {
     "alive": "Жив",
@@ -68,6 +70,7 @@
     "editCard": "Редактировать карточку"
   },
   "footer": {
-    "madeWithLove": "Сделано с любовью nansykuznetsova"
+    "madeWithLove": "Сделано с любовью",
+    "madeBy": "by nansykuznetsova"
   }
 }

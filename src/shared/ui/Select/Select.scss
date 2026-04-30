@@ -1,6 +1,7 @@
 @use '@/styles/variables' as *;
 
 .select {
+  position: relative;
   height: 56px;
   width: 240px;
 

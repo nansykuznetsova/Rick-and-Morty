@@ -1,3 +1,5 @@
+@use '@/styles/variables' as *;
+
 .character-list {
   display: flex;
   flex-direction: column;
@@ -6,13 +8,23 @@
   align-items: center;
   min-height: 100vh;
 
+  &__cards-wrapper {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
   &__cards {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 24px;
-    width: 1050px;
+    width: 100%;
+    max-width: 1050px;
     min-height: 465px;
     align-items: center;
   }
@@ -20,5 +32,36 @@
   &__cards-empty-list {
     font-size: 24px;
     font-weight: 500;
+  }
+}
+
+@media (width <= $breakpoint-mobile) {
+  .character-list {
+    padding-block: 20px;
+    align-items: stretch;
+
+    &__cards-wrapper {
+      justify-content: center;
+
+      .loader__img_large {
+        width: 100px;
+      }
+    }
+
+    &__cards {
+      flex-direction: column;
+      width: 100%;
+      max-width: 100%;
+      padding: 0 20px;
+      gap: 16px;
+      min-height: auto;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+
+    &__cards-empty-list {
+      font-size: 18px;
+      text-align: center;
+    }
   }
 }

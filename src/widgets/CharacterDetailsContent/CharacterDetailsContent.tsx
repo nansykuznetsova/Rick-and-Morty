@@ -91,11 +91,11 @@ export const CharacterDetailsContent: React.FunctionComponent = () => {
                 <strong>{t('character.species')}</strong>
                 <span>{translatedSpecies}</span>
               </div>
-              <div className='character-profile__content-table-origin'>
+              <div className='character-details__description-origin'>
                 <strong>{t('character.origin')}</strong>
                 <span>{character.origin.name}</span>
               </div>
-              <div className='character-profile__content-table-type'>
+              <div className='character-details__description-type'>
                 <strong>{t('character.type')}</strong>
                 <span>{character.type || t('character.unknown')}</span>
               </div>

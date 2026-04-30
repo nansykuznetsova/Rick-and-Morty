@@ -23,6 +23,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
+    /* PWA */
+    "types": ["vite-plugin-pwa/client"],
+
     /* Alias */
     "baseUrl": "./src",
     "paths": {

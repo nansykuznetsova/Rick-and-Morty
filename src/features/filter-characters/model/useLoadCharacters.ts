@@ -1,9 +1,8 @@
 import { type InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
 import { type CharacterCardTypes, getCharacters } from '@/entities/character';
+import { useFilterStore } from '@/features';
 import { FIRST_PAGE_PAGINATION } from '@/shared/config';
-
-import { useFilterStore } from './filterStore';
 
 interface CharactersPage {
   results: CharacterCardTypes[];
