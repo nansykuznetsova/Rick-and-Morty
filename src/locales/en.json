@@ -8,7 +8,8 @@
   "actions": {
     "goBack": "GO BACK",
     "goToMainPage": "Go to main page",
-    "reloadPage": "Reload page"
+    "reloadPage": "Reload page",
+    "retry": "Try again"
   },
   "errors": {
     "oops": "Oops! \ud83e\udde8",
@@ -72,5 +73,8 @@
   "footer": {
     "madeWithLove": "Made with love",
     "madeBy": "by nansykuznetsova"
+  },
+  "toast": {
+    "failedToLoadCharacterList": "Failed to load character list"
   }
 }

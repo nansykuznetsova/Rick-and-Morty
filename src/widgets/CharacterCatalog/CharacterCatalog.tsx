@@ -1,5 +1,8 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+
+import axios from 'axios';
 
 import { type CharacterFilters } from '@/entities/character';
 import {
@@ -11,7 +14,7 @@ import {
 } from '@/features';
 import { useDebounce } from '@/shared';
 import { Loader, Logo } from '@/shared';
-import { DEBOUNCE_DELAY } from '@/shared/config';
+import { DEBOUNCE_DELAY, RATE_LIMIT_RETRY_DELAY } from '@/shared/config';
 import { InfiniteScroll } from '@/widgets';
 
 import './CharacterCatalog.scss';
@@ -25,11 +28,29 @@ export const CharacterCatalog: React.FunctionComponent = memo(
     const {
       data,
       fetchNextPage,
-      isFetching,
       hasNextPage,
       isLoading,
-      isFetchingNextPage
+      isFetchingNextPage,
+      isFetchNextPageError,
+      error
     } = useLoadCharacters();
+
+    useEffect(() => {
+      if (!isFetchNextPageError || !error) return;
+      if (axios.isAxiosError(error) && error.response?.status === 429) return;
+      toast.error(t('errors.somethingWentWrong'));
+    }, [isFetchNextPageError, error, t]);
+
+    useEffect(() => {
+      if (!isFetchNextPageError || isFetchingNextPage || !error) return;
+      if (!axios.isAxiosError(error) || error.response?.status !== 429) return;
+
+      const timer = setTimeout(() => {
+        fetchNextPage();
+      }, RATE_LIMIT_RETRY_DELAY);
+
+      return () => clearTimeout(timer);
+    }, [isFetchNextPageError, isFetchingNextPage, error, fetchNextPage]);
 
     const characters = data?.pages.flatMap((page) => page.results) ?? [];
 
@@ -53,10 +74,8 @@ export const CharacterCatalog: React.FunctionComponent = memo(
     );
 
     const handleLoadMore = useCallback(() => {
-      if (!isFetching && hasNextPage) {
-        fetchNextPage();
-      }
-    }, [isFetching, hasNextPage, fetchNextPage]);
+      fetchNextPage();
+    }, [fetchNextPage]);
 
     return (
       <div className='character-list'>

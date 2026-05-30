@@ -9,7 +9,7 @@
   height: 60px;
   box-shadow: 0 4px 6px -4px var(--shadow-color);
   justify-content: space-between;
-  padding: 0 48px;
+  padding: 5px 210px;
 
   &__logo {
     width: 46px;
@@ -39,6 +39,6 @@
 
 @media (width <= $breakpoint-mobile) {
   .header {
-    padding: 0 24px;
+    padding: 6px 24px;
   }
 }
