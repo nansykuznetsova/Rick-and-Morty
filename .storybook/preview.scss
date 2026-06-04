@@ -1,0 +1,30 @@
+.sb-theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+  min-height: 100vh;
+}
+
+.sb-theme-panel {
+  border: 1px solid var(--br-muted-color);
+  border-radius: 12px;
+  overflow: visible;
+  background-color: var(--surface-color);
+  color: var(--text-color);
+  min-height: 100vh;
+}
+
+.sb-theme-label {
+  margin: 0;
+  padding: 10px 14px;
+  font: 600 13px/1.4 'Roboto', sans-serif;
+  border-bottom: 1px solid var(--br-muted-color);
+  background-color: var(--bg-color);
+}
+
+.sb-theme-content {
+  padding: 16px;
+  background-color: var(--bg-color);
+  min-height: calc(100vh - 44px);
+}

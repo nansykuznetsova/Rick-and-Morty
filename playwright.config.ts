@@ -1,7 +1,27 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const storybookServer = {
+  command: 'npm run storybook -- --ci --host 127.0.0.1',
+  url: 'http://127.0.0.1:6006',
+  reuseExistingServer: !process.env.CI
+};
+
+const appServer = {
+  command: 'npm run dev -- --host 127.0.0.1 --port 4173',
+  url: 'http://127.0.0.1:4173',
+  reuseExistingServer: !process.env.CI
+};
+
+const runTarget = process.env.PW_TARGET;
+const selectedWebServer =
+  runTarget === 'e2e'
+    ? appServer
+    : runTarget === 'storybook'
+      ? storybookServer
+      : [storybookServer, appServer];
+
 export default defineConfig({
-  testDir: './tests',
+  testMatch: '*.spec.ts',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -14,8 +34,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'http://localhost:5173',
+    viewport: { width: 1280, height: 720 },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry'
@@ -24,25 +43,23 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
+      name: 'storybook-chromium',
+      testMatch: /src\/shared\/ui\/.*\.spec\.ts/,
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: 'http://127.0.0.1:6006'
+      }
     },
-
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] }
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] }
+      name: 'e2e-chromium',
+      testMatch: /tests\/.*\.spec\.ts/,
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: 'http://127.0.0.1:4173'
+      }
     }
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI
-  }
+  webServer: selectedWebServer
 });

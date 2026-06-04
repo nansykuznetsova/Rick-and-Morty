@@ -34,23 +34,26 @@ export const CharacterCatalog: React.FunctionComponent = memo(
       isFetchNextPageError,
       error
     } = useLoadCharacters();
+    const isRateLimitError =
+      isFetchNextPageError &&
+      axios.isAxiosError(error) &&
+      error.response?.status === 429;
 
     useEffect(() => {
       if (!isFetchNextPageError || !error) return;
-      if (axios.isAxiosError(error) && error.response?.status === 429) return;
+      if (isRateLimitError) return;
       toast.error(t('errors.somethingWentWrong'));
-    }, [isFetchNextPageError, error, t]);
+    }, [isFetchNextPageError, error, isRateLimitError, t]);
 
     useEffect(() => {
-      if (!isFetchNextPageError || isFetchingNextPage || !error) return;
-      if (!axios.isAxiosError(error) || error.response?.status !== 429) return;
+      if (!isRateLimitError || isFetchingNextPage) return;
 
       const timer = setTimeout(() => {
         fetchNextPage();
       }, RATE_LIMIT_RETRY_DELAY);
 
       return () => clearTimeout(timer);
-    }, [isFetchNextPageError, isFetchingNextPage, error, fetchNextPage]);
+    }, [isRateLimitError, isFetchingNextPage, fetchNextPage]);
 
     const characters = data?.pages.flatMap((page) => page.results) ?? [];
 
@@ -74,8 +77,9 @@ export const CharacterCatalog: React.FunctionComponent = memo(
     );
 
     const handleLoadMore = useCallback(() => {
+      if (isRateLimitError) return;
       fetchNextPage();
-    }, [fetchNextPage]);
+    }, [isRateLimitError, fetchNextPage]);
 
     return (
       <div className='character-list'>
@@ -106,7 +110,7 @@ export const CharacterCatalog: React.FunctionComponent = memo(
                   </span>
                 )}
               </ul>
-              {hasNextPage && (
+              {hasNextPage && !isRateLimitError && (
                 <InfiniteScroll
                   loadMore={handleLoadMore}
                   isLoading={isFetchingNextPage}
