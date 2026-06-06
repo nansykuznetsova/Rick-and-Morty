@@ -53,7 +53,8 @@
 
     &_small {
       position: absolute;
-      width: 94px;
+      width: auto;
+      min-width: 94px;
       z-index: 10;
     }
   }

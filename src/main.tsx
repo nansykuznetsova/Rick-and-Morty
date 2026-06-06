@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import axios from 'axios';
 import { registerSW } from 'virtual:pwa-register';
 
 import { ErrorBoundary } from '@/shared';
@@ -14,7 +15,16 @@ import './styles/index.scss';
 
 import './i18n';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: (failureCount, error) =>
+        failureCount < 3 &&
+        !(axios.isAxiosError(error) && error.response?.status === 429),
+      refetchOnWindowFocus: false
+    }
+  }
+});
 registerSW({ immediate: true });
 
 createRoot(document.getElementById('root')!).render(

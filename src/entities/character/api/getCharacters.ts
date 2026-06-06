@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast';
 
 import axios from 'axios';
+import i18n from 'i18next';
 
 import {
   type ApiResponse,
@@ -45,7 +46,7 @@ export const getCharacters = async (
     if (axios.isAxiosError(error) && error.code === 'ERR_CANCELED') {
       throw error;
     }
-    toast.error('Failed to load character list');
+    toast.error(i18n.t('toast.failedToLoadCharacterList'));
     throw error;
   }
 };

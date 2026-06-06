@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
-import { Loader } from '@/shared';
-import { ROOT_MARGIN } from '@/shared/config';
+import { Loader, useThrottle } from '@/shared';
+import { ROOT_MARGIN, THROTTLE_DELAY } from '@/shared/config';
 
 interface InfiniteScrollProps {
   loadMore: () => void;
@@ -9,37 +9,32 @@ interface InfiniteScrollProps {
   hasMore?: boolean;
 }
 
-export const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
-  loadMore,
-  isLoading,
-  hasMore = true
-}) => {
-  const loaderRef = useRef<HTMLDivElement | null>(null);
+export const InfiniteScroll: React.FC<InfiniteScrollProps> = memo(
+  function InfiniteScroll({ loadMore, isLoading, hasMore = true }) {
+    const loaderRef = useRef<HTMLDivElement | null>(null);
+    const [isIntersecting, setIsIntersecting] = useState(false);
+    const throttledLoad = useThrottle(loadMore, THROTTLE_DELAY);
 
-  // подгрузка новых данных при прокрутке
-  useEffect(() => {
-    if (!hasMore) return;
-    const target = loaderRef.current;
+    useEffect(() => {
+      if (!hasMore) return;
+      const target = loaderRef.current;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting) {
-          loadMore();
-        }
-      },
-      {
-        rootMargin: ROOT_MARGIN
+      const observer = new IntersectionObserver(
+        ([entry]) => setIsIntersecting(entry.isIntersecting),
+        { rootMargin: ROOT_MARGIN }
+      );
+
+      if (target) observer.observe(target);
+
+      return () => observer.disconnect();
+    }, [hasMore]);
+
+    useEffect(() => {
+      if (isIntersecting && !isLoading && hasMore) {
+        throttledLoad();
       }
-    );
+    }, [isIntersecting, isLoading, hasMore, throttledLoad]);
 
-    if (target) observer.observe(target);
-
-    return () => {
-      if (target) observer.unobserve(target);
-      observer.disconnect();
-    };
-  }, [hasMore, loadMore]);
-
-  return <div ref={loaderRef}>{isLoading && <Loader size='small' />}</div>;
-};
+    return <div ref={loaderRef}>{isLoading && <Loader size='small' />}</div>;
+  }
+);

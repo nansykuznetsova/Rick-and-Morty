@@ -33,6 +33,25 @@
     font-size: 24px;
     font-weight: 500;
   }
+
+  &__retry-btn {
+    margin-top: 24px;
+    padding: 10px 32px;
+    border-radius: 8px;
+    border: 1px solid var(--br-color);
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    font-family: $font-second;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 }
 
 @media (width <= $breakpoint-mobile) {

@@ -1,5 +1,8 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
+
+import axios from 'axios';
 
 import { type CharacterFilters } from '@/entities/character';
 import {
@@ -11,7 +14,7 @@ import {
 } from '@/features';
 import { useDebounce } from '@/shared';
 import { Loader, Logo } from '@/shared';
-import { DEBOUNCE_DELAY } from '@/shared/config';
+import { DEBOUNCE_DELAY, RATE_LIMIT_RETRY_DELAY } from '@/shared/config';
 import { InfiniteScroll } from '@/widgets';
 
 import './CharacterCatalog.scss';
@@ -25,11 +28,32 @@ export const CharacterCatalog: React.FunctionComponent = memo(
     const {
       data,
       fetchNextPage,
-      isFetching,
       hasNextPage,
       isLoading,
-      isFetchingNextPage
+      isFetchingNextPage,
+      isFetchNextPageError,
+      error
     } = useLoadCharacters();
+    const isRateLimitError =
+      isFetchNextPageError &&
+      axios.isAxiosError(error) &&
+      error.response?.status === 429;
+
+    useEffect(() => {
+      if (!isFetchNextPageError || !error) return;
+      if (isRateLimitError) return;
+      toast.error(t('errors.somethingWentWrong'));
+    }, [isFetchNextPageError, error, isRateLimitError, t]);
+
+    useEffect(() => {
+      if (!isRateLimitError || isFetchingNextPage) return;
+
+      const timer = setTimeout(() => {
+        fetchNextPage();
+      }, RATE_LIMIT_RETRY_DELAY);
+
+      return () => clearTimeout(timer);
+    }, [isRateLimitError, isFetchingNextPage, fetchNextPage]);
 
     const characters = data?.pages.flatMap((page) => page.results) ?? [];
 
@@ -53,10 +77,9 @@ export const CharacterCatalog: React.FunctionComponent = memo(
     );
 
     const handleLoadMore = useCallback(() => {
-      if (!isFetching && hasNextPage) {
-        fetchNextPage();
-      }
-    }, [isFetching, hasNextPage, fetchNextPage]);
+      if (isRateLimitError) return;
+      fetchNextPage();
+    }, [isRateLimitError, fetchNextPage]);
 
     return (
       <div className='character-list'>
@@ -87,7 +110,7 @@ export const CharacterCatalog: React.FunctionComponent = memo(
                   </span>
                 )}
               </ul>
-              {hasNextPage && (
+              {hasNextPage && !isRateLimitError && (
                 <InfiniteScroll
                   loadMore={handleLoadMore}
                   isLoading={isFetchingNextPage}
