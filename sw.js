@@ -2781,7 +2781,7 @@ precacheAndRoute([{
   "revision": "e3676506edd30680d6cd2dbb8b30f3b3"
 }, {
   "url": "index.html",
-  "revision": "4e180cc77b0b0a61b0eaa98500f4cf27"
+  "revision": "869194bbfe0e2187fed92c01ad4842d3"
 }, {
   "url": "favicon.svg",
   "revision": "d5aa6e44f04b6dba9b8fa978346866b9"
@@ -2804,10 +2804,10 @@ precacheAndRoute([{
   "url": "assets/loader-DtTLCl97.png",
   "revision": null
 }, {
-  "url": "assets/index-C3UdMH3z.css",
+  "url": "assets/index-VzJrrXVo.css",
   "revision": null
 }, {
-  "url": "assets/index-0CQ824mo.js",
+  "url": "assets/index-BU3OnlzM.js",
   "revision": null
 }, {
   "url": "apple-touch-icon.png",
